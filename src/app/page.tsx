@@ -1,18 +1,16 @@
-import Image from "next/image";
+import Avatar from "@/components/avatar";
+import BoopCounter from "@/components/boopCounter";
+import getBoops from "@/components/server-api/getBoops";
+import { unstable_noStore } from "next/cache";
 
-export default function Home() {
+export default async function Home() {
+  unstable_noStore();
+  const boops = await getBoops();
   return (
     <div className="mx-auto my-10 text-center">
-      <Image
-        width={200}
-        height={200}
-        src="/veve.png"
-        alt="veve"
-        title="Goober"
-        className="rounded-full mx-auto"
-      />
+      <Avatar />
       <p>veve</p>
-      <button className="bg-background">Aaaaaa</button>
+      <BoopCounter count={boops.count} />
     </div>
   );
 }
