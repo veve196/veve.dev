@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import React from "react";
+import {ThemeProvider} from "@/app/providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,7 +34,14 @@ export default function RootLayout({
       <body
         className={`${inter.className} min-h-screen bg-background antialiased`}
       >
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+        >
         {children}
+      </ThemeProvider>
       </body>
     </html>
   );
