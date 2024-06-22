@@ -52,3 +52,21 @@
     text-wrap: balance;
   }
 }
+
+.fade-away {
+  user-select: none;
+  pointer-events: none;
+  position: absolute;
+  animation: fadeAway 2s forwards;
+}
+
+@keyframes fadeAway {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-150px);
+  }
+}
