@@ -13,7 +13,10 @@ export default async function Home() {
       <Avatar />
       <p className="text-4xl mt-2 mb-4">veve</p>
       <Link href="/about">About</Link> • <Link href="/gallery">Gallery</Link> •{" "}
-      <Link href="/ref">Refsheet</Link>
+      <Link href="/ref">Refsheet</Link> •{" "}
+      <Link href="https://t.me/addstickers/FurdisAndVeve" target="_blank">
+        My Stickers!
+      </Link>
       <Separator className="my-3 w-72 mx-auto" />
       <BoopCounter count={boops.count} />
     </div>

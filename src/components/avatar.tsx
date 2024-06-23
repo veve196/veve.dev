@@ -53,7 +53,7 @@ export default function Avatar() {
       alt="veve"
       title="Goober"
       draggable={false}
-      className="rounded-full mx-auto select-none"
+      className="rounded-full mx-auto select-none border"
       onClick={(e) => handleClick(e)}
     />
   );

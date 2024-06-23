@@ -33,7 +33,7 @@ export default function ColorButton({ copyColor, textColor }: Props) {
         backgroundColor: copyColor,
         color: textColor || "white",
       }}
-      className="me-2 mb-2"
+      className="me-2 mb-2 border"
       onClick={handleOnClick}
     >
       Copy
