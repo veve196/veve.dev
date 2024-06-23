@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import { useToast } from "./ui/use-toast";
 
@@ -29,7 +30,11 @@ export default function ColorButton({ copyColor, textColor }: Props) {
 
   return (
     <Button
-      className={`bg-[${copyColor}] ${textColor || "text-white"} me-2`}
+      style={{
+        backgroundColor: copyColor,
+        color: textColor || "white",
+      }}
+      className="me-2"
       onClick={handleOnClick}
     >
       Copy
