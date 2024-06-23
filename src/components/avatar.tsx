@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import updateBoop from "./actions/updateBoop";
+import updateBoop from "../utils/actions/updateBoop";
 
 export default function Avatar() {
   const handleClick = async (e: React.MouseEvent<HTMLImageElement>) => {
@@ -10,16 +10,26 @@ export default function Avatar() {
     const emojis = [
       "👉👈",
       "🥺",
-      "❤",
       "💕",
       "💗",
       "🧡",
-      "❣",
       "💦",
       "💙",
       "💘",
       "💓",
-      "im trying to reach you about your car's extended warranty",
+      "💖",
+      "💚",
+      "💛",
+      "💜",
+      "💝",
+      "💞",
+      "💟",
+      "🖤",
+      "🤍",
+      "🤎",
+      "❤️‍🩹",
+      "❤️‍🔥",
+      "i'm trying to reach you about your car's extended warranty",
     ];
 
     text.textContent = emojis[Math.floor(Math.random() * emojis.length)];

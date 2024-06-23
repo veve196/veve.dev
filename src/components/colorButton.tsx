@@ -1,6 +1,5 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import { useToast } from "./ui/use-toast";
 
@@ -34,7 +33,7 @@ export default function ColorButton({ copyColor, textColor }: Props) {
         backgroundColor: copyColor,
         color: textColor || "white",
       }}
-      className="me-2"
+      className="me-2 mb-2"
       onClick={handleOnClick}
     >
       Copy

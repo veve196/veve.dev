@@ -1,7 +1,6 @@
 import Avatar from "@/components/avatar";
 import BoopCounter from "@/components/boopCounter";
-import getBoops from "@/components/server-api/getBoops";
-import { Button } from "@/components/ui/button";
+import getBoops from "@/utils/server-api/getBoops";
 import { Separator } from "@/components/ui/separator";
 import { unstable_noStore } from "next/cache";
 import Link from "next/link";
@@ -10,7 +9,7 @@ export default async function Home() {
   unstable_noStore();
   const boops = await getBoops();
   return (
-    <div className="mx-auto my-10 text-center">
+    <div className="text-center">
       <Avatar />
       <p className="text-4xl mt-2 mb-4">veve</p>
       <Link href="/about">About</Link> • <Link href="/gallery">Gallery</Link> •{" "}

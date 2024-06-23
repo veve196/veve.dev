@@ -1,7 +1,6 @@
 import ColorButton from "@/components/colorButton";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import Link from "next/link";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -10,15 +9,24 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Metadata } from "next/types";
+import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
 
 export const runtime = "edge";
+export const metadata: Metadata = {
+  title: "Refsheet",
+};
 export default async function Home() {
   return (
-    <div className="w-[800px] mx-auto my-2 pt-4">
+    <>
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            <BreadcrumbLink asChild>
+              <Link href="/">Home</Link>
+            </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
@@ -26,17 +34,19 @@ export default async function Home() {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
+      <Separator className="my-4" />
+      <AspectRatio ratio={47 / 36}>
+        <Image
+          fill
+          src="/ref.png"
+          alt="Refsheet"
+          title="Refsheet"
+          className="mx-auto mb-2 rounded-md object-cover"
+        />
+      </AspectRatio>
 
-      <Image
-        width={800}
-        height={800}
-        src="/ref.png"
-        alt="Refsheet"
-        title="Refsheet"
-        className="mx-auto mb-2 mt-2"
-      />
-      <div className="flex justify-between">
-        <span>
+      <div className="flex justify-between mt-4">
+        <div>
           <ColorButton copyColor="#2b3855" />
           <ColorButton copyColor="#47aafe" />
           <ColorButton copyColor="#80c3ff" />
@@ -44,13 +54,11 @@ export default async function Home() {
           <ColorButton copyColor="#75a6bd" />
           <ColorButton copyColor="#7bbbb0" />
           <ColorButton copyColor="#800000" />
-        </span>
+        </div>
         <a href="/ref.png" download>
           <Button className="justify-end">Download</Button>
         </a>
       </div>
-
-      <div className="text-center mt-4"></div>
-    </div>
+    </>
   );
 }

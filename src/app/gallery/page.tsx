@@ -1,23 +1,56 @@
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import { Metadata } from "next/types";
+import getGallery from "@/utils/server-api/getGallery";
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+  BreadcrumbPage,
+} from "@/components/ui/breadcrumb";
+import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 
 export const runtime = "edge";
-export default async function Home() {
+export const metadata: Metadata = {
+  title: "Gallery",
+};
+export default async function Gallery() {
+  const gallery = await getGallery();
+
   return (
     <>
-      <Image
-        width={600}
-        height={600}
-        src="/comebacklater.jpg"
-        alt="come back later"
-        title="come back later"
-        className="mx-auto my-10"
-      />
-      <div className="text-center">
-        <Link href="/">
-          <Button>Go Back</Button>
-        </Link>
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild>
+              <Link href="/">Home</Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Gallery</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+      <Separator className="my-4" />
+      <div className="flex gap-4 flex-wrap justify-center">
+        {gallery.documents.map((document) => {
+          const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/storage/buckets/gallery/files/${document.fileId}/preview?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}&height=400`;
+          return (
+            <Link key={document.$id} href={`/gallery/${document.$id}`}>
+              <div className="mb-4">
+                <img
+                  src={url}
+                  alt={document.displayName}
+                  title={document.displayName}
+                  className="rounded-md h-[200px]"
+                />
+                <p className="text-center">{document.displayName}</p>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </>
   );

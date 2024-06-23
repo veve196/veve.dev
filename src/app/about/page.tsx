@@ -1,23 +1,52 @@
-import { Button } from "@/components/ui/button";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import Link from "next/link";
+import { Metadata } from "next/types";
 
 export const runtime = "edge";
-export default async function Home() {
+export const metadata: Metadata = {
+  title: "About",
+};
+export default async function About() {
   return (
     <>
-      <Image
-        width={600}
-        height={600}
-        src="/comebacklater.jpg"
-        alt="come back later"
-        title="come back later"
-        className="mx-auto my-10"
-      />
-      <div className="text-center">
-        <Link href="/">
-          <Button>Go Back</Button>
-        </Link>
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild>
+              <Link href="/">Home</Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>About</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+      <Separator className="my-4" />
+      <div className="flex gap-4">
+        <Image
+          src="/veve/wave.webp"
+          alt="wave"
+          title="Hewwo!"
+          width={200}
+          height={200}
+          className=""
+        />
+        <div>
+          <p className="text-2xl mb-3">Hello, I'm veve!</p>
+          <p>Hey guys did you know that</p>
+          <p>...</p>
+          <p>Uhm hey guys</p>
+        </div>
       </div>
     </>
   );
