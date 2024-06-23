@@ -42,7 +42,7 @@ export default async function About() {
           className=""
         />
         <div>
-          <p className="text-2xl mb-3">Hello, I'm veve!</p>
+          <p className="text-2xl mb-3">Hello, I&apos;m veve!</p>
           <p>Hey guys did you know that</p>
           <p>...</p>
           <p>Uhm hey guys</p>
