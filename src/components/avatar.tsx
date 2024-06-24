@@ -35,7 +35,7 @@ export default function Avatar() {
     text.textContent = emojis[Math.floor(Math.random() * emojis.length)];
     text.className = "fade-away";
     text.style.left = `${e.pageX}px`;
-    text.style.top = `${e.pageY}px`;
+    text.style.top = `${e.pageY - 40}px`; // Bisschen höher setzen weil der Daumen sonst verdeckt
     document.body.appendChild(text);
 
     setTimeout(() => {
