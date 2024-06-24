@@ -24,7 +24,7 @@ export default async function Gallery() {
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link href="/">Home</Link>
+              <Link href={"/"}>Home</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
@@ -40,6 +40,7 @@ export default async function Gallery() {
           return (
             <Link key={document.$id} href={`/gallery/${document.$id}`}>
               <div className="mb-4">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={url}
                   alt={document.displayName}

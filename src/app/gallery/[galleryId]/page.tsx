@@ -1,5 +1,4 @@
 import { Metadata } from "next/types";
-import getGallery from "@/utils/server-api/getGallery";
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -11,7 +10,6 @@ import {
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import getGalleryItem from "@/utils/server-api/getGalleryItem";
-import Image from "next/image";
 import { LinkIcon } from "lucide-react";
 
 export const runtime = "edge";
@@ -31,13 +29,13 @@ export default async function Details({
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link href="/">Home</Link>
+              <Link href={"/"}>Home</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link href="/gallery">Gallery</Link>
+              <Link href={"/gallery"}>Gallery</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
@@ -49,6 +47,7 @@ export default async function Details({
       <Separator className="my-4" />
       <div className="flex gap-4 flex-wrap">
         <div className="w-2/4 self-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={`${process.env.NEXT_PUBLIC_API_URL}/v1/storage/buckets/gallery/files/${gallery.fileId}/view?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}`}
             alt={gallery.displayName}
