@@ -2,7 +2,7 @@
 
 import { client } from "@/app/appwrite";
 import { RealtimeResponseEvent } from "appwrite";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
   count: number;
@@ -10,13 +10,13 @@ interface Props {
 
 export default function BoopCounter({ count }: Props) {
   const [boopCounter, setBoopCounter] = useState(count);
-
-  client.subscribe(
-    "databases.web.collections.counters.documents.veveBoops",
-    (response: RealtimeResponseEvent<any>) => {
-      setBoopCounter(response.payload.count);
-    }
-  );
-
+  useEffect(() => {
+    client.subscribe(
+      "databases.web.collections.counters.documents.veveBoops",
+      (response: RealtimeResponseEvent<any>) => {
+        setBoopCounter(response.payload.count);
+      }
+    );
+  }, []);
   return <p>Boops: {boopCounter}</p>;
 }
