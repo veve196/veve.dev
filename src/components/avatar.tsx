@@ -59,6 +59,7 @@ export default function Avatar() {
       title="Goober"
       draggable={false}
       className="rounded-full mx-auto select-none border"
+      priority
       onClick={(e) => handleClick(e)}
     />
   );

@@ -1,5 +1,4 @@
 "use client";
-import "@/app/background.scss";
 
 export default function Background() {
   return (

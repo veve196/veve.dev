@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+//import { Inter } from "next/font/google";
+import localFont from "next/font/local";
+import "./globals.scss";
 import React from "react";
 import { ThemeProvider } from "@/app/providers";
 import { Toaster } from "@/components/ui/toaster";
 import Background from "@/components/background";
 
-const inter = Inter({ subsets: ["latin"] });
-
+//const inter = Inter({ subsets: ["latin"] });
+const pixelFont = localFont({ src: "../../public/PixelMplus12-Regular.woff2" });
 export const metadata: Metadata = {
   title: {
     default: "veve",
@@ -33,10 +34,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased`}>
+      <body
+        className={`${pixelFont.className} antialiased tracking-widest text-[1.2rem]`}
+      >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >

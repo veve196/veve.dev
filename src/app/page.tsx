@@ -11,8 +11,9 @@ export default async function Home() {
   return (
     <div className="text-center">
       <Avatar />
-      <p className="text-4xl mt-2 mb-4">veve</p>
-      <Link href={"/about"}>About</Link> • <Link href={"/gallery"}>Gallery</Link> •{" "}
+      <p className="text-6xl mt-2 mb-4">veve</p>
+      <Link href={"/about"}>About</Link> •{" "}
+      <Link href={"/gallery"}>Gallery</Link> •{" "}
       <Link href={"/ref"}>Refsheet</Link> •{" "}
       <Link href="https://t.me/addstickers/FurdisAndVeve" target="_blank">
         My Stickers!
