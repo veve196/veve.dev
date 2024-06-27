@@ -27,8 +27,13 @@ export default function Avatar() {
       "🖤",
       "🤍",
       "🤎",
-      "❤️‍🩹",
-      "❤️‍🔥",
+      "💌",
+      "💢",
+      "💫",
+      "💤",
+      "💥",
+      "🔥",
+      "🔫",
       "i'm trying to reach you about your car's extended warranty",
     ];
 
