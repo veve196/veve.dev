@@ -54,7 +54,7 @@ export default function Avatar() {
     <Image
       width={200}
       height={200}
-      src="/veve.png"
+      src="/avatar.webp"
       alt="veve"
       title="Goober"
       draggable={false}
