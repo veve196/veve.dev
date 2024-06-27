@@ -4,6 +4,7 @@ import "./globals.css";
 import React from "react";
 import { ThemeProvider } from "@/app/providers";
 import { Toaster } from "@/components/ui/toaster";
+import Background from "@/components/background";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} bg-background antialiased`}>
+      <body className={`${inter.className} antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -43,6 +44,7 @@ export default function RootLayout({
             {children}
           </main>
           <Toaster />
+          <Background />
         </ThemeProvider>
       </body>
     </html>
