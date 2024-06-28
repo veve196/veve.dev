@@ -41,6 +41,7 @@ export default async function Home() {
           src="/ref.png"
           alt="Refsheet"
           title="Refsheet"
+          priority
           className="mx-auto mb-2 rounded-md object-cover"
         />
       </AspectRatio>

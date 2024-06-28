@@ -32,18 +32,16 @@ export default async function Home() {
         </Link>
       </Button>
       <Separator className="my-3 w-72 mx-auto" />
-      <div className="flex flex-col">
-        <Button variant="link">
-          <Link href="https://x.com/veve196" target="_blank">
-            Twitter/X
-          </Link>
-        </Button>
-        <Button variant="link">
-          <Link href="https://t.me/veve196" target="_blank">
-            Telegram
-          </Link>
-        </Button>
-      </div>
+      <Button variant="link" className="block mx-auto">
+        <Link href={"https://x.com/veve196"} target="_blank">
+          Twitter/X
+        </Link>
+      </Button>
+      <Button variant="link" className="block mx-auto">
+        <Link href={"https://t.me/veve196"} target="_blank">
+          Telegram
+        </Link>
+      </Button>
       <Separator className="my-3 w-72 mx-auto" />
       <BoopCounter count={boops.count} />
     </div>
