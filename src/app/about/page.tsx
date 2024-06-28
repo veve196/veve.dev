@@ -34,7 +34,7 @@ export default async function About() {
       <Separator className="my-4" />
       <div className="flex gap-4">
         <Image
-          src="/veve/wave.webp"
+          src="/wave.webp"
           alt="wave"
           title="Hewwo!"
           width={200}
