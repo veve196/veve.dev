@@ -16,7 +16,7 @@ export default function Custom404() {
         />
         <h1 className="text-8xl font-bold">404</h1>
         <Separator className="w-full" />
-        <p>Oops! The page you're looking for was not found.</p>
+        <p>Oops! The page you&apos;re looking for was not found.</p>
         <Button variant="link" className="text-2xl">
           <Link href="/">Go back</Link>
         </Button>
