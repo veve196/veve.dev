@@ -240,3 +240,31 @@ $shadows-big: multiple-box-shadow(100);
     }
   }
 }
+
+// @keyframes flyDiagonally {
+//   from {
+//     transform: translateX(-100%) translateY(-100%);
+//   }
+//   to {
+//     transform: translateX(100vw) translateY(100vh);
+//   }
+// }
+
+// #line1 {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+// }
+
+// #line1::before {
+//   content: "";
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   width: 2px; /* Width of the line */
+//   height: 100px; /* Height of the line */
+//   background-color: white; /* Color of the line */
+//   animation: flyDiagonally 3s linear infinite;
+// }

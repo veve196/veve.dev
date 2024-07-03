@@ -21,7 +21,7 @@ export default function Custom404() {
     <>
       <Breadcrumb>
         <BreadcrumbList>
-          <BreadcrumbItem>
+          <BreadcrumbItem className="z-10">
             <BreadcrumbLink asChild>
               <Link href={"/"}>Home</Link>
             </BreadcrumbLink>

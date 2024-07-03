@@ -25,8 +25,8 @@ export default async function Home() {
       <Button variant="link" className="px-2">
         <Link href={"/ref"}>Refsheet</Link>
       </Button>
-      •
-      <Button variant="link" className="px-2">
+      <span className="hidden sm:inline-block">•</span>
+      <Button variant="link" className="px-2 block mx-auto sm:inline-block">
         <Link href="https://t.me/addstickers/FurdisAndVeve" target="_blank">
           My Stickers!
         </Link>
