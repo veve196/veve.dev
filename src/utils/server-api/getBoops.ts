@@ -1,5 +1,7 @@
+"use server";
+
 import { databases } from "@/app/appwrite-server";
-import {unstable_noStore} from "next/cache";
+import { unstable_noStore } from "next/cache";
 
 export default async function getBoops() {
   unstable_noStore();

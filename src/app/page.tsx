@@ -1,19 +1,21 @@
+"use client";
 import Avatar from "@/components/avatar";
 import BoopCounter from "@/components/boopCounter";
-import getBoops from "@/utils/server-api/getBoops";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
-import { Twitter, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import TypingAnimation from "@/components/typingAnimation";
+import { useEffect, useState } from "react";
 
 export const runtime = "edge";
 
-export default async function Home() {
-  const boops = await getBoops();
+export default function Home() {
   return (
     <div className="text-center">
       <Avatar />
-      <p className="text-5xl mt-2 mb-4">veve</p>
+      <p className="text-5xl mt-2 mb-4">
+        <TypingAnimation texts={["welcome to my page! :3", "veve"]} />
+      </p>
       <Button variant="link" className="px-2">
         <Link href={"/about"}>About</Link>
       </Button>
@@ -43,7 +45,7 @@ export default async function Home() {
         </Link>
       </Button>
       <Separator className="my-3 w-72 mx-auto" />
-      <BoopCounter count={boops.count} />
+      <BoopCounter />
     </div>
   );
 }
