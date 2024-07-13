@@ -9,8 +9,9 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
+import Image from "next/image";
 import getGalleryItem from "@/utils/server-api/getGalleryItem";
-import { LinkIcon, Palette } from "lucide-react";
+import { LinkIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export const runtime = "edge";
@@ -47,15 +48,15 @@ export default async function Details({
       </Breadcrumb>
       <Separator className="my-4" />
       <div className="flex gap-4">
-        <div>
+        <div className="flex-grow">
           <img
             src={`${process.env.NEXT_PUBLIC_API_URL}/v1/storage/buckets/gallery/files/${gallery.fileId}/view?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}`}
             alt={gallery.displayName}
             title={gallery.displayName}
-            className="rounded-md max-w-1/3"
+            className="rounded-md min-w-32"
           />
         </div>
-        <div className="flex-grow">
+        <div>
           <h1 className="text-4xl">{gallery.displayName}</h1>
           <p className="mt-2 mb-4">
             {gallery.description ?? "No description..."}
