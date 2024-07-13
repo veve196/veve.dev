@@ -10,7 +10,8 @@ import {
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import getGalleryItem from "@/utils/server-api/getGalleryItem";
-import { LinkIcon } from "lucide-react";
+import { LinkIcon, Palette } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export const runtime = "edge";
 export const metadata: Metadata = {
@@ -45,9 +46,8 @@ export default async function Details({
         </BreadcrumbList>
       </Breadcrumb>
       <Separator className="my-4" />
-      <div className="flex gap-4 flex-wrap">
-        <div className="w-2/4 self-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
+      <div className="flex gap-4">
+        <div>
           <img
             src={`${process.env.NEXT_PUBLIC_API_URL}/v1/storage/buckets/gallery/files/${gallery.fileId}/view?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}`}
             alt={gallery.displayName}
@@ -56,19 +56,27 @@ export default async function Details({
           />
         </div>
         <div className="flex-grow">
-          <h1 className="text-4xl mb-2">{gallery.displayName}</h1>
-          <p>{gallery.description ?? "No description..."}</p>
-
+          <h1 className="text-4xl">{gallery.displayName}</h1>
+          <p className="mt-2 mb-4">
+            {gallery.description ?? "No description..."}
+          </p>
           {gallery.artist && (
             <Link
               href={gallery.artist}
               target="_blank"
-              className="flex align-middle mt-4"
+              className="flex align-middle"
             >
               <LinkIcon className="pe-2" />
               {gallery.artist}
             </Link>
-          )}
+          )}{" "}
+          <Button className="mt-4">
+            <Link
+              href={`${process.env.NEXT_PUBLIC_API_URL}/v1/storage/buckets/gallery/files/${gallery.fileId}/view?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}`}
+            >
+              See full image
+            </Link>
+          </Button>
         </div>
       </div>
     </>

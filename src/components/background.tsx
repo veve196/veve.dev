@@ -9,7 +9,6 @@ export default function Background() {
       <div id="stars1"></div>
       <div id="stars2"></div>
       <div id="stars3"></div>
-      <div id="line1"></div>
     </div>
   );
 }
