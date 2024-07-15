@@ -74,6 +74,7 @@ export default async function Details({
           <Button className="mt-4">
             <Link
               href={`${process.env.NEXT_PUBLIC_API_URL}/v1/storage/buckets/gallery/files/${gallery.fileId}/view?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}`}
+              target="_blank"
             >
               See full image
             </Link>
