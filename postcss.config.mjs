@@ -1,4 +1,4 @@
-/** @type {import('postcss-load-config').Config} */
+/* jshint esversion: 6 */
 const config = {
   plugins: {
     tailwindcss: {},

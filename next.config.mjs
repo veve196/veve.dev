@@ -1,7 +1,13 @@
+/* jshint esversion: 6 */
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["dash.fayevr.dev"],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '"dash.fayevr.dev"',
+      },
+    ],
   },
 };
 
