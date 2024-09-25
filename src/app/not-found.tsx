@@ -12,10 +12,11 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Metadata } from "next/types";
 
-export const runtime = "edge";
 export const metadata: Metadata = {
-  title: "404",
+  title: "404 - Page Not Found",
+  description: "Oops! The page you're looking for was not found.",
 };
+
 export default function Custom404() {
   return (
     <>
