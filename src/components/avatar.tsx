@@ -47,7 +47,7 @@ export default function Avatar() {
       document.body.removeChild(text);
     }, 2000);
 
-    const result = await updateBoop();
+    await updateBoop();
   };
 
   return (
