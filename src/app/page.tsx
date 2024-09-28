@@ -15,7 +15,7 @@ export default async function Home() {
 
   return (
     <div className="text-center">
-      <Avatar />
+      <Avatar milestones={milestones} />
       <p className="text-5xl mt-2 mb-4">
         <TypingAnimation texts={["welcome to my page! :3", "veve"]} />
       </p>
