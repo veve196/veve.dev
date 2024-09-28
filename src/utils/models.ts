@@ -13,3 +13,14 @@ export namespace Gallery {
     documents: GalleryDocument[];
   }
 }
+export namespace Milestones {
+  export interface MilestoneDocument extends Models.Document {
+    milestone: number;
+    message: string;
+  }
+
+  export interface MilestoneType {
+    total: number;
+    documents: MilestoneDocument[];
+  }
+}

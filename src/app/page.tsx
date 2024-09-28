@@ -1,15 +1,18 @@
-"use client";
 import Avatar from "@/components/avatar";
 import BoopCounter from "@/components/boopCounter";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import TypingAnimation from "@/components/typingAnimation";
-import { useEffect, useState } from "react";
+import getMilestones from "@/utils/server-api/getMilestones";
+import getBoops from "@/utils/server-api/getBoops";
 
 export const runtime = "edge";
 
-export default function Home() {
+export default async function Home() {
+  const milestones = await getMilestones();
+  const boops = await getBoops();
+
   return (
     <div className="text-center">
       <Avatar />
@@ -45,7 +48,7 @@ export default function Home() {
         </Link>
       </Button>
       <Separator className="my-3 w-72 mx-auto" />
-      <BoopCounter />
+      <BoopCounter boopCount={boops} />
     </div>
   );
 }
