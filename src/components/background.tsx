@@ -1,5 +1,7 @@
 "use client";
 
+import "../styles/background.scss";
+
 export default function Background() {
   return (
     <div

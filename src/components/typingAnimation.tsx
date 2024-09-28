@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import "../styles/typingAnimation.css";
 
 interface Props {
   texts: string[];

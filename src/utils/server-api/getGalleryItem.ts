@@ -1,5 +1,4 @@
 import { databases } from "@/app/appwrite-server";
-import { Models } from "node-appwrite";
 import { Gallery } from "../models";
 
 export default async function getGalleryItem(

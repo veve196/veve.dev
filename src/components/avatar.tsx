@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import updateBoop from "../utils/actions/updateBoop";
+import "../styles/avatar.css";
 
 export default function Avatar() {
   const handleClick = async (e: React.MouseEvent<HTMLImageElement>) => {

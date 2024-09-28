@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 //import { Inter } from "next/font/google";
 import localFont from "next/font/local";
-import "./globals.scss";
+import "../styles/globals.css";
 import React from "react";
 import { ThemeProvider } from "@/app/providers";
 import { Toaster } from "@/components/ui/toaster";
