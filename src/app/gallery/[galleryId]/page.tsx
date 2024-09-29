@@ -58,14 +58,18 @@ export default async function Details({
         </div>
         <div>
           <h1 className="text-4xl">{gallery.displayName}</h1>
-          <p className="mt-2 mb-4">
-            {gallery.description ?? "No description..."}
-          </p>
+          <div
+            className="mt-2 mb-4"
+            dangerouslySetInnerHTML={{
+              __html: gallery.description || "No description...",
+            }}
+          />
           {gallery.artist && (
             <Link
               href={gallery.artist}
               target="_blank"
               className="flex align-middle"
+              title="Artist link"
             >
               <LinkIcon className="pe-2" />
               {gallery.artist}

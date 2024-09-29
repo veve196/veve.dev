@@ -4,13 +4,11 @@ import Image from "next/image";
 import {
   AlertDialog,
   AlertDialogAction,
-  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
 import updateBoop from "../utils/actions/updateBoop";
@@ -37,6 +35,7 @@ export default function Avatar({
       "💗",
       "🧡",
       "💦",
+      "🍆",
       "💙",
       "💘",
       "💓",
@@ -83,17 +82,22 @@ export default function Avatar({
 
   return (
     <>
-      <Image
+      <div
+        id="avatar"
+        className="w-[200px] h-[200px] rounded-full mx-auto select-none border"
+        onClick={handleClick}
+      />
+      {/* <Image
         width={200}
         height={200}
         src="/avatar.webp"
         alt="veve"
-        title="Goober"
+        title="Click me!"
         draggable={false}
         className="rounded-full mx-auto select-none border"
         priority
         onClick={handleClick}
-      />
+      /> */}
       <AlertDialog open={showMessage} onOpenChange={setShowMessage}>
         <AlertDialogContent>
           <AlertDialogHeader>
