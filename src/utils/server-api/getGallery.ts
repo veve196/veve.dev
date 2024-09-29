@@ -6,6 +6,5 @@ export default async function getGallery(): Promise<Gallery.GalleryType> {
   return await databases.listDocuments("web", "gallery", [
     Query.orderAsc("sortOrder"),
     Query.limit(100),
-    Query.notEqual("isHidden", true),
   ]);
 }
