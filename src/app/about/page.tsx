@@ -39,7 +39,7 @@ export default async function About() {
           title="Hewwo!"
           width={200}
           height={200}
-          className=""
+          priority
         />
         <div>
           <p className="text-2xl mb-3">Hello, I&apos;m veve!</p>

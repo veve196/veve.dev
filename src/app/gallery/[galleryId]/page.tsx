@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
-import Image from "next/image";
 import getGalleryItem from "@/utils/server-api/getGalleryItem";
 import { LinkIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
