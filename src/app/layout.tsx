@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-//import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import "../styles/globals.css";
 import React from "react";
@@ -7,7 +6,6 @@ import { ThemeProvider } from "@/app/providers";
 import { Toaster } from "@/components/ui/toaster";
 import Background from "@/components/background";
 
-//const inter = Inter({ subsets: ["latin"] });
 const pixelFont = localFont({ src: "../../public/PixelMplus12-Regular.woff2" });
 export const metadata: Metadata = {
   title: {

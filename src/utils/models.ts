@@ -1,11 +1,10 @@
 import { Models } from "node-appwrite";
-export namespace Gallery {
+export namespace Galleries {
   export interface GalleryDocument extends Models.Document {
-    fileId: string;
-    displayName: string;
-    description: string | null;
-    artist: string | null;
-    sortOrder: number | null;
+    title: string;
+    description?: string;
+    isDefault?: boolean;
+    images: Images.ImageDocument[];
   }
 
   export interface GalleryType {
@@ -13,6 +12,24 @@ export namespace Gallery {
     documents: GalleryDocument[];
   }
 }
+
+export namespace Images {
+  export interface ImageDocument extends Models.Document {
+    fileId: string;
+    parentId?: string;
+    title: string;
+    description?: string;
+    artistUrl?: string;
+    sortOrder?: number;
+    isHidden?: boolean;
+  }
+
+  export interface ImageType {
+    total: number;
+    documents: ImageDocument[];
+  }
+}
+
 export namespace Milestones {
   export interface MilestoneDocument extends Models.Document {
     milestone: number;
