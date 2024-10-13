@@ -52,7 +52,7 @@ export default async function Details({
 
       {images.map((image, index) => (
         <div key={image.$id}>
-          <div key={image.$id} className="flex gap-4 mb-12">
+          <div className="flex gap-4 mb-12">
             <div className="flex-grow">
               <img
                 src={`${process.env.NEXT_PUBLIC_API_URL}/v1/storage/buckets/gallery/files/${image.fileId}/view?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}`}
@@ -64,7 +64,7 @@ export default async function Details({
             <div>
               <h1 className="text-4xl">{image.title}</h1>
               <div
-                className="mt-2 mb-4"
+                className="mt-2 mb-4 image-description"
                 dangerouslySetInnerHTML={{
                   __html: image.description || "No description...",
                 }}
@@ -73,7 +73,7 @@ export default async function Details({
                 <Link
                   href={image.artistUrl}
                   target="_blank"
-                  className="flex align-middle"
+                  className="flex align-middle underline"
                   title="Artist link"
                 >
                   <LinkIcon className="pe-2" />
@@ -91,7 +91,10 @@ export default async function Details({
             </div>
           </div>
           {index === 0 && images.length > 1 && (
-            <h2 className="mb-8">Alt versions:</h2>
+            <>
+              <Separator className="my-6" />
+              <h2 className="mb-8">Alt versions:</h2>
+            </>
           )}
         </div>
       ))}

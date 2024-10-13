@@ -15,6 +15,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEffect, useState } from "react";
 import { Galleries } from "@/utils/models";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import "@/styles/gallery.css";
 
 export default function GalleryClient() {
   const [galleries, setGallieries] = useState<Galleries.GalleryType | null>(
@@ -83,8 +84,12 @@ export default function GalleryClient() {
                   .map((image) => {
                     const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/storage/buckets/gallery/files/${image.fileId}/preview?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}&height=400`;
                     return (
-                      <Link key={image.$id} href={`/gallery/${image.$id}`}>
-                        <div className="mb-4">
+                      <Link
+                        key={image.$id}
+                        href={`/gallery/${image.$id}`}
+                        className="image-item"
+                      >
+                        <div className="mb-4 image">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src={url}

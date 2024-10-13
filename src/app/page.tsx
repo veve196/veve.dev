@@ -6,12 +6,17 @@ import { Button } from "@/components/ui/button";
 import TypingAnimation from "@/components/typingAnimation";
 import getMilestones from "@/utils/server-api/getMilestones";
 import getBoops from "@/utils/server-api/getBoops";
+import { getStatus } from "@/utils/server-api/getStatus";
 
 export const runtime = "edge";
 
 export default async function Home() {
   const milestones = await getMilestones();
   const boops = await getBoops();
+  const status = await getStatus();
+
+  console.log(status);
+  console.log(new Date());
 
   return (
     <div className="text-center">
@@ -19,6 +24,7 @@ export default async function Home() {
       <p className="text-5xl mt-2 mb-4">
         <TypingAnimation texts={["welcome to my page! :3", "veve"]} />
       </p>
+      {status && <p>{status.status}</p>}
       <Button variant="link" className="px-2" type="button">
         <Link href={"/about"}>About</Link>
       </Button>
