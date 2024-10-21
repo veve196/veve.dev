@@ -15,9 +15,6 @@ export default async function Home() {
   const boops = await getBoops();
   const status = await getStatus();
 
-  console.log(status);
-  console.log(new Date());
-
   return (
     <div className="text-center">
       <Avatar milestones={milestones} />
@@ -47,6 +44,11 @@ export default async function Home() {
         </Link>
       </Button>
       <Separator className="my-3 w-72 mx-auto" />
+      <Button variant="link" className="block mx-auto" type="button">
+        <Link href={"https://bsky.app/profile/veve.soy"} target="_blank">
+          Bluesky
+        </Link>
+      </Button>
       <Button variant="link" className="block mx-auto" type="button">
         <Link href={"https://x.com/veve196"} target="_blank">
           Twitter/X
