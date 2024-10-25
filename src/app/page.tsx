@@ -7,10 +7,12 @@ import TypingAnimation from "@/components/typingAnimation";
 import getMilestones from "@/utils/server-api/getMilestones";
 import getBoops from "@/utils/server-api/getBoops";
 import { getStatus } from "@/utils/server-api/getStatus";
+import getSocials from "@/utils/server-api/getSocials";
 
 export const runtime = "edge";
 
 export default async function Home() {
+  const socials = await getSocials();
   const milestones = await getMilestones();
   const boops = await getBoops();
   const status = await getStatus();
@@ -44,21 +46,22 @@ export default async function Home() {
         </Link>
       </Button>
       <Separator className="my-3 w-72 mx-auto" />
-      <Button variant="link" className="block mx-auto" type="button">
-        <Link href={"https://bsky.app/profile/veve.soy"} target="_blank">
-          Bluesky
-        </Link>
-      </Button>
-      <Button variant="link" className="block mx-auto" type="button">
-        <Link href={"https://x.com/veve196"} target="_blank">
-          Twitter/X
-        </Link>
-      </Button>
-      <Button variant="link" className="block mx-auto" type="button">
-        <Link href={"https://t.me/veve196"} target="_blank">
-          Telegram
-        </Link>
-      </Button>
+      {socials.documents.map((social) => (
+        <Button
+          key={social.$id}
+          variant="link"
+          className="block mx-auto"
+          type="button"
+        >
+          <Link
+            href={social.url}
+            target="_blank"
+            title={social.tooltip ?? social.title}
+          >
+            {social.title}
+          </Link>
+        </Button>
+      ))}
       <Separator className="my-3 w-72 mx-auto" />
       <BoopCounter boopCount={boops} />
     </div>

@@ -54,3 +54,17 @@ export namespace Milestones {
     documents: MilestoneDocument[];
   }
 }
+
+export namespace Socials {
+  export interface SocialDocument extends Models.Document {
+    url: string;
+    title: string;
+    tooltip?: string;
+    sortOrder?: number;
+  }
+
+  export interface SocialType {
+    total: number;
+    documents: SocialDocument[];
+  }
+}
