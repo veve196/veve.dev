@@ -1,0 +1,33 @@
+#background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -999;
+  background: radial-gradient(
+    ellipse at bottom,
+    hsl(var(--background)) 0%,
+    hsl(var(--background-secondary)) 100%
+  );
+}
+
+[id^="stars-"] {
+  background: transparent;
+}
+
+[id^="stars-"]:after {
+  content: " ";
+  position: absolute;
+  top: 100vh;
+  background: transparent;
+}
+
+@keyframes animStar {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-100vh);
+  }
+}
