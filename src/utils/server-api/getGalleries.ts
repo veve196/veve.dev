@@ -7,5 +7,6 @@ import { Query } from "node-appwrite";
 export default async function getGalleries(): Promise<Galleries.GalleryType> {
   return await databases.listDocuments("web", "galleries", [
     Query.orderAsc("sortOrder"),
+    Query.or([Query.isNull("isHidden"), Query.equal("isHidden", false)]),
   ]);
 }
