@@ -18,11 +18,13 @@ export const metadata: Metadata = {
   title: "Details",
 };
 
-export default async function Details({
-  params: { imageId },
-}: {
-  params: { imageId: string };
+export default async function Details(props: {
+  params: Promise<{ imageId: string }>;
 }) {
+  const params = await props.params;
+
+  const { imageId } = params;
+
   const image = await getImage(imageId);
   const alts = await getAltImages(imageId);
 
