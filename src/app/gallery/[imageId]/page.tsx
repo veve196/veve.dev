@@ -17,6 +17,7 @@ export const runtime = "edge";
 export const metadata: Metadata = {
   title: "Details",
 };
+
 export default async function Details({
   params: { imageId },
 }: {

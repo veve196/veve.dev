@@ -38,7 +38,6 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
-          enableSystem
           disableTransitionOnChange
         >
           <main className="mx-auto max-w-4xl my-8 px-3 lg:px-0">
