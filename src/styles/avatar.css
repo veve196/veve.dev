@@ -25,3 +25,23 @@
     transform: translateX(-50%) translateY(-150px);
   }
 }
+
+.status-online {
+  background-color: #3ba55c;
+  border-color: #3ba55c;
+}
+
+.status-idle {
+  background-color: #faa61a;
+  border-color: #faa61a;
+}
+
+.status-dnd {
+  background-color: #ed4245;
+  border-color: #ed4245;
+}
+
+.status-offline {
+  background-color: #747f8d;
+  border-color: #747f8d;
+}

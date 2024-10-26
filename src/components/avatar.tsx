@@ -13,8 +13,9 @@ import {
 
 import updateBoop from "../utils/actions/updateBoop";
 import "../styles/avatar.css";
-import { Milestones } from "@/utils/models";
-import React from "react";
+import { FayeVR, Milestones } from "@/utils/models";
+import React, { useEffect } from "react";
+import getDiscordStatus from "@/utils/server-api/getDiscordStatus";
 
 export default function Avatar({
   milestones,
@@ -25,6 +26,16 @@ export default function Avatar({
   const [msDoc, setMsDoc] = React.useState<
     Milestones.MilestoneDocument | undefined
   >();
+  const [dcStatus, setDcStatus] = React.useState<
+    FayeVR.DiscordStatus | undefined
+  >();
+
+  useEffect(() => {
+    getDiscordStatus().then((status) => {
+      setDcStatus(status);
+    });
+  }, []);
+
   const handleClick = async (e: React.MouseEvent<HTMLImageElement>) => {
     const text = document.createElement("span");
 
@@ -84,20 +95,18 @@ export default function Avatar({
     <>
       <div
         id="avatar"
-        className="w-[200px] h-[200px] rounded-full mx-auto select-none border"
+        className={`w-[200px] h-[200px] rounded-full mx-auto select-none relative ${
+          dcStatus ? `status-${dcStatus.status} border-4` : ""
+        }`}
         onClick={handleClick}
-      />
-      {/* <Image
-        width={200}
-        height={200}
-        src="/avatar.webp"
-        alt="veve"
-        title="Click me!"
-        draggable={false}
-        className="rounded-full mx-auto select-none border"
-        priority
-        onClick={handleClick}
-      /> */}
+      >
+        {dcStatus && (
+          <div
+            className={`w-[32px] h-[32px] rounded-full border-2 border-transparent absolute bottom-3 right-3 status-${dcStatus.status}`}
+            title={`${dcStatus.status}`}
+          />
+        )}
+      </div>
       <AlertDialog open={showMessage} onOpenChange={setShowMessage}>
         <AlertDialogContent>
           <AlertDialogHeader>
