@@ -24,15 +24,15 @@ export default async function Home() {
         <TypingAnimation texts={["welcome to my page! :3", "veve"]} />
       </p>
       {status && <p>{status.status}</p>}
-      <Button variant="link" className="px-2" type="button">
+      <Button variant="link" className="px-2" type="button" asChild>
         <Link href={"/about"}>About</Link>
       </Button>
       •
-      <Button variant="link" className="px-2" type="button">
+      <Button variant="link" className="px-2" type="button" asChild>
         <Link href={"/gallery"}>Gallery</Link>
       </Button>
       •
-      <Button variant="link" className="px-2" type="button">
+      <Button variant="link" className="px-2" type="button" asChild>
         <Link href={"/ref"}>Refsheet</Link>
       </Button>
       <span className="hidden sm:inline-block">•</span>
@@ -40,6 +40,7 @@ export default async function Home() {
         variant="link"
         className="px-2 block mx-auto sm:inline-block"
         type="button"
+        asChild
       >
         <Link href="https://t.me/addstickers/FurdisAndVeve" target="_blank">
           My Stickers!
@@ -52,6 +53,7 @@ export default async function Home() {
           variant="link"
           className="block mx-auto"
           type="button"
+          asChild
         >
           <Link
             href={social.url}
