@@ -4,8 +4,12 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
+        protocol: "https",
         hostname: '"dash.fayevr.dev"',
+      },
+      {
+        protocol: "https",
+        hostname: "i.scdn.co",
       },
     ],
   },
