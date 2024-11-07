@@ -16,6 +16,20 @@ export default function SpotifyPlayer() {
     });
   }, []);
 
+  useEffect(() => {
+    if (!spotifyStatus || !spotifyStatus.ends_at) return;
+
+    const remainingTime =
+      new Date(spotifyStatus.ends_at).getTime() - Date.now();
+    const timer = setTimeout(() => {
+      getSpotifyStatus().then((data) => {
+        setSpotifyStatus(data);
+      });
+    }, remainingTime + 1000);
+
+    return () => clearTimeout(timer);
+  }, [spotifyStatus]);
+
   if (!spotifyStatus || spotifyStatus.song_name === undefined) {
     return null;
   }
