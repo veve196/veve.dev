@@ -9,6 +9,7 @@ import getBoops from "@/utils/server-api/getBoops";
 import { getStatus } from "@/utils/server-api/getStatus";
 import getSocials from "@/utils/server-api/getSocials";
 import SpotifyPlayer from "@/components/spotifyPlayer";
+import Image from "next/image";
 
 export const runtime = "edge";
 
@@ -73,6 +74,16 @@ export default async function Home() {
         <BoopCounter boopCount={boops} />
       </div>
       <SpotifyPlayer />
+      <Link href={"/draw"}>
+        <Image
+          src="/paint.webp"
+          alt="Paint"
+          title="Draw something!"
+          width={128}
+          height={128}
+          className="sm:fixed relative sm:right-0 sm:top-0 sm:mt-16 sm:me-10 mx-auto my-16 animate-bounce"
+        />
+      </Link>
     </>
   );
 }
