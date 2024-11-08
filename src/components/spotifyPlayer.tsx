@@ -2,7 +2,6 @@
 
 import { FayeVR } from "@/utils/models";
 import { getSpotifyStatus } from "@/utils/server-api/getDiscordStatus";
-import Image from "next/image";
 import React from "react";
 import { useEffect } from "react";
 
@@ -47,7 +46,9 @@ export default function SpotifyPlayer() {
         <div className="flex-1 p-4">
           <p className="text-xs text-muted-foreground pb-2">listening to:</p>
           <h1 className="font-semibold">{spotifyStatus.song_name}</h1>
-          <p className="text-muted-foreground">{spotifyStatus.artist}</p>
+          <p className="text-muted-foreground">
+            {spotifyStatus.artist.replaceAll("; ", ", ")}
+          </p>
         </div>
       </div>
     </>
