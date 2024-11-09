@@ -45,17 +45,33 @@ const DrawingCanvas = () => {
     context.lineCap = "round";
     context.strokeStyle = color;
 
-    const startDrawing = (event: MouseEvent) => {
-      setHasDrawn(true);
+    const startDrawing = (event: MouseEvent | TouchEvent) => {
+      event.preventDefault();
       setIsDrawing(true);
+      const { offsetX, offsetY } = getEventPosition(event);
       context.beginPath();
-      context.moveTo(event.offsetX, event.offsetY);
+      context.moveTo(offsetX, offsetY);
     };
 
-    const draw = (event: MouseEvent) => {
+    const draw = (event: MouseEvent | TouchEvent) => {
+      event.preventDefault();
       if (!isDrawing) return;
-      context.lineTo(event.offsetX, event.offsetY);
+      const { offsetX, offsetY } = getEventPosition(event);
+      context.lineTo(offsetX, offsetY);
       context.stroke();
+    };
+
+    const getEventPosition = (event: MouseEvent | TouchEvent) => {
+      if (event instanceof MouseEvent) {
+        return { offsetX: event.offsetX, offsetY: event.offsetY };
+      } else {
+        const touch = event.touches[0];
+        const rect = canvas.getBoundingClientRect();
+        return {
+          offsetX: touch.clientX - rect.left,
+          offsetY: touch.clientY - rect.top,
+        };
+      }
     };
 
     const stopDrawing = () => {
@@ -77,17 +93,23 @@ const DrawingCanvas = () => {
 
     canvas.addEventListener("mousedown", startDrawing);
     canvas.addEventListener("mousemove", draw);
-    //canvas.addEventListener("mouseup", stopDrawing);
+    canvas.addEventListener("mouseup", stopDrawing);
     canvas.addEventListener("mouseleave", handleMouseLeave);
     canvas.addEventListener("mouseenter", handleMouseEnter);
+    canvas.addEventListener("touchstart", startDrawing, { passive: false });
+    canvas.addEventListener("touchmove", draw, { passive: false });
+    canvas.addEventListener("touchend", stopDrawing, { passive: false });
     window.addEventListener("mouseup", stopDrawing);
 
     return () => {
       canvas.removeEventListener("mousedown", startDrawing);
       canvas.removeEventListener("mousemove", draw);
-      //canvas.removeEventListener("mouseup", stopDrawing);
+      canvas.removeEventListener("mouseup", stopDrawing);
       canvas.removeEventListener("mouseleave", handleMouseLeave);
       canvas.removeEventListener("mouseenter", handleMouseEnter);
+      canvas.removeEventListener("touchstart", startDrawing);
+      canvas.removeEventListener("touchmove", draw);
+      canvas.removeEventListener("touchend", stopDrawing);
       window.removeEventListener("mouseup", stopDrawing);
     };
   }, [isDrawing, color]);
