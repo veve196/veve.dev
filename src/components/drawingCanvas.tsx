@@ -63,16 +63,32 @@ const DrawingCanvas = () => {
       context.closePath();
     };
 
+    const handleMouseEnter = (event: MouseEvent) => {
+      if (!isDrawing) return;
+
+      context.beginPath();
+      context.moveTo(event.offsetX, event.offsetY);
+    };
+
+    const handleMouseLeave = (event: MouseEvent) => {
+      if (!isDrawing) return;
+      context.closePath();
+    };
+
     canvas.addEventListener("mousedown", startDrawing);
     canvas.addEventListener("mousemove", draw);
-    canvas.addEventListener("mouseup", stopDrawing);
-    canvas.addEventListener("mouseout", stopDrawing);
+    //canvas.addEventListener("mouseup", stopDrawing);
+    canvas.addEventListener("mouseleave", handleMouseLeave);
+    canvas.addEventListener("mouseenter", handleMouseEnter);
+    window.addEventListener("mouseup", stopDrawing);
 
     return () => {
       canvas.removeEventListener("mousedown", startDrawing);
       canvas.removeEventListener("mousemove", draw);
-      canvas.removeEventListener("mouseup", stopDrawing);
-      canvas.removeEventListener("mouseout", stopDrawing);
+      //canvas.removeEventListener("mouseup", stopDrawing);
+      canvas.removeEventListener("mouseleave", handleMouseLeave);
+      canvas.removeEventListener("mouseenter", handleMouseEnter);
+      window.removeEventListener("mouseup", stopDrawing);
     };
   }, [isDrawing, color]);
 
