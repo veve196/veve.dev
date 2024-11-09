@@ -14,14 +14,20 @@ import {
   AlertDialogTitle,
 } from "./ui/alert-dialog";
 import { LoadingSpinner } from "./ui/loading-spinner";
+import { RotateCcw } from "lucide-react";
+import { Slider } from "./ui/slider";
 
 const DrawingCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [color, setColor] = useState("#000000");
+  const [lineWidth, setLineWidth] = useState(5);
   const [showDialog, setShowDialog] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const [hasDrawn, setHasDrawn] = useState(false);
+  const [paths, setPaths] = useState<{ x: number; y: number }[][]>([]);
+  const [currentPath, setCurrentPath] = useState<{ x: number; y: number }[]>(
+    []
+  );
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -41,15 +47,17 @@ const DrawingCanvas = () => {
     const context = canvas.getContext("2d");
     if (!context) return;
 
-    context.lineWidth = 5;
+    context.lineWidth = lineWidth;
     context.lineCap = "round";
     context.strokeStyle = color;
 
     const startDrawing = (event: MouseEvent | TouchEvent) => {
       event.preventDefault();
       setIsDrawing(true);
-      setHasDrawn(true);
       const { offsetX, offsetY } = getScaledEventPosition(event, canvas);
+
+      const newPath = [{ x: offsetX, y: offsetY }];
+      setCurrentPath(newPath);
 
       context.beginPath();
       context.moveTo(offsetX, offsetY);
@@ -63,6 +71,9 @@ const DrawingCanvas = () => {
       event.preventDefault();
       if (!isDrawing) return;
       const { offsetX, offsetY } = getScaledEventPosition(event, canvas);
+      const newPoint = { x: offsetX, y: offsetY };
+      setCurrentPath((prevPath) => [...prevPath, newPoint]);
+
       context.lineTo(offsetX, offsetY);
       context.stroke();
     };
@@ -91,8 +102,10 @@ const DrawingCanvas = () => {
     };
 
     const stopDrawing = () => {
+      if (!isDrawing) return;
       setIsDrawing(false);
-      context.closePath();
+      setPaths((prevPaths) => [...prevPaths, currentPath]);
+      setCurrentPath([]);
     };
 
     const handleMouseEnter = (event: MouseEvent) => {
@@ -128,7 +141,7 @@ const DrawingCanvas = () => {
       canvas.removeEventListener("touchend", stopDrawing);
       window.removeEventListener("mouseup", stopDrawing);
     };
-  }, [isDrawing, color]);
+  }, [isDrawing, color, currentPath, lineWidth]);
 
   const handleClear = () => {
     const canvas = canvasRef.current;
@@ -138,7 +151,7 @@ const DrawingCanvas = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = "white";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        setHasDrawn(false);
+        setPaths([]);
       }
     }
   };
@@ -169,23 +182,81 @@ const DrawingCanvas = () => {
     setShowDialog(false);
   };
 
+  const handleUndo = () => {
+    setPaths((prevPaths) => {
+      const newPaths = prevPaths.slice(0, -1);
+      redrawCanvas(newPaths);
+      return newPaths;
+    });
+  };
+
+  const redrawCanvas = (paths: { x: number; y: number }[][]) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const context = canvas.getContext("2d");
+    if (!context) return;
+
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.lineWidth = 5;
+    context.lineCap = "round";
+    context.strokeStyle = color;
+
+    paths.forEach((path) => {
+      context.beginPath();
+      path.forEach((point, index) => {
+        if (index === 0) {
+          context.moveTo(point.x, point.y);
+        } else {
+          context.lineTo(point.x, point.y);
+        }
+      });
+      context.stroke();
+    });
+  };
+
   return (
     <>
       <div className="mx-auto relative max-w-[500px]">
-        <div className="">
+        <div>
           {isSaving && (
-            <div className=" w-full h-full bg-black opacity-50 absolute flex justify-center items-center gap-2">
+            <div className=" w-full h-full absolute flex justify-center items-center gap-2 text-black animate-pulse">
               <LoadingSpinner />
               Saving...
             </div>
           )}
+          <div className="flex justify-between gap-2 mb-2">
+            {/* <Button
+              onClick={handleUndo}
+              disabled={paths.length === 0 || isSaving}
+              className="w-16"
+            >
+              <RotateCcw />
+            </Button> */}
+            <Slider
+              defaultValue={[lineWidth]}
+              min={1}
+              max={20}
+              step={1}
+              onValueChange={(value) => setLineWidth(value[0])}
+              disabled={isSaving}
+              className="w-32"
+            />
+            <Input
+              type="color"
+              value={color}
+              onChange={handleColorChange}
+              disabled={isSaving}
+              className="w-16 p-0 rounded"
+            />
+          </div>
           <canvas
             ref={canvasRef}
             width={500}
             height={500}
             className="border border-black bg-white w-full"
           />
-          <div className="mt-4 flex justify-between">
+          <div className="mt-4 flex justify-between gap-2">
             <Button
               variant={"destructive"}
               onClick={handleClear}
@@ -194,19 +265,12 @@ const DrawingCanvas = () => {
             >
               Clear
             </Button>
-            <Input
-              type="color"
-              value={color}
-              onChange={handleColorChange}
-              className="w-32 p-1"
-              disabled={isSaving}
-            />
             <Button
               onClick={handleSave}
               className="w-32 bg-green-500 text-white"
-              disabled={isSaving || !hasDrawn}
+              disabled={isSaving || paths.length === 0}
               title={
-                hasDrawn
+                paths.length === 0
                   ? "Send your drawing to me! :3"
                   : "Draw something first!"
               }
