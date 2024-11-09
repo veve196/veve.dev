@@ -23,7 +23,7 @@ const DrawingCanvas = () => {
   const [color, setColor] = useState("#000000");
   const [lineWidth, setLineWidth] = useState(5);
   const [showDialog, setShowDialog] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
+  const [isSaving, setIsSaving] = useState(true);
   const [paths, setPaths] = useState<{ x: number; y: number }[][]>([]);
   const [currentPath, setCurrentPath] = useState<{ x: number; y: number }[]>(
     []
@@ -220,7 +220,7 @@ const DrawingCanvas = () => {
       <div className="mx-auto relative max-w-[500px]">
         <div>
           {isSaving && (
-            <div className=" w-full h-full absolute flex justify-center items-center gap-2 text-black animate-pulse">
+            <div className=" w-full h-full absolute flex justify-center items-center gap-2 text-black text-4xl animate-pulse">
               <LoadingSpinner />
               Saving...
             </div>
