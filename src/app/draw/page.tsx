@@ -35,9 +35,7 @@ export default async function About() {
       <h1 className="text-center">
         Draw something <b>anonymously</b> for me to see! :3
       </h1>
-      <p className="text-center text-destructive my-2">
-        kinda wip, only works on desktop for now!
-      </p>
+      <p className="text-center text-destructive my-2">kinda wip!</p>
       <DrawingCanvas />
     </>
   );

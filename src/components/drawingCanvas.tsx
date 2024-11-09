@@ -48,30 +48,46 @@ const DrawingCanvas = () => {
     const startDrawing = (event: MouseEvent | TouchEvent) => {
       event.preventDefault();
       setIsDrawing(true);
-      const { offsetX, offsetY } = getEventPosition(event);
+      setHasDrawn(true);
+      const { offsetX, offsetY } = getScaledEventPosition(event, canvas);
+
       context.beginPath();
       context.moveTo(offsetX, offsetY);
+
+      // draws a dot if you click without moving
+      context.lineTo(offsetX, offsetY);
+      context.stroke();
     };
 
     const draw = (event: MouseEvent | TouchEvent) => {
       event.preventDefault();
       if (!isDrawing) return;
-      const { offsetX, offsetY } = getEventPosition(event);
+      const { offsetX, offsetY } = getScaledEventPosition(event, canvas);
       context.lineTo(offsetX, offsetY);
       context.stroke();
     };
 
-    const getEventPosition = (event: MouseEvent | TouchEvent) => {
+    const getScaledEventPosition = (
+      event: MouseEvent | TouchEvent,
+      canvas: HTMLCanvasElement
+    ) => {
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+
+      let clientX, clientY;
       if (event instanceof MouseEvent) {
-        return { offsetX: event.offsetX, offsetY: event.offsetY };
+        clientX = event.clientX;
+        clientY = event.clientY;
       } else {
-        const touch = event.touches[0];
-        const rect = canvas.getBoundingClientRect();
-        return {
-          offsetX: touch.clientX - rect.left,
-          offsetY: touch.clientY - rect.top,
-        };
+        clientX = event.touches[0].clientX;
+        clientY = event.touches[0].clientY;
       }
+
+      return {
+        offsetX: (clientX - rect.left) * scaleX,
+        offsetY: (clientY - rect.top) * scaleY,
+      };
     };
 
     const stopDrawing = () => {
@@ -155,8 +171,8 @@ const DrawingCanvas = () => {
 
   return (
     <>
-      <div className="mx-auto w-[500px] relative">
-        <div className="h-[500px]">
+      <div className="mx-auto relative max-w-[500px]">
+        <div className="">
           {isSaving && (
             <div className=" w-full h-full bg-black opacity-50 absolute flex justify-center items-center gap-2">
               <LoadingSpinner />
@@ -167,7 +183,7 @@ const DrawingCanvas = () => {
             ref={canvasRef}
             width={500}
             height={500}
-            className="border border-black bg-white w-[500px] h-[500px]"
+            className="border border-black bg-white w-full"
           />
           <div className="mt-4 flex justify-between">
             <Button
