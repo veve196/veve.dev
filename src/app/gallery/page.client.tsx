@@ -23,8 +23,10 @@ export default function GalleryClient() {
     null
   );
   const [curGalleryId, setCurGalleryId] = useState<string | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
+  const slideshow = searchParams.get("slideshow");
 
   useEffect(() => {
     getGalleries().then((galleries) => {
@@ -45,9 +47,38 @@ export default function GalleryClient() {
     if (curGalleryId) sessionStorage.setItem("galleryId", curGalleryId);
   }, [curGalleryId]);
 
+  useEffect(() => {
+    if (slideshow && galleries && curGalleryId) {
+      const gallery = galleries.documents.find((g) => g.$id === curGalleryId);
+      if (gallery) {
+        const interval = setInterval(() => {
+          setCurrentImageIndex(
+            (prevIndex) => (prevIndex + 1) % gallery.images.length
+          );
+        }, 10000);
+
+        return () => clearInterval(interval);
+      }
+    }
+  }, [slideshow, galleries, curGalleryId]);
+
   const handleTabClick = (galleryId: string) => {
     setCurGalleryId(galleryId);
   };
+
+  if (slideshow && galleries && curGalleryId) {
+    const gallery = galleries.documents.find((g) => g.$id === curGalleryId);
+    if (gallery) {
+      return (
+        <div
+          className="bg-cover bg-no-repeat bg-center fixed top-0 left-0 w-full h-full transition-all"
+          style={{
+            backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}/v1/storage/buckets/gallery/files/${gallery.images[currentImageIndex].fileId}/preview?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}')`,
+          }}
+        ></div>
+      );
+    }
+  }
 
   return (
     <>

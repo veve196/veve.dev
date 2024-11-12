@@ -12,6 +12,12 @@ import Link from "next/link";
 import getImage, { getAltImages } from "@/utils/server-api/getImage";
 import { LinkIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export const runtime = "edge";
 export const metadata: Metadata = {
