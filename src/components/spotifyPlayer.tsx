@@ -38,7 +38,9 @@ export default function SpotifyPlayer() {
         <img
           src={spotifyStatus.cover_url}
           alt="album cover"
-          title={`${spotifyStatus.song_name} by ${spotifyStatus.artist}`}
+          title={`${
+            spotifyStatus.song_name
+          } by ${spotifyStatus.artist.replaceAll("; ", ", ")}`}
           width={116}
           height={116}
           className="self-center"

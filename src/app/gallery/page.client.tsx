@@ -16,16 +16,24 @@ import { useEffect, useState } from "react";
 import { Galleries } from "@/utils/models";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import "@/styles/gallery.css";
+import { useSearchParams } from "next/navigation";
 
 export default function GalleryClient() {
   const [galleries, setGallieries] = useState<Galleries.GalleryType | null>(
     null
   );
   const [curGalleryId, setCurGalleryId] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
 
   useEffect(() => {
     getGalleries().then((galleries) => {
       setGallieries(galleries);
+
+      if (id) {
+        setCurGalleryId(id);
+        return;
+      }
 
       const galleryId = sessionStorage.getItem("galleryId");
 
