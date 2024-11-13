@@ -33,6 +33,10 @@ export default function Avatar({
     getDiscordStatus().then((status) => {
       setDcStatus(status);
     });
+
+    // Preload image to avoid flickering on hover
+    const img = new Image();
+    img.src = "/avatar_blushies.webp";
   }, []);
 
   const handleClick = async (e: React.MouseEvent<HTMLImageElement>) => {
@@ -94,7 +98,7 @@ export default function Avatar({
     <>
       <div
         id="avatar"
-        className={`w-[200px] h-[200px] rounded-full mx-auto select-none relative ${
+        className={`w-[200px] h-[200px] rounded-full mx-auto select-none relative cursor-pointer ${
           dcStatus ? `status-${dcStatus.status} border-4` : ""
         }`}
         onClick={handleClick}
