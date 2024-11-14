@@ -138,7 +138,7 @@ export default function GalleryClient() {
                               title={image.title}
                               fill
                               sizes="200px"
-                              className="object-contain !relative"
+                              className="object-contain !relative rounded-md"
                               placeholder="blur"
                               blurDataURL="/placeholder.webp"
                             />
