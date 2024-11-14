@@ -13,7 +13,7 @@ import {
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb";
 
-export default function Custom404() {
+export default function Custom500() {
   return (
     <>
       <Breadcrumb>
@@ -42,7 +42,7 @@ export default function Custom404() {
           <h1 className="text-8xl font-bold">500</h1>
           <Separator className="w-full" />
           <p>
-            Something went wrong and it's definitely not my fault.
+            Something went wrong and it&apos;s definitely not my fault.
             <br />
             Please try again later!
           </p>
