@@ -17,6 +17,7 @@ import { Galleries } from "@/utils/models";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import "@/styles/gallery.css";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 export default function GalleryClient() {
   const [galleries, setGallieries] = useState<Galleries.GalleryType | null>(
@@ -121,21 +122,27 @@ export default function GalleryClient() {
                   .filter((image) => !image.parentId && !image.isHidden)
                   .sort((a, b) => (a.sortOrder ?? 9999) - (b.sortOrder ?? 9999))
                   .map((image) => {
-                    const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/storage/buckets/gallery/files/${image.fileId}/preview?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}&height=400`;
+                    const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/storage/buckets/gallery/files/${image.fileId}/preview?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}&height=200`;
+
                     return (
                       <Link
                         key={image.$id}
                         href={`/gallery/${image.$id}`}
                         className="image-item"
                       >
-                        <div className="mb-4 image">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={url}
-                            alt={image.title}
-                            title={image.title}
-                            className="rounded-md h-[200px]"
-                          />
+                        <div className="mb-4">
+                          <div className="relative h-[200px]">
+                            <Image
+                              src={url}
+                              alt={image.title}
+                              title={image.title}
+                              fill
+                              sizes="200px"
+                              className="object-contain !relative"
+                              placeholder="blur"
+                              blurDataURL="/placeholder.webp"
+                            />
+                          </div>
                           <p className="text-center">{image.title}</p>
                         </div>
                       </Link>

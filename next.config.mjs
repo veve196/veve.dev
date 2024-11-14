@@ -5,7 +5,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: '"dash.fayevr.dev"',
+        hostname: '"cloud.appwrite.io"',
       },
       {
         protocol: "https",
