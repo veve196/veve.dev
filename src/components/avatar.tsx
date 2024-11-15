@@ -102,6 +102,7 @@ export default function Avatar({
           dcStatus ? `status-${dcStatus.status} border-4` : ""
         }`}
         onClick={handleClick}
+        title="Boop me!"
       >
         {dcStatus && (
           <div
