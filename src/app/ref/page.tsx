@@ -35,17 +35,15 @@ export default async function Home() {
         </BreadcrumbList>
       </Breadcrumb>
       <Separator className="my-4" />
-      <AspectRatio ratio={47 / 36}>
-        <Image
-          fill
-          src="/ref.png"
-          alt="Refsheet"
-          title="Refsheet"
-          priority
-          className="mx-auto mb-2 rounded-md object-cover"
-        />
-      </AspectRatio>
-
+      <Image
+        src="/ref/refsheet_preview.webp"
+        alt="Refsheet"
+        title="Refsheet"
+        width={896}
+        height={686}
+        priority
+        className="mx-auto mb-2 rounded-md object-cover"
+      />
       <div className="flex justify-between mt-4">
         <div>
           <ColorButton copyColor="#2b3855" />
@@ -56,8 +54,10 @@ export default async function Home() {
           <ColorButton copyColor="#7bbbb0" />
           <ColorButton copyColor="#800000" />
         </div>
-        <a href="/ref.png" download>
-          <Button className="justify-end">Download</Button>
+        <a href="/ref/refsheet_veve.png" download>
+          <Button className="justify-end" title="full resolution">
+            Download
+          </Button>
         </a>
       </div>
     </>

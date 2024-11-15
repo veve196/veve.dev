@@ -140,7 +140,7 @@ export default function GalleryClient() {
                               sizes="200px"
                               className="object-contain !relative rounded-md"
                               placeholder="blur"
-                              blurDataURL="/placeholder.webp"
+                              blurDataURL="/gallery/placeholder.webp"
                             />
                           </div>
                           <p className="text-center">{image.title}</p>

@@ -34,9 +34,10 @@ export default function ColorButton({ copyColor, textColor }: Props) {
         color: textColor || "white",
       }}
       className="me-2 mb-2 border"
+      title="Click to copy!"
       onClick={handleOnClick}
     >
-      Copy
+      {copyColor}
     </Button>
   );
 }
