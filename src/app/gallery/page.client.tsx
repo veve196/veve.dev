@@ -100,7 +100,7 @@ export default function GalleryClient() {
       {(!galleries || !curGalleryId) && <LoadingSpinner className="mx-auto" />}
       {galleries && curGalleryId && (
         <Tabs defaultValue={curGalleryId} className="text-center">
-          <TabsList>
+          <TabsList className="flex-wrap h-auto">
             {galleries.documents.map((gallery) => (
               <TabsTrigger
                 key={gallery.$id}
