@@ -283,7 +283,7 @@ const DrawingCanvas = () => {
       <AlertDialog open={showDialog} onOpenChange={handleOpenChange}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Thank you! 🩵</AlertDialogTitle>
+            <AlertDialogTitle>Thank you! 💙</AlertDialogTitle>
             <AlertDialogDescription>
               Thanks for sending me your beautiful masterpiece! :3 🎨
             </AlertDialogDescription>

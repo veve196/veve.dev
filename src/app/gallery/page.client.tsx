@@ -1,23 +1,22 @@
 "use client";
 
-import getGalleries from "@/utils/server-api/getGalleries";
 import {
   Breadcrumb,
-  BreadcrumbList,
   BreadcrumbItem,
   BreadcrumbLink,
-  BreadcrumbSeparator,
+  BreadcrumbList,
   BreadcrumbPage,
+  BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useEffect, useState } from "react";
-import { Galleries } from "@/utils/models";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import "@/styles/gallery.css";
+import { Galleries } from "@/utils/models";
+import getGalleries from "@/utils/server-api/getGalleries";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function GalleryClient() {
   const [galleries, setGallieries] = useState<Galleries.GalleryType | null>(
@@ -131,16 +130,11 @@ export default function GalleryClient() {
                         className="image-item"
                       >
                         <div className="mb-4">
-                          <div className="relative h-[200px]">
-                            <Image
+                          <div className="">
+                            <img
                               src={url}
                               alt={image.title}
                               title={image.title}
-                              fill
-                              sizes="200px"
-                              className="object-contain !relative rounded-md"
-                              placeholder="blur"
-                              blurDataURL="/gallery/placeholder.webp"
                             />
                           </div>
                           <p className="text-center">{image.title}</p>
