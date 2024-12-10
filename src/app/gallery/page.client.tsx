@@ -119,7 +119,17 @@ export default function GalleryClient() {
               <div className="flex gap-4 flex-wrap justify-center">
                 {gallery.images
                   .filter((image) => !image.parentId && !image.isHidden)
-                  .sort((a, b) => (a.sortOrder ?? 9999) - (b.sortOrder ?? 9999))
+                  .sort((a, b) => {
+                    const sortOrderComparison =
+                      (a.sortOrder ?? 9999) - (b.sortOrder ?? 9999);
+                    if (sortOrderComparison !== 0) {
+                      return sortOrderComparison;
+                    }
+                    return (
+                      new Date(b.$createdAt).getTime() -
+                      new Date(a.$createdAt).getTime()
+                    );
+                  })
                   .map((image) => {
                     const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/storage/buckets/gallery/files/${image.fileId}/preview?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}&height=200`;
 
