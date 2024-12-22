@@ -1,17 +1,9 @@
-import { Metadata } from "next/types";
-import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbSeparator,
-  BreadcrumbPage,
-} from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
-import getImage, { getAltImages } from "@/utils/server-api/getImage";
-import { LinkIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import getImage, { getAltImages } from "@/server-api/getImage";
+import { LinkIcon } from "lucide-react";
+import Link from "next/link";
+import { Metadata } from "next/types";
 
 export const runtime = "edge";
 export const metadata: Metadata = {
@@ -19,40 +11,19 @@ export const metadata: Metadata = {
 };
 
 export default async function Details(props: {
-  params: Promise<{ imageId: string }>;
+  params: Promise<{ id: string }>;
 }) {
   const params = await props.params;
 
-  const { imageId } = params;
+  const { id } = params;
 
-  const image = await getImage(imageId);
-  const alts = await getAltImages(imageId);
+  const image = await getImage(id);
+  const alts = await getAltImages(id);
 
   const images = [image, ...alts.documents];
 
   return (
     <>
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link href={"/"}>Home</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link href={"/gallery"}>Gallery</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Details</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-      <Separator className="my-4" />
-
       {images.map((image, index) => (
         <div key={image.$id}>
           <div className="flex gap-4 mb-12">

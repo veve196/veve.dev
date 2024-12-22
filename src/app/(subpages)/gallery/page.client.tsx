@@ -1,19 +1,10 @@
 "use client";
 
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Galleries } from "@/models";
+import getGalleries from "@/server-api/getGalleries";
 import "@/styles/gallery.css";
-import { Galleries } from "@/utils/models";
-import getGalleries from "@/utils/server-api/getGalleries";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -82,20 +73,6 @@ export default function GalleryClient() {
 
   return (
     <>
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link href={"/"}>Home</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Gallery</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-      <Separator className="my-4" />
       {(!galleries || !curGalleryId) && <LoadingSpinner className="mx-auto" />}
       {galleries && curGalleryId && (
         <Tabs defaultValue={curGalleryId} className="text-center">

@@ -1,18 +1,7 @@
 import ColorButton from "@/components/colorButton";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Metadata } from "next/types";
-import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
 
 export const runtime = "edge";
 export const metadata: Metadata = {
@@ -21,20 +10,6 @@ export const metadata: Metadata = {
 export default async function Home() {
   return (
     <>
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link href={"/"}>Home</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Ref</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-      <Separator className="my-4" />
       <Image
         src="/ref/refsheet_preview.webp"
         alt="Refsheet"

@@ -10,11 +10,11 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-import updateBoop from "../utils/actions/updateBoop";
-import "../styles/avatar.css";
-import { FayeVR, Milestones } from "@/utils/models";
+import { FayeVR, Milestones } from "@/models";
+import getDiscordStatus from "@/server-api/getDiscordStatus";
 import React, { useEffect } from "react";
-import getDiscordStatus from "@/utils/server-api/getDiscordStatus";
+import updateBoop from "../actions/updateBoop";
+import "../styles/avatar.css";
 
 export default function Avatar({
   milestones,

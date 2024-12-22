@@ -1,9 +1,11 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
-import { Input } from "@/components/ui/input";
+import uploadDrawing from "@/actions/uploadDrawing";
 import { Button } from "@/components/ui/button";
-import uploadDrawing from "@/utils/actions/uploadDrawing";
+import { Input } from "@/components/ui/input";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { Slider } from "@/components/ui/slider";
+import React, { useEffect, useRef, useState } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,9 +15,6 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "./ui/alert-dialog";
-import { LoadingSpinner } from "./ui/loading-spinner";
-import { RotateCcw } from "lucide-react";
-import { Slider } from "./ui/slider";
 
 const DrawingCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);

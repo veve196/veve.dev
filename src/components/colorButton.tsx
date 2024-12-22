@@ -1,7 +1,7 @@
 "use client";
 
+import { useToast } from "@/hooks/use-toast";
 import { Button } from "./ui/button";
-import { useToast } from "./ui/use-toast";
 
 interface Props {
   copyColor: string;

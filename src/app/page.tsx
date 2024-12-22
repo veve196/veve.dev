@@ -1,23 +1,24 @@
 import Avatar from "@/components/avatar";
 import BoopCounter from "@/components/boopCounter";
-import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import TypingAnimation from "@/components/typingAnimation";
-import getMilestones from "@/utils/server-api/getMilestones";
-import getBoops from "@/utils/server-api/getBoops";
-import { getStatus } from "@/utils/server-api/getStatus";
-import getSocials from "@/utils/server-api/getSocials";
 import SpotifyPlayer from "@/components/spotifyPlayer";
+import TypingAnimation from "@/components/typingAnimation";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { Milestones, Socials, Statuses } from "@/models";
+import getBoops from "@/server-api/getBoops";
+import getMilestones from "@/server-api/getMilestones";
+import getSocials from "@/server-api/getSocials";
+import { getStatus } from "@/server-api/getStatus";
 import Image from "next/image";
+import Link from "next/link";
 
 export const runtime = "edge";
 
 export default async function Home() {
-  const socials = await getSocials();
-  const milestones = await getMilestones();
-  const boops = await getBoops();
-  const status = await getStatus();
+  const socials: Socials.SocialType = await getSocials();
+  const milestones: Milestones.MilestoneType = await getMilestones();
+  const boops: number = await getBoops();
+  const status: Statuses.StatusDocument = await getStatus();
 
   return (
     <>
