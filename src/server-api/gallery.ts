@@ -1,6 +1,6 @@
 "use server";
 
-import { databases } from "@/app/appwrite-server";
+import { databases, storage } from "@/app/appwrite-server";
 import { Galleries, Images } from "@/models";
 import { Query } from "node-appwrite";
 
