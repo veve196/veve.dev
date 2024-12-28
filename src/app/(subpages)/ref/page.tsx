@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     siteName: "veve",
     images: [
       {
-        url: "/ref/refsheet_preview.webp",
+        url: `${process.env.NEXT_PUBLIC_DOMAIN}/ref/refsheet_preview.webp`,
         width: 896,
         height: 686,
         alt: "Refsheet",
