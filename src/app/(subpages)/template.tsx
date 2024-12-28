@@ -20,7 +20,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link href={"/"}>Home</Link>
+              <Link href={"/"}>home</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           {routes.slice(1).map((route, index) => (
