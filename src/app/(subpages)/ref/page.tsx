@@ -2,6 +2,8 @@ import ColorButton from "@/components/colorButton";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Metadata } from "next/types";
+import "@/styles/ref.css";
+import Link from "next/link";
 
 export const runtime = "edge";
 export const metadata: Metadata = {
@@ -34,6 +36,11 @@ export default async function Home() {
             Download
           </Button>
         </a>
+      </div>
+      <div className="text-center mt-8">
+        <Link href="/ref/fufu" className="rainbow-text text-4xl">
+          Click here for BFs ref!
+        </Link>
       </div>
     </>
   );
