@@ -25,7 +25,15 @@ export default async function Details(props: {
   const images = [img, ...alts.documents];
 
   return (
-    <>
+    <div className="relative">
+      <Image
+        src="/wip.webp"
+        width={128}
+        height={64}
+        alt="wip!"
+        title="wip!"
+        className="top-[-32px] right-0 absolute rotate-12 animate-pulse"
+      />
       {images.map((image, index) => (
         <React.Fragment key={index}>
           <div className="flex flex-wrap gap-4">
@@ -72,6 +80,6 @@ export default async function Details(props: {
           )}
         </React.Fragment>
       ))}
-    </>
+    </div>
   );
 }
