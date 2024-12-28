@@ -6,7 +6,15 @@ import { Metadata } from "next/types";
 export const runtime = "edge";
 export const metadata: Metadata = {
   title: "Refsheet",
+  description: "here u go :3",
+  openGraph: {
+    title: "Fufu's ref",
+    description: "here u go :3",
+    type: "website",
+    siteName: "veve",
+  },
 };
+
 export default async function Home() {
   return (
     <>

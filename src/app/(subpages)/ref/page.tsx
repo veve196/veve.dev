@@ -8,7 +8,15 @@ import Link from "next/link";
 export const runtime = "edge";
 export const metadata: Metadata = {
   title: "Refsheet",
+  description: "here u go :3",
+  openGraph: {
+    title: "veve's ref",
+    description: "here u go :3",
+    type: "website",
+    siteName: "veve",
+  },
 };
+
 export default async function Home() {
   return (
     <>
