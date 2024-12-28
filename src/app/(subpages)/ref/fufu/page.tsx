@@ -11,7 +11,7 @@ export default async function Home() {
   return (
     <>
       <Image
-        src="/ref/refsheet_preview.webp"
+        src="/ref/fufu/refsheet_preview.webp"
         alt="Refsheet"
         title="Refsheet"
         width={896}
@@ -21,15 +21,14 @@ export default async function Home() {
       />
       <div className="flex justify-between mt-4">
         <div>
-          <ColorButton copyColor="#2b3855" />
-          <ColorButton copyColor="#47aafe" />
-          <ColorButton copyColor="#80c3ff" />
-          <ColorButton copyColor="#ffffff" textColor="#000" />
-          <ColorButton copyColor="#75a6bd" />
-          <ColorButton copyColor="#7bbbb0" />
-          <ColorButton copyColor="#800000" />
+          <ColorButton copyColor="#fe29b2" />
+          <ColorButton copyColor="#e115ae" />
+          <ColorButton copyColor="#ff1ca3" />
+          <ColorButton copyColor="#90067e" />
+          <ColorButton copyColor="#3a0d4c" />
+          <ColorButton copyColor="#fffcfd" textColor="#000" />
         </div>
-        <a href="/ref/refsheet.png" download>
+        <a href="/ref/fufu/refsheet.png" download>
           <Button className="justify-end" title="full resolution">
             Download
           </Button>
