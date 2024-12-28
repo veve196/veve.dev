@@ -14,6 +14,14 @@ export const metadata: Metadata = {
     description: "here u go :3",
     type: "website",
     siteName: "veve",
+    images: [
+      {
+        url: "/ref/refsheet_preview.webp",
+        width: 896,
+        height: 686,
+        alt: "Refsheet",
+      },
+    ],
   },
 };
 
