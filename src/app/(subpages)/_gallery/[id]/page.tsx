@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import getImage, { getAltImages } from "@/server-api/getImage";
+import { getImage, getAltImages } from "@/server-api/gallery";
 import { LinkIcon } from "lucide-react";
 import Link from "next/link";
 import { Metadata } from "next/types";

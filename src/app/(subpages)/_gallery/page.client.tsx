@@ -3,7 +3,7 @@
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Galleries } from "@/models";
-import getGalleries from "@/server-api/getGalleries";
+import { getGalleriesWithImages } from "@/server-api/gallery";
 import "@/styles/gallery.css";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -20,7 +20,7 @@ export default function GalleryClient() {
   const slideshow = searchParams.get("slideshow");
 
   useEffect(() => {
-    getGalleries().then((galleries) => {
+    getGalleriesWithImages().then((galleries) => {
       setGallieries(galleries);
 
       if (id) {
