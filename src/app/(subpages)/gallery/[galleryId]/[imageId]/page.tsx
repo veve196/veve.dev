@@ -8,9 +8,24 @@ import { Metadata } from "next/types";
 import React from "react";
 
 export const runtime = "edge";
-export const metadata: Metadata = {
-  title: "Details",
-};
+
+export async function generateMetadata(props: {
+  params: Promise<{ imageId: string }>;
+}): Promise<Metadata> {
+  const params = await props.params;
+  const { imageId } = params;
+
+  const img = await getImage(imageId);
+
+  return {
+    title: img.title,
+    description: img.description,
+    openGraph: {
+      title: img.title,
+      description: img.description,
+    },
+  };
+}
 
 export default async function Details(props: {
   params: Promise<{ imageId: string }>;

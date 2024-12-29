@@ -1,4 +1,4 @@
-import ColorButton from "@/components/colorButton";
+import ColorButton from "@/components/color-button";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Metadata } from "next/types";
@@ -10,8 +10,6 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Fufu's ref",
     description: "here u go :3",
-    type: "website",
-    siteName: "veve",
     images: [
       {
         url: `${process.env.NEXT_PUBLIC_DOMAIN}/ref/fufu/refsheet_preview.webp`,

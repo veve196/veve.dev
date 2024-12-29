@@ -1,9 +1,9 @@
-import ColorButton from "@/components/colorButton";
+import ColorButton from "@/components/color-button";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import { Metadata } from "next/types";
 import "@/styles/ref.css";
+import Image from "next/image";
 import Link from "next/link";
+import { Metadata } from "next/types";
 
 export const runtime = "edge";
 export const metadata: Metadata = {
@@ -12,8 +12,6 @@ export const metadata: Metadata = {
   openGraph: {
     title: "veve's ref",
     description: "here u go :3",
-    type: "website",
-    siteName: "veve",
     images: [
       {
         url: `${process.env.NEXT_PUBLIC_DOMAIN}/ref/refsheet_preview.webp`,

@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "../styles/globals.css";
-import React from "react";
+import Background from "@/components/background";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
-import Background from "@/components/background";
+import type { Metadata } from "next";
+import localFont from "next/font/local";
+import React from "react";
+import "../styles/globals.css";
 
 const pixelFont = localFont({ src: "../../public/PixelMplus12-Regular.woff2" });
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     description:
       "i'm veve and i suck at everything :3 i like to make things, though.",
     type: "website",
-    siteName: "veve",
+    siteName: "veve.dev",
   },
   metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN!),
 };

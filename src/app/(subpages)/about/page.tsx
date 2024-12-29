@@ -4,12 +4,16 @@ import { Metadata } from "next/types";
 export const runtime = "edge";
 export const metadata: Metadata = {
   title: "About",
-  description: "this is my about page!",
+  description: "This is my about page!",
   openGraph: {
     title: "About",
-    description: "this is my about page!",
-    type: "website",
-    siteName: "veve",
+    description: "This page is about stuff",
+    images: [
+      {
+        url: `${process.env.NEXT_PUBLIC_DOMAIN}/about/downey.webp`,
+        alt: "stuff",
+      },
+    ],
   },
 };
 

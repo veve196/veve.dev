@@ -34,6 +34,12 @@ export async function getDefaultGallery(): Promise<Galleries.GalleryDocument> {
   return response.documents[0];
 }
 
+export async function getGallery(
+  id: string
+): Promise<Galleries.GalleryDocument> {
+  return await databases.getDocument("web", "galleries", id);
+}
+
 export async function getGalleryImages(
   id: string,
   page: number,

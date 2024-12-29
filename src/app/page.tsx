@@ -1,7 +1,7 @@
 import Avatar from "@/components/avatar";
-import BoopCounter from "@/components/boopCounter";
-import SpotifyPlayer from "@/components/spotifyPlayer";
-import TypingAnimation from "@/components/typingAnimation";
+import BoopCounter from "@/components/boop-counter";
+import SpotifyPlayer from "@/components/spotify-player";
+import TypingAnimation from "@/components/typing-animation";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Milestones, Socials, Statuses } from "@/models";

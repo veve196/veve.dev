@@ -1,4 +1,4 @@
-import DrawingCanvas from "@/components/drawingCanvas";
+import DrawingCanvas from "@/components/drawing-canvas";
 import { Metadata } from "next/types";
 
 export const runtime = "edge";
@@ -8,8 +8,6 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Draw something!",
     description: "i dare u",
-    type: "website",
-    siteName: "veve",
   },
 };
 export default async function About() {
