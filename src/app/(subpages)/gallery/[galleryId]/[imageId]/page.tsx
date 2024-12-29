@@ -23,6 +23,12 @@ export async function generateMetadata(props: {
     openGraph: {
       title: img.title,
       description: img.description,
+      images: [
+        {
+          url: `${process.env.NEXT_PUBLIC_API_URL}/v1/storage/buckets/gallery/files/${img.fileId}/view?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}`,
+          alt: img.title,
+        },
+      ],
     },
   };
 }

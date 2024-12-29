@@ -8,10 +8,10 @@ import { Metadata } from "next/types";
 export const runtime = "edge";
 export const metadata: Metadata = {
   title: "Refsheet",
-  description: "here u go :3",
+  description: "here u go dear artist 👉👈",
   openGraph: {
     title: "veve's ref",
-    description: "here u go :3",
+    description: "here u go dear artist 👉👈",
     images: [
       {
         url: `${process.env.NEXT_PUBLIC_DOMAIN}/ref/refsheet_preview.webp`,
@@ -53,7 +53,7 @@ export default async function Home() {
       </div>
       <div className="text-center mt-8">
         <Link href="/ref/fufu" className="rainbow-text text-4xl">
-          Click here for BFs ref!
+          Click here for Bfs ref!
         </Link>
       </div>
     </>
