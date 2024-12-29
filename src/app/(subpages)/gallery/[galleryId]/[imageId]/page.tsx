@@ -53,7 +53,7 @@ export default async function Details(props: {
         height={64}
         alt="wip!"
         title="wip!"
-        className="top-[-32px] right-0 absolute rotate-12 animate-pulse"
+        className="top-[-64px] right-0 absolute rotate-12 animate-pulse"
       />
       {images.map((image, index) => (
         <React.Fragment key={index}>
