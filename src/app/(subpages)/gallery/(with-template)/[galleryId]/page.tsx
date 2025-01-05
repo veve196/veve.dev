@@ -30,9 +30,16 @@ export default async function Gallery(props: {
 }) {
   const params = await props.params;
   const { galleryId } = params;
+  const gallery = await getGallery(galleryId);
 
   return (
     <>
+      <div
+        className="text-center mb-4 gallery-description"
+        dangerouslySetInnerHTML={{
+          __html: gallery.description || "",
+        }}
+      />
       <GalleryContent galleryId={galleryId} imagesPerPage={25} />
     </>
   );
