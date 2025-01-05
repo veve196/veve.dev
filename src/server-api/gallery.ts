@@ -47,7 +47,7 @@ export async function getGalleryImages(
 ): Promise<Images.ImageType> {
   return await databases.listDocuments("web", "images", [
     Query.equal("galleryId", id),
-    Query.isNull("parentId"),
+    Query.or([Query.isNull("parentId"), Query.equal("parentId", "")]),
     Query.or([Query.isNull("isHidden"), Query.equal("isHidden", false)]),
     Query.limit(imagesPerPage),
     Query.offset((page - 1) * imagesPerPage),
