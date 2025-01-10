@@ -13,6 +13,7 @@ import { getGalleryImages } from "@/server-api/gallery";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
+import Image from "next/image";
 
 interface GalleryContentProps {
   galleryId: string;
@@ -25,22 +26,32 @@ export default function GalleryContent({
 }: GalleryContentProps) {
   const [page, setPage] = useState(1);
   const [images, setImages] = useState<Images.ImageType | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const imageSize = 200;
 
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
     getGalleryImages(galleryId, page, imagesPerPage).then((images) => {
       setImages(images);
-      setLoading(false);
+      setIsLoading(false);
     });
   }, [page]);
 
-  if (!images || loading) return <LoadingSpinner className="mx-auto" />;
+  if (!images || isLoading) return <LoadingSpinner className="mx-auto" />;
 
   return (
     <>
       <div className="flex gap-4 flex-wrap justify-center">
         {images.documents.map((image, index) => {
+          image.width = image.width || imageSize;
+          image.height = image.height || imageSize;
+
+          const isLarge = image.height != imageSize;
+          const scaledHeight = isLarge ? imageSize : image.height;
+          const scaledWidth = isLarge
+            ? (image.width / image.height) * scaledHeight
+            : image.height;
+
           const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/storage/buckets/gallery/files/${image.fileId}/preview?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}&height=200`;
 
           return (
@@ -49,11 +60,25 @@ export default function GalleryContent({
               href={`/gallery/${galleryId}/${image.$id}`}
               className="image-item"
             >
-              <img
+              <Image
                 src={url}
                 alt={image.title}
                 title={image.title}
+                width={scaledWidth}
+                height={scaledHeight}
                 className="rounded"
+                quality={90}
+                unoptimized={
+                  image.mimeType != null &&
+                  [
+                    "image/gif",
+                    "image/apng",
+                    "image/webp",
+                    "image/svg+xml",
+                    "video/x-mng",
+                  ].includes(image.mimeType)
+                }
+                placeholder="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw"
               />
               <p className="text-center">{image.title}</p>
             </Link>

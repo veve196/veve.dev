@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next/types";
 import React from "react";
+import "@/styles/details.css";
 
 export const runtime = "edge";
 
@@ -46,61 +47,77 @@ export default async function Details(props: {
   const images = [img, ...alts.documents];
 
   return (
-    <div className="relative">
-      <Image
-        src="/wip.webp"
-        width={128}
-        height={64}
-        alt="wip!"
-        title="wip!"
-        className="top-[-64px] right-0 absolute rotate-12 animate-pulse"
-      />
-      {images.map((image, index) => (
-        <React.Fragment key={index}>
-          <div className="flex flex-wrap gap-4">
-            <img
-              src={`${process.env.NEXT_PUBLIC_API_URL}/v1/storage/buckets/gallery/files/${image.fileId}/view?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}`}
-              alt={image.title}
-              title={image.title}
-              className="max-h-96"
-            />
-            <div>
-              <h1 className="text-4xl">{image.title}</h1>
-              <div
-                className="mt-2 mb-4 image-description"
-                dangerouslySetInnerHTML={{
-                  __html: image.description || "No description...",
-                }}
+    <>
+      {images.map((image, index) => {
+        image.width = image.width || 300;
+        image.height = image.height || 300;
+
+        const isLarge = image.height > 800;
+        const scaledHeight = isLarge ? 800 : image.height;
+        const scaledWidth = isLarge
+          ? (image.width / image.height) * scaledHeight
+          : image.height;
+
+        return (
+          <React.Fragment key={index}>
+            <div className="image-container p-4 rounded-lg mb-4">
+              <Image
+                src={`${process.env.NEXT_PUBLIC_API_URL}/v1/storage/buckets/gallery/files/${image.fileId}/view?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}`}
+                alt={image.title}
+                title={image.title}
+                width={scaledWidth}
+                height={scaledHeight}
+                objectFit="contain"
+                className="mx-auto"
+                quality={100}
+                unoptimized={
+                  image.mimeType != null &&
+                  [
+                    "image/gif",
+                    "image/apng",
+                    "image/webp",
+                    "image/svg+xml",
+                    "video/x-mng",
+                  ].includes(image.mimeType)
+                }
+                placeholder="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw"
               />
-              {image.artistUrl && (
-                <Link
-                  href={image.artistUrl}
-                  target="_blank"
-                  className="flex align-middle underline"
-                  title="Artist link"
-                >
-                  <LinkIcon className="pe-2" />
-                  {image.artistUrl}
-                </Link>
-              )}{" "}
-              <Button className="mt-4">
-                <Link
-                  href={`${process.env.NEXT_PUBLIC_API_URL}/v1/storage/buckets/gallery/files/${image.fileId}/view?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}`}
-                  target="_blank"
-                >
-                  See full image
-                </Link>
-              </Button>
             </div>
-          </div>
-          {index === 0 && images.length > 1 && (
-            <>
-              <Separator className="my-6" />
-              <h2 className="mb-4">Alt versions:</h2>
-            </>
-          )}
-        </React.Fragment>
-      ))}
-    </div>
+            <h1 className="text-4xl">{image.title}</h1>
+            <div
+              className="mt-2 mb-4 image-description"
+              dangerouslySetInnerHTML={{
+                __html: image.description || "No description...",
+              }}
+            />
+            {image.artistUrl && (
+              <Link
+                href={image.artistUrl}
+                target="_blank"
+                className="flex align-middle underline"
+                title="Artist link"
+              >
+                <LinkIcon className="pe-2" />
+                {image.artistUrl}
+              </Link>
+            )}{" "}
+            <Button className="mt-4">
+              <Link
+                href={`${process.env.NEXT_PUBLIC_API_URL}/v1/storage/buckets/gallery/files/${image.fileId}/view?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}`}
+                target="_blank"
+              >
+                See full image
+              </Link>
+            </Button>
+            {index === 0 && images.length > 1 && (
+              <>
+                <Separator className="my-6" />
+                <h2 className="mb-4">Alt versions:</h2>
+              </>
+            )}
+          </React.Fragment>
+        );
+      })}
+    </>
   );
 }

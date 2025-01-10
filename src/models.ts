@@ -35,6 +35,9 @@ export namespace Images {
     artistUrl?: string;
     sortOrder?: number;
     isHidden?: boolean;
+    width?: number;
+    height?: number;
+    mimeType?: string;
   }
 
   export interface ImageType {
