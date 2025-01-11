@@ -1,9 +1,9 @@
+import { Button } from "@/components/ui/button";
+import { isMimeTypeAnimatable, scaleImageDimensions } from "@/utils/helpers";
 import { Images } from "@/utils/models";
-import { scaleImageDimensions } from "@/utils/utils";
 import { LinkIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
 interface GalleryDetailImageProps {
   image: Images.ImageDocument;
@@ -29,16 +29,7 @@ export default function GalleryDetailImage({ image }: GalleryDetailImageProps) {
           objectFit="contain"
           className="mx-auto"
           quality={100}
-          unoptimized={
-            image.mimeType != null &&
-            [
-              "image/gif",
-              "image/apng",
-              "image/webp",
-              "image/svg+xml",
-              "video/x-mng",
-            ].includes(image.mimeType)
-          }
+          unoptimized={isMimeTypeAnimatable(image.mimeType)}
           placeholder="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw"
         />
       </div>

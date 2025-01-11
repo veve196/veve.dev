@@ -8,12 +8,13 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { Images } from "@/utils/models";
 import { getGalleryImages } from "@/server-api/gallery";
+import { isMimeTypeAnimatable } from "@/utils/helpers";
+import { Images } from "@/utils/models";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
-import Image from "next/image";
 
 interface GalleryContentProps {
   galleryId: string;
@@ -68,16 +69,7 @@ export default function GalleryContent({
                 height={scaledHeight}
                 className="rounded"
                 quality={90}
-                unoptimized={
-                  image.mimeType != null &&
-                  [
-                    "image/gif",
-                    "image/apng",
-                    "image/webp",
-                    "image/svg+xml",
-                    "video/x-mng",
-                  ].includes(image.mimeType)
-                }
+                unoptimized={isMimeTypeAnimatable(image.mimeType)}
                 placeholder="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw"
               />
               <p className="text-center">{image.title}</p>

@@ -17,3 +17,16 @@ export function scaleImageDimensions(
 
   return { scaledWidth, scaledHeight };
 }
+
+export function isMimeTypeAnimatable(mimeType: string | undefined) {
+  return (
+    mimeType != null &&
+    [
+      "image/gif",
+      "image/apng",
+      "image/webp",
+      "image/svg+xml",
+      "video/x-mng",
+    ].includes(mimeType)
+  );
+}
