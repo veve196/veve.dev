@@ -1,5 +1,5 @@
 import { databases } from "@/app/appwrite-server";
-import { Statuses } from "../models";
+import { Statuses } from "../utils/models";
 import { Query } from "node-appwrite";
 import { unstable_noStore } from "next/cache";
 

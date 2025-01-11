@@ -1,7 +1,7 @@
 "use client";
 
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { Galleries } from "@/models";
+import { Galleries } from "@/utils/models";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 

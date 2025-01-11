@@ -10,7 +10,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-import { FayeVR, Milestones } from "@/models";
+import { FayeVR, Milestones } from "@/utils/models";
 import getDiscordStatus from "@/server-api/getDiscordStatus";
 import React, { useEffect } from "react";
 import updateBoop from "../actions/updateBoop";

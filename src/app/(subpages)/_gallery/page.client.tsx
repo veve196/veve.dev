@@ -2,7 +2,7 @@
 
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Galleries } from "@/models";
+import { Galleries } from "@/utils/models";
 import { getGalleriesWithImages } from "@/server-api/gallery";
 import "@/styles/gallery.css";
 import Link from "next/link";

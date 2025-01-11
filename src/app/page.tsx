@@ -4,7 +4,7 @@ import SpotifyPlayer from "@/components/spotify-player";
 import TypingAnimation from "@/components/typing-animation";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Milestones, Socials, Statuses } from "@/models";
+import { Milestones, Socials, Statuses } from "@/utils/models";
 import getBoops from "@/server-api/getBoops";
 import getMilestones from "@/server-api/getMilestones";
 import getSocials from "@/server-api/getSocials";

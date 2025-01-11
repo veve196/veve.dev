@@ -2,7 +2,7 @@
 
 import { databases, storage } from "@/app/appwrite-server";
 import { ID, Query } from "node-appwrite";
-import { Galleries } from "../models";
+import { Galleries } from "../utils/models";
 
 export default async function uploadDrawing(drawing: Blob) {
   const file = new File([drawing], "drawing.png", { type: "image/png" });

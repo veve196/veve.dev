@@ -1,6 +1,6 @@
 "use client";
 
-import { FayeVR } from "@/models";
+import { FayeVR } from "@/utils/models";
 import { getSpotifyStatus } from "@/server-api/getDiscordStatus";
 import React from "react";
 import { useEffect } from "react";

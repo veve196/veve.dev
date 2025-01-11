@@ -1,5 +1,5 @@
 import GalleryToggleGroup from "@/components/gallery-toggle-group";
-import { Galleries } from "@/models";
+import { Galleries } from "@/utils/models";
 import { getGalleries } from "@/server-api/gallery";
 
 interface GalleryTemplateProps {

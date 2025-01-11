@@ -8,7 +8,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { Images } from "@/models";
+import { Images } from "@/utils/models";
 import { getGalleryImages } from "@/server-api/gallery";
 import Link from "next/link";
 import { useEffect, useState } from "react";

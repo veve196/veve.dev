@@ -1,7 +1,7 @@
 "use server";
 
 import { databases, storage } from "@/app/appwrite-server";
-import { Galleries, Images } from "@/models";
+import { Galleries, Images } from "@/utils/models";
 import { Query } from "node-appwrite";
 
 export async function getGalleriesWithImages(): Promise<Galleries.GalleryType> {

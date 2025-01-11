@@ -1,4 +1,4 @@
-import { FayeVR } from "../models";
+import { FayeVR } from "../utils/models";
 
 export default async function getDiscordStatus(): Promise<FayeVR.DiscordStatus> {
   return await fetch(
