@@ -1,5 +1,7 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import {
   Pagination,
@@ -14,7 +16,6 @@ import { Images } from "@/utils/models";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Button } from "./ui/button";
 
 interface GalleryContentProps {
   galleryId: string;
@@ -54,12 +55,13 @@ export default function GalleryContent({
             : image.height;
 
           const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/storage/buckets/gallery/files/${image.fileId}/preview?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}&height=200`;
+          const isGif = image.mimeType === "image/gif";
 
           return (
             <Link
               key={index}
               href={`/gallery/${galleryId}/${image.$id}`}
-              className="image-item"
+              className="image-item relative"
             >
               <Image
                 src={url}
@@ -72,6 +74,14 @@ export default function GalleryContent({
                 unoptimized={isMimeTypeAnimatable(image.mimeType)}
                 placeholder="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw"
               />
+              {isGif && (
+                <Badge
+                  variant="secondary"
+                  className="absolute top-0 -translate-y-1/2 right-2"
+                >
+                  GIF
+                </Badge>
+              )}
               <p className="text-center">{image.title}</p>
             </Link>
           );
