@@ -15,7 +15,6 @@ export default function SpotifyPlayer() {
       const data = await getSpotifyStatus();
 
       if (data && data.artist) {
-        console.log(data);
         data.artist = data.artist.replaceAll(";", ", ");
       }
 
