@@ -45,7 +45,7 @@ export default function SpotifyPlayer() {
       };
 
       const interval = setInterval(updateProgress, 1000);
-      updateProgress(); // Initial call to set the progress immediately
+      updateProgress();
 
       return () => clearInterval(interval);
     }

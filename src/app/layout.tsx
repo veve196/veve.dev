@@ -1,6 +1,7 @@
 import Background from "@/components/background";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import React from "react";
@@ -47,6 +48,7 @@ export default function RootLayout({
           <Background />
         </ThemeProvider>
       </body>
+      <SpeedInsights />
     </html>
   );
 }
