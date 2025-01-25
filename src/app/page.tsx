@@ -4,11 +4,9 @@ import SpotifyPlayer from "@/components/spotify-player";
 import TypingAnimation from "@/components/typing-animation";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import getBoops from "@/server-api/getBoops";
-import getMilestones from "@/server-api/getMilestones";
 import getSocials from "@/server-api/getSocials";
 import { getStatus } from "@/server-api/getStatus";
-import { Milestones, Socials, Statuses } from "@/utils/models";
+import { Socials, Statuses } from "@/utils/models";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -16,14 +14,12 @@ export const runtime = "edge";
 
 export default async function Home() {
   const socials: Socials.SocialType = await getSocials();
-  const milestones: Milestones.MilestoneType = await getMilestones();
-  const boops: number = await getBoops();
   const status: Statuses.StatusDocument = await getStatus();
 
   return (
     <>
       <div className="text-center">
-        <Avatar milestones={milestones} />
+        <Avatar />
         <p className="text-5xl mt-2 mb-4">
           <TypingAnimation texts={["welcome to my page! :3", "veve"]} />
         </p>
@@ -72,7 +68,7 @@ export default async function Home() {
           ))}
         </div>
         <Separator className="my-3 w-72 mx-auto" />
-        <BoopCounter boopCount={boops} />
+        <BoopCounter />
       </div>
       <SpotifyPlayer />
       <Link href={"/draw"}>

@@ -9,27 +9,26 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-
-import { FayeVR, Milestones } from "@/utils/models";
 import getDiscordStatus from "@/server-api/getDiscordStatus";
-import React, { useEffect } from "react";
-import updateBoop from "../actions/updateBoop";
-import "../styles/avatar.css";
+import getMilestones from "@/server-api/getMilestones";
+import { FayeVR, Milestones } from "@/utils/models";
+import React, { useEffect, useState } from "react";
+import updateBoop from "@/actions/updateBoop";
+import "@/styles/avatar.css";
 
-export default function Avatar({
-  milestones,
-}: {
-  milestones: Milestones.MilestoneType;
-}) {
-  const [showMessage, setShowMessage] = React.useState(false);
-  const [msDoc, setMsDoc] = React.useState<
-    Milestones.MilestoneDocument | undefined
-  >();
-  const [dcStatus, setDcStatus] = React.useState<
-    FayeVR.DiscordStatus | undefined
-  >();
+export default function Avatar() {
+  const [showMessage, setShowMessage] = useState(false);
+  const [milestones, setMilestones] = useState<Milestones.MilestoneType | null>(
+    null
+  );
+  const [msDoc, setMsDoc] = useState<Milestones.MilestoneDocument | null>(null);
+  const [dcStatus, setDcStatus] = useState<FayeVR.DiscordStatus | null>(null);
 
   useEffect(() => {
+    getMilestones().then((milestones) => {
+      setMilestones(milestones);
+    });
+
     getDiscordStatus().then((status) => {
       setDcStatus(status);
     });
@@ -84,6 +83,9 @@ export default function Avatar({
     }, 2000);
 
     const curBoop = await updateBoop();
+
+    if (!milestones) return;
+
     const msTempDoc = milestones.documents.find(
       (doc) => doc.milestone === curBoop
     );

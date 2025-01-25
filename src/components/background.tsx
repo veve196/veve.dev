@@ -1,7 +1,7 @@
 "use client";
 
+import "@/styles/background.css";
 import { useEffect } from "react";
-import "../styles/background.css";
 
 export default function Background() {
   useEffect(() => {

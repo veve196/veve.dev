@@ -1,10 +1,10 @@
 "use client";
 
+import { Progress } from "@/components/ui/progress";
 import { getSpotifyStatus } from "@/server-api/getDiscordStatus";
 import { FayeVR } from "@/utils/models";
-import { useState, useEffect } from "react";
-import { Progress } from "@/components/ui/progress";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function SpotifyPlayer() {
   const [spotifyStatus, setSpotifyStatus] = useState<FayeVR.Spotify | null>();
@@ -69,7 +69,7 @@ export default function SpotifyPlayer() {
           <p className="text-xs text-muted-foreground pb-2">listening to:</p>
           <h1 className="font-semibold">{spotifyStatus.song_name}</h1>
           <p className="text-muted-foreground">{spotifyStatus.artist}</p>
-          <Progress value={progress} className="mt-4" />
+          <Progress value={progress} className="mt-4 h-2" />
         </div>
       </div>
     </>
