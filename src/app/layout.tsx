@@ -43,12 +43,12 @@ export default function RootLayout({
         >
           <main className="mx-auto max-w-4xl my-8 px-3 lg:px-0">
             {children}
+            <SpeedInsights />
           </main>
           <Toaster />
           <Background />
         </ThemeProvider>
       </body>
-      <SpeedInsights />
     </html>
   );
 }
