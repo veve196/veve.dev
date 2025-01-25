@@ -56,7 +56,7 @@ export default function SpotifyPlayer() {
   }
   return (
     <>
-      <div className="flex bg-background border-2 border-white rounded shadow w-full sm:w-[32rem] mx-auto mt-8">
+      <div className="flex bg-background border-2 border-white rounded shadow-sm w-full sm:w-[32rem] mx-auto mt-8">
         <Image
           src={spotifyStatus.cover_url}
           alt="album cover"

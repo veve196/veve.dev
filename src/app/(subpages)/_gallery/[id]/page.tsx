@@ -27,7 +27,7 @@ export default async function Details(props: {
       {images.map((image, index) => (
         <div key={image.$id}>
           <div className="flex gap-4 mb-12">
-            <div className="flex-grow">
+            <div className="grow">
               <img
                 src={`${process.env.NEXT_PUBLIC_API_URL}/v1/storage/buckets/gallery/files/${image.fileId}/view?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}`}
                 alt={image.title}
