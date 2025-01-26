@@ -1,11 +1,8 @@
 import { databases } from "@/app/appwrite-server";
-import { Statuses } from "../utils/models";
+import { Statuses } from "@/utils/models";
 import { Query } from "node-appwrite";
-import { unstable_noStore } from "next/cache";
 
 export async function getStatus(): Promise<Statuses.StatusDocument> {
-  unstable_noStore();
-
   const date = new Date();
   const tzOffset = date.getTimezoneOffset() * 60000; // offset in milliseconds
   const localISOTime = new Date(date.getTime() - tzOffset)
