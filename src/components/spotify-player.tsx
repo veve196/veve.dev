@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 export default function SpotifyPlayer() {
   const [spotifyStatus, setSpotifyStatus] = useState<FayeVR.Spotify | null>();
   const [progress, setProgress] = useState(0);
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const [remainingTime, setRemainingTime] = useState(0);
 
   useEffect(() => {
     const fetchSpotifyStatus = async () => {
@@ -36,12 +38,17 @@ export default function SpotifyPlayer() {
   useEffect(() => {
     if (spotifyStatus && spotifyStatus.started_at && spotifyStatus.ends_at) {
       const updateProgress = () => {
-        const currentTime = Date.now();
+        const songLength =
+          new Date(spotifyStatus.ends_at).getTime() -
+          new Date(spotifyStatus.started_at).getTime();
         const startTime = new Date(spotifyStatus.started_at).getTime();
         const endTime = new Date(spotifyStatus.ends_at).getTime();
-        const progressPercentage =
-          ((currentTime - startTime) / (endTime - startTime)) * 100;
+        const elapsedTime = Date.now() - startTime;
+        const remainingTime = endTime - Date.now();
+        const progressPercentage = (elapsedTime / (endTime - startTime)) * 100;
         setProgress(progressPercentage);
+        setElapsedTime(elapsedTime > songLength ? songLength : elapsedTime);
+        setRemainingTime(remainingTime < 0 ? 0 : remainingTime);
       };
 
       const interval = setInterval(updateProgress, 1000);
@@ -50,6 +57,13 @@ export default function SpotifyPlayer() {
       return () => clearInterval(interval);
     }
   }, [spotifyStatus]);
+
+  const formatTime = (milliseconds: number) => {
+    const totalSeconds = Math.floor(milliseconds / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  };
 
   if (!spotifyStatus || spotifyStatus.song_name === undefined) {
     return null;
@@ -69,7 +83,16 @@ export default function SpotifyPlayer() {
           <p className="text-xs text-muted-foreground pb-2">listening to:</p>
           <h1 className="font-semibold">{spotifyStatus.song_name}</h1>
           <p className="text-muted-foreground">{spotifyStatus.artist}</p>
-          <Progress value={progress} className="mt-4 h-2" />
+
+          <div className="flex gap-2 items-center mt-4">
+            <p className="text-xs text-muted-foreground">
+              {formatTime(elapsedTime)}
+            </p>
+            <Progress value={progress} className="h-2 grow mt-0" />
+            <p className="text-xs text-muted-foreground">
+              -{formatTime(remainingTime)}
+            </p>
+          </div>
         </div>
       </div>
     </>
