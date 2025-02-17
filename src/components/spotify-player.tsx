@@ -1,13 +1,14 @@
 "use client";
 
 import { Progress } from "@/components/ui/progress";
-import { getSpotifyStatus } from "@/server-api/getDiscordStatus";
-import { FayeVR } from "@/utils/models";
+import { getSpotifyStatus } from "@/server-api/discord";
+import { Discord } from "@/utils/models";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function SpotifyPlayer() {
-  const [spotifyStatus, setSpotifyStatus] = useState<FayeVR.Spotify | null>();
+  const [spotifyStatus, setSpotifyStatus] =
+    useState<Discord.SpotifyStatus | null>();
   const [progress, setProgress] = useState(0);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [remainingTime, setRemainingTime] = useState(0);
@@ -15,15 +16,15 @@ export default function SpotifyPlayer() {
   useEffect(() => {
     const fetchSpotifyStatus = async () => {
       const data = await getSpotifyStatus();
-
+      console.log(data);
       if (data && data.artist) {
         data.artist = data.artist.replaceAll(";", ", ");
       }
 
       setSpotifyStatus(data);
 
-      if (data && data.ends_at) {
-        const remainingTime = new Date(data.ends_at).getTime() - Date.now();
+      if (data && data.endDate) {
+        const remainingTime = new Date(data.endDate).getTime() - Date.now();
         const timer = setTimeout(() => {
           fetchSpotifyStatus();
         }, remainingTime + 1000);
@@ -36,13 +37,13 @@ export default function SpotifyPlayer() {
   }, []);
 
   useEffect(() => {
-    if (spotifyStatus && spotifyStatus.started_at && spotifyStatus.ends_at) {
+    if (spotifyStatus && spotifyStatus.startDate && spotifyStatus.endDate) {
       const updateProgress = () => {
         const songLength =
-          new Date(spotifyStatus.ends_at).getTime() -
-          new Date(spotifyStatus.started_at).getTime();
-        const startTime = new Date(spotifyStatus.started_at).getTime();
-        const endTime = new Date(spotifyStatus.ends_at).getTime();
+          new Date(spotifyStatus.endDate).getTime() -
+          new Date(spotifyStatus.startDate).getTime();
+        const startTime = new Date(spotifyStatus.startDate).getTime();
+        const endTime = new Date(spotifyStatus.endDate).getTime();
         const elapsedTime = Date.now() - startTime;
         const remainingTime = endTime - Date.now();
         const progressPercentage = (elapsedTime / (endTime - startTime)) * 100;
@@ -65,23 +66,23 @@ export default function SpotifyPlayer() {
     return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   };
 
-  if (!spotifyStatus || spotifyStatus.song_name === undefined) {
+  if (!spotifyStatus || spotifyStatus.title === undefined) {
     return null;
   }
   return (
     <>
       <div className="flex bg-background border-2 border-white rounded shadow-sm w-full sm:w-[32rem] mx-auto mt-8">
         <Image
-          src={spotifyStatus.cover_url}
+          src={spotifyStatus.coverUrl}
           alt="album cover"
-          title={`${spotifyStatus.song_name} by ${spotifyStatus.artist}`}
+          title={`${spotifyStatus.title} by ${spotifyStatus.artist}`}
           width={148}
           height={148}
           className="self-center"
         />
         <div className="flex-1 p-4">
           <p className="text-xs text-muted-foreground pb-2">listening to:</p>
-          <h1 className="font-semibold">{spotifyStatus.song_name}</h1>
+          <h1 className="font-semibold">{spotifyStatus.title}</h1>
           <p className="text-muted-foreground">{spotifyStatus.artist}</p>
 
           <div className="flex gap-2 items-center mt-4">

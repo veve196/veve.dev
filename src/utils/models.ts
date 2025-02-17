@@ -143,3 +143,20 @@ export namespace FayeVR {
     ends_at: string;
   }
 }
+
+export namespace Discord {
+  export interface User {
+    id: string;
+    avatarUrl: string;
+    status: "online" | "idle" | "dnd" | "offline";
+  }
+
+  export interface SpotifyStatus {
+    title: string;
+    artist: string;
+    album: string;
+    coverUrl: string;
+    startDate: Date;
+    endDate: Date;
+  }
+}

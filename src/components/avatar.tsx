@@ -1,5 +1,6 @@
 "use client";
 
+import updateBoop from "@/actions/updateBoop";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -9,12 +10,11 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import getDiscordStatus from "@/server-api/getDiscordStatus";
+import { getDiscordUser } from "@/server-api/discord";
 import getMilestones from "@/server-api/getMilestones";
-import { FayeVR, Milestones } from "@/utils/models";
-import React, { useEffect, useState } from "react";
-import updateBoop from "@/actions/updateBoop";
 import "@/styles/avatar.css";
+import { Discord, Milestones } from "@/utils/models";
+import React, { useEffect, useState } from "react";
 
 export default function Avatar() {
   const [showMessage, setShowMessage] = useState(false);
@@ -22,15 +22,15 @@ export default function Avatar() {
     null
   );
   const [msDoc, setMsDoc] = useState<Milestones.MilestoneDocument | null>(null);
-  const [dcStatus, setDcStatus] = useState<FayeVR.DiscordStatus | null>(null);
+  const [dcUser, setDcUser] = useState<Discord.User | null>(null);
 
   useEffect(() => {
     getMilestones().then((milestones) => {
       setMilestones(milestones);
     });
 
-    getDiscordStatus().then((status) => {
-      setDcStatus(status);
+    getDiscordUser().then((user) => {
+      setDcUser(user);
     });
 
     // Preload image to avoid flickering on hover
@@ -101,15 +101,15 @@ export default function Avatar() {
       <div
         id="avatar"
         className={`w-[200px] h-[200px] rounded-full mx-auto select-none relative cursor-pointer ${
-          dcStatus ? `status-${dcStatus.status} border-4` : ""
+          dcUser ? `status-${dcUser.status} border-4` : ""
         }`}
         onClick={handleClick}
         title="Boop me!"
       >
-        {dcStatus && (
+        {dcUser && (
           <div
-            className={`w-[32px] h-[32px] rounded-full border-2 border-transparent absolute bottom-3 right-3 status-${dcStatus.status}`}
-            title={`${dcStatus.status}`}
+            className={`w-[32px] h-[32px] rounded-full border-2 border-transparent absolute bottom-3 right-3 status-${dcUser.status}`}
+            title={`${dcUser.status}`}
           />
         )}
       </div>
