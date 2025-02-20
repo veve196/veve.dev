@@ -101,7 +101,14 @@ export default function GalleryContent({
             { length: Math.ceil(images.total / imagesPerPage) },
             (_, i) => (
               <PaginationItem key={i + 1} onClick={() => setPage(i + 1)}>
-                <Button variant="outline">{i + 1}</Button>
+                <Button
+                  variant="outline"
+                  className={
+                    page === i + 1 ? "border-gray-400 pointer-events-none" : ""
+                  }
+                >
+                  {i + 1}
+                </Button>
               </PaginationItem>
             )
           )}
