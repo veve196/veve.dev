@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @config '../../tailwind.config.ts';
 
@@ -76,4 +76,10 @@
     --destructive-foreground: 210 40% 98.04%;
     --ring: 225.45 71.22% 72.75%;
   }
+}
+
+button,
+input[type="button"],
+input[type="submit"] {
+  cursor: pointer;
 }
