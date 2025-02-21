@@ -16,7 +16,7 @@ export default function SpotifyPlayer() {
   useEffect(() => {
     const fetchSpotifyStatus = async () => {
       const data = await getSpotifyStatus();
-      console.log(data);
+
       if (data && data.artist) {
         data.artist = data.artist.replaceAll(";", ", ");
       }
@@ -71,7 +71,7 @@ export default function SpotifyPlayer() {
   }
   return (
     <>
-      <div className="flex bg-background border-2 border-white rounded shadow-sm w-full sm:w-[32rem] mx-auto mt-8">
+      <div className="flex bg-background border-2 border-white rounded shadow-sm w-full sm:w-[32rem] mx-auto mt-8 fade-in">
         <Image
           src={spotifyStatus.coverUrl}
           alt="album cover"
@@ -80,9 +80,11 @@ export default function SpotifyPlayer() {
           height={148}
           className="self-center"
         />
-        <div className="flex-1 p-4">
+        <div className="flex-1 p-4 w-0">
           <p className="text-xs text-muted-foreground pb-2">listening to:</p>
-          <h1 className="font-semibold">{spotifyStatus.title}</h1>
+          <h1 className="font-semibold truncate" title={spotifyStatus.title}>
+            {spotifyStatus.title}
+          </h1>
           <p className="text-muted-foreground">{spotifyStatus.artist}</p>
 
           <div className="flex gap-2 items-center mt-4">

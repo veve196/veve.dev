@@ -83,3 +83,18 @@ input[type="button"],
 input[type="submit"] {
   cursor: pointer;
 }
+
+/* https://stackoverflow.com/a/75077782 */
+@font-face {
+  font-family: "ellipsis-font";
+  src: local("Arial");
+  /*
+   * The unicode for ellipsis ("…").
+   * Makes it so this font only gets applied for that single character
+   */
+  unicode-range: U+2026;
+}
+
+.truncate {
+  font-family: ellipsis-font, pixelFont;
+}
