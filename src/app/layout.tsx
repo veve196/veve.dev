@@ -7,7 +7,7 @@ import localFont from "next/font/local";
 import React from "react";
 import "../styles/globals.css";
 
-const pixelFont = localFont({ src: "../../public/PixelMplus12-Regular.woff2" });
+const pixelFont = localFont({ src: "../../public/pixelFont.woff2" });
 export const metadata: Metadata = {
   title: {
     default: "veve",
