@@ -85,7 +85,12 @@ export default function SpotifyPlayer() {
           <h1 className="font-semibold truncate" title={spotifyStatus.title}>
             {spotifyStatus.title}
           </h1>
-          <p className="text-muted-foreground">{spotifyStatus.artist}</p>
+          <p
+            className="text-muted-foreground truncate"
+            title={spotifyStatus.artist}
+          >
+            {spotifyStatus.artist}
+          </p>
 
           <div className="flex gap-2 items-center mt-4">
             <p className="text-xs text-muted-foreground">
