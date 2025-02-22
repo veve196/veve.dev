@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
@@ -10,14 +12,8 @@ import {
   BreadcrumbSeparator,
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb";
-import { Metadata } from "next/types";
 
-export const metadata: Metadata = {
-  title: "404 - Page Not Found",
-  description: "Oops! The page you're looking for was not found.",
-};
-
-export default function Custom404() {
+export default function Error() {
   return (
     <>
       <Breadcrumb>
@@ -29,7 +25,7 @@ export default function Custom404() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>???</BreadcrumbPage>
+            <BreadcrumbPage>Oopsie</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
@@ -43,11 +39,15 @@ export default function Custom404() {
             width={400}
             height={400}
           />
-          <h1 className="text-8xl font-bold">404</h1>
+          <h1 className="text-8xl font-bold">500</h1>
           <Separator className="w-full" />
-          <p>Oops! The page you&apos;re looking for was not found.</p>
+          <p>
+            Something went wrong and it&apos;s definitely not my fault.
+            <br />
+            Please try again later!
+          </p>
           <Button variant="link" className="text-2xl">
-            <Link href="/">Go back</Link>
+            <Link href="/">Try Again</Link>
           </Button>
         </div>
       </div>
