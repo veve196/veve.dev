@@ -35,7 +35,7 @@ export default function Avatar() {
 
     // Preload image to avoid flickering on hover
     const img = new Image();
-    img.src = "/avatar_blushies.webp";
+    img.src = "/avatar-blushies.webp";
   }, []);
 
   const handleClick = async (e: React.MouseEvent<HTMLImageElement>) => {

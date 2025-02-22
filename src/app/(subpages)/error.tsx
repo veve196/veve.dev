@@ -4,38 +4,16 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbSeparator,
-  BreadcrumbPage,
-} from "@/components/ui/breadcrumb";
 
 export default function Error() {
   return (
     <>
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem className="z-10">
-            <BreadcrumbLink asChild>
-              <Link href={"/"}>Home</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Oopsie</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-      <Separator className="my-4" />
       <div className="text-2xl flex flex-col items-center justify-center w-full h-full fixed overflow-hidden top-0 left-0 p-8">
         <div className="flex flex-col items-center justify-center text-center gap-4">
           <Image
-            src={"/404.webp"}
-            alt="Page not found"
-            title="Page not found"
+            src={"/error.webp"}
+            alt="Error"
+            title="Error"
             width={400}
             height={400}
           />

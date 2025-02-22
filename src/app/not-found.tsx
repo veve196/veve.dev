@@ -2,43 +2,32 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbSeparator,
-  BreadcrumbPage,
-} from "@/components/ui/breadcrumb";
 import { Metadata } from "next/types";
-import RunnerGame from "@/components/runner-game";
 
 export const metadata: Metadata = {
   title: "404 - Page Not Found",
   description: "Oops! The page you're looking for was not found.",
+  openGraph: {
+    title: "404 - Page Not Found",
+    description: "Oops! The page you're looking for was not found.",
+    images: [
+      {
+        url: `${process.env.NEXT_PUBLIC_DOMAIN}/ref/not-found.webp`,
+        width: 720,
+        height: 713,
+        alt: "Not found",
+      },
+    ],
+  },
 };
 
 export default function NotFound() {
   return (
     <>
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem className="z-10">
-            <BreadcrumbLink asChild>
-              <Link href={"/"}>Home</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>???</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-      <Separator className="my-4" />
       <div className="text-2xl flex flex-col items-center justify-center w-full h-full fixed overflow-hidden top-0 left-0 p-8">
         <div className="flex flex-col items-center justify-center text-center gap-4">
           <Image
-            src={"/404.webp"}
+            src={"/error.webp"}
             alt="Page not found"
             title="Page not found"
             width={400}
