@@ -1,3 +1,4 @@
+import Game from "@/components/game";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
@@ -24,7 +25,8 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <>
-      <div className="text-2xl flex flex-col items-center justify-center w-full h-full fixed overflow-hidden top-0 left-0 p-8">
+      <Game />
+      {/* <div className="text-2xl flex flex-col items-center justify-center w-full h-full fixed overflow-hidden top-0 left-0 p-8">
         <div className="flex flex-col items-center justify-center text-center gap-4">
           <Image
             src={"/error.webp"}
@@ -40,7 +42,7 @@ export default function NotFound() {
             <Link href="/">Go back</Link>
           </Button>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
