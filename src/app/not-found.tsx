@@ -1,7 +1,5 @@
 import Game from "@/components/game";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next/types";
 
@@ -30,11 +28,13 @@ export default function NotFound() {
           <h1 className="text-8xl font-bold">404</h1>
           <p className="mb-8">
             Oops! The page you&apos;re looking for was not found.
+            <br />
+            Anyway, help little veve to jump over the obstacles!
           </p>
           <Game />
           <p>Press SPACE to jump!</p>
           <Button className="text-2xl mt-4">
-            <Link href="/">Go back</Link>
+            <Link href="/">Homepage</Link>
           </Button>
         </div>
       </div>

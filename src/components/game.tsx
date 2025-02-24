@@ -37,9 +37,6 @@ export default function Game() {
     playerImages[2].src = "/not-found/veve-skate-3.webp";
     playerImages[3].src = "/not-found/veve-skate-4.webp";
 
-    const obstacleImage = new Image();
-    obstacleImage.src = "/not-found/obstacle.webp";
-
     let player = {
       x: 50,
       y: 300,
@@ -124,22 +121,18 @@ export default function Game() {
 
       let obstacle = {
         x: canvas.width,
-        y: canvas.height - 59,
-        width: 100,
-        height: 59,
+        y: canvas.height - 50,
+        width: 50,
+        height: 50,
       };
       obstacles.push(obstacle);
     };
 
     const drawObstacles = () => {
       obstacles.forEach((obstacle) => {
-        ctx.drawImage(
-          obstacleImage,
-          obstacle.x,
-          obstacle.y,
-          obstacle.width,
-          obstacle.height
-        );
+        // draw 50x50 square with ctx:
+        ctx.fillStyle = "red";
+        ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
       });
     };
 
