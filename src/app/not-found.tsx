@@ -25,24 +25,19 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <>
-      <Game />
-      {/* <div className="text-2xl flex flex-col items-center justify-center w-full h-full fixed overflow-hidden top-0 left-0 p-8">
+      <div className="text-2xl flex flex-col items-center justify-center w-full h-full fixed overflow-hidden top-0 left-0 p-8">
         <div className="flex flex-col items-center justify-center text-center gap-4">
-          <Image
-            src={"/error.webp"}
-            alt="Page not found"
-            title="Page not found"
-            width={400}
-            height={400}
-          />
           <h1 className="text-8xl font-bold">404</h1>
-          <Separator className="w-full" />
-          <p>Oops! The page you&apos;re looking for was not found.</p>
-          <Button variant="link" className="text-2xl">
+          <p className="mb-8">
+            Oops! The page you&apos;re looking for was not found.
+          </p>
+          <Game />
+          <p>Press SPACE to jump!</p>
+          <Button className="text-2xl mt-4">
             <Link href="/">Go back</Link>
           </Button>
         </div>
-      </div> */}
+      </div>
     </>
   );
 }
