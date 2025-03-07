@@ -1,4 +1,8 @@
 @import "tailwindcss";
+/*
+  ---break---
+*/
+@custom-variant dark (&:is(.dark *));
 
 @config '../../tailwind.config.ts';
 
@@ -97,4 +101,17 @@ input[type="submit"] {
 
 .truncate {
   font-family: ellipsis-font, pixelFont;
+}
+
+/*
+  ---break---
+*/
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

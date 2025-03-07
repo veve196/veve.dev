@@ -72,75 +72,14 @@ export namespace Socials {
   }
 }
 
-export namespace FayeVR {
-  export interface DiscordStatus {
-    status: "online" | "idle" | "dnd" | "offline";
-    activities_raw: ActivitiesRaw[];
-    activities_simplified: ActivitiesSimplified[];
-    spotify: Spotify;
+export namespace Highscores {
+  export interface HighscoreDocument extends Models.Document {
+    highscore: number;
   }
 
-  export interface ActivitiesRaw {
-    name: string;
-    type: number;
-    url: any;
-    details?: string;
-    state?: string;
-    applicationId?: string;
-    timestamps?: Timestamps;
-    party?: Party;
-    syncId?: string;
-    assets?: Assets;
-    flags: number;
-    emoji?: Emoji;
-    buttons: any[];
-    createdTimestamp: number;
-  }
-
-  export interface Timestamps {
-    start: string;
-    end?: string;
-  }
-
-  export interface Party {
-    id?: string;
-  }
-
-  export interface Assets {
-    largeText: string;
-    smallText?: string;
-    largeImage: string;
-    smallImage?: string;
-  }
-
-  export interface Emoji {
-    animated: boolean;
-    name: string;
-    id: string;
-    createdTimestamp: number;
-    identifier: string;
-    imageURL: string;
-  }
-
-  export interface ActivitiesSimplified {
-    name: string;
-    type: number;
-    state?: string;
-    details?: string;
-    url: any;
-    timestamps?: Timestamps;
-    assets?: Assets;
-    party?: Party;
-    flags: number;
-  }
-
-  export interface Spotify {
-    song_name: string;
-    artist: string;
-    album: string;
-    cover_url: string;
-    started_at: string;
-    ends_at: string;
+  export interface HighscoreType {
+    total: number;
+    documents: HighscoreDocument[];
   }
 }
 

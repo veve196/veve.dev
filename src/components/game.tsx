@@ -1,12 +1,31 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { Input } from "./ui/input";
+import saveHighscore from "@/actions/saveHighscore";
 
-export default function Game() {
+interface Props {
+  highscoreSaved?: () => void;
+}
+
+export default function Game({ highscoreSaved }: Props) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [startGame, setStartGame] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
+  const [playerName, setPlayerName] = useState("");
+  const startGameRef = useRef(startGame);
   const gameOverRef = useRef(gameOver);
   const scoreRef = useRef(score);
   const bestScoreRef = useRef(bestScore);
@@ -15,8 +34,16 @@ export default function Game() {
   const resetGame = useCallback(() => {
     setGameOver(false);
     setScore(0);
+    startGameRef.current = false;
     gameOverRef.current = false;
     scoreRef.current = 0;
+
+    //clear canvas
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     if (animationFrameId.current) {
       cancelAnimationFrame(animationFrameId.current);
@@ -179,12 +206,16 @@ export default function Game() {
       if (deltaTime >= frameDuration) {
         lastFrameTime = timestamp;
 
-        if (gameOverRef.current) {
-          ctx.fillStyle = "white";
-          ctx.font = "40px pixelFont";
-          ctx.fillText("Game Over", canvas.width / 2 - 100, canvas.height / 2);
+        if (!startGameRef.current || gameOverRef.current) {
           return;
         }
+
+        // if (gameOverRef.current) {
+        //   ctx.fillStyle = "white";
+        //   ctx.font = "40px pixelFont";
+        //   ctx.fillText("Game Over", canvas.width / 2 - 100, canvas.height / 2);
+        //   return;
+        // }
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -210,22 +241,82 @@ export default function Game() {
   };
 
   useEffect(() => {
-    startGameLoop();
-    return () => {
-      if (animationFrameId.current) {
-        cancelAnimationFrame(animationFrameId.current);
-      }
-    };
-  }, [resetGame]);
+    startGameRef.current = startGame;
+    if (startGame) {
+      startGameLoop();
+      return () => {
+        if (animationFrameId.current) {
+          cancelAnimationFrame(animationFrameId.current);
+        }
+      };
+    }
+  }, [startGame, resetGame]);
+
+  const handleDiscardHighscore = () => {
+    setStartGame(false);
+    resetGame();
+  };
+
+  const handleSaveHighscore = () => {
+    saveHighscore(playerName, score).then((highscore) => {
+      highscoreSaved?.();
+      setStartGame(false);
+      resetGame();
+    });
+  };
 
   return (
-    <div>
-      <canvas
-        ref={canvasRef}
-        width="800"
-        height="200"
-        className="mx-auto bg-transparent border-b-4"
-      ></canvas>
-    </div>
+    <>
+      <div className="relative">
+        <canvas
+          ref={canvasRef}
+          width="800"
+          height="200"
+          className="mx-auto bg-transparent border-b-4"
+        ></canvas>
+        {!startGame && (
+          <Button
+            className=" absolute top-1/2 left-1/2 transform -translate-1/2 text-5xl py-8"
+            onClick={() => setStartGame(true)}
+          >
+            Start Game
+          </Button>
+        )}
+      </div>
+      <AlertDialog open={gameOverRef.current}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Game Over!</AlertDialogTitle>
+            <AlertDialogDescription>
+              You scored <b>{score}</b> points! 🎉
+              <br />
+              <br />
+              Do you want to add your score to the leaderboard?
+              <br />
+              <br />
+              If yes, please enter your name:
+              <br />
+              <Input
+                type="text"
+                placeholder="coolguy123"
+                value={playerName}
+                onChange={(e) => setPlayerName(e.target.value)}
+              />
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter className="flex justify-between">
+            <AlertDialogAction onClick={handleDiscardHighscore}>
+              Cancel
+            </AlertDialogAction>
+            <AlertDialogAction
+              onClick={handleSaveHighscore}
+              disabled={!playerName}
+            >
+              Add meee
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   );
 }
