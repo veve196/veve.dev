@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 
 interface Props {
   copyColor: string;
@@ -9,21 +9,12 @@ interface Props {
 }
 
 export default function ColorButton({ copyColor, textColor }: Props) {
-  const { toast } = useToast();
-
   const handleOnClick = () => {
     navigator.clipboard
       .writeText(copyColor)
-      .then(() =>
-        toast({
-          title: "✔️ Copied!",
-        })
-      )
+      .then(() => toast("✔️ Copied!"))
       .catch(() => {
-        toast({
-          title: `❌ Failed to copy color code: ${copyColor}`,
-          variant: "destructive",
-        });
+        toast(`❌ Failed to copy color code: ${copyColor}`);
       });
   };
 
