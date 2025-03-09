@@ -46,7 +46,7 @@ export default async function Home() {
             My Stickers!
           </Link>
         </Button>
-        <Separator className="my-3 w-72 mx-auto" />
+        <Separator className="my-3 !w-72 mx-auto" />
         <div className="flex flex-col">
           {socials.documents.map((social) => (
             <Button
@@ -67,7 +67,7 @@ export default async function Home() {
             </Button>
           ))}
         </div>
-        <Separator className="my-3 w-72 mx-auto" />
+        <Separator className="my-3 !w-72 mx-auto" />
         <BoopCounter />
       </div>
       <SpotifyPlayer />

@@ -16,9 +16,14 @@ export default function GalleryToggleGroup({
   const galleryId = routes[routes.length - 1];
 
   return (
-    <ToggleGroup type="single" defaultValue={galleryId}>
+    <ToggleGroup type="single" defaultValue={galleryId} className="mx-auto">
       {galleries.documents.map((gallery, index) => (
-        <ToggleGroupItem key={index} value={gallery.$id} asChild>
+        <ToggleGroupItem
+          key={index}
+          value={gallery.$id}
+          asChild
+          className="rounded-md min-w-[auto]"
+        >
           <Link href={`/gallery/${gallery.$id}`}>{gallery.title}</Link>
         </ToggleGroupItem>
       ))}

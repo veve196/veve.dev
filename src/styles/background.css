@@ -7,8 +7,8 @@
   z-index: -999;
   background: radial-gradient(
     ellipse at bottom,
-    hsl(var(--background)) 0%,
-    hsl(var(--background-secondary)) 100%
+    var(--background) 32%,
+    var(--background-secondary) 120%
   );
 }
 
