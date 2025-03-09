@@ -189,30 +189,30 @@ const DrawingCanvas = () => {
   //   });
   // };
 
-  const redrawCanvas = (paths: { x: number; y: number }[][]) => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+  // const redrawCanvas = (paths: { x: number; y: number }[][]) => {
+  //   const canvas = canvasRef.current;
+  //   if (!canvas) return;
 
-    const context = canvas.getContext("2d");
-    if (!context) return;
+  //   const context = canvas.getContext("2d");
+  //   if (!context) return;
 
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.lineWidth = 5;
-    context.lineCap = "round";
-    context.strokeStyle = color;
+  //   context.clearRect(0, 0, canvas.width, canvas.height);
+  //   context.lineWidth = 5;
+  //   context.lineCap = "round";
+  //   context.strokeStyle = color;
 
-    paths.forEach((path) => {
-      context.beginPath();
-      path.forEach((point, index) => {
-        if (index === 0) {
-          context.moveTo(point.x, point.y);
-        } else {
-          context.lineTo(point.x, point.y);
-        }
-      });
-      context.stroke();
-    });
-  };
+  //   paths.forEach((path) => {
+  //     context.beginPath();
+  //     path.forEach((point, index) => {
+  //       if (index === 0) {
+  //         context.moveTo(point.x, point.y);
+  //       } else {
+  //         context.lineTo(point.x, point.y);
+  //       }
+  //     });
+  //     context.stroke();
+  //   });
+  // };
 
   return (
     <>
