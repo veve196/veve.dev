@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { isMimeTypeAnimatable, scaleImageDimensions } from "@/utils/helpers";
-import { Images } from "@/utils/models";
+import { ImageDocument } from "@/utils/models";
 import { LinkIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 interface GalleryDetailImageProps {
-  image: Images.ImageDocument;
+  image: ImageDocument;
 }
 
 export default function GalleryDetailImage({ image }: GalleryDetailImageProps) {

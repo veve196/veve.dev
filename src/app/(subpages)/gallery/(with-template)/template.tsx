@@ -1,5 +1,5 @@
 import GalleryToggleGroup from "@/components/gallery-toggle-group";
-import { Galleries } from "@/utils/models";
+import { GalleryType } from "@/utils/models";
 import { getGalleries } from "@/server-api/gallery";
 
 interface GalleryTemplateProps {
@@ -9,7 +9,7 @@ interface GalleryTemplateProps {
 export default async function GalleryTemplate({
   children,
 }: GalleryTemplateProps) {
-  const galleries: Galleries.GalleryType = await getGalleries();
+  const galleries: GalleryType = await getGalleries();
 
   return (
     <>

@@ -6,15 +6,15 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import getSocials from "@/server-api/getSocials";
 import { getStatus } from "@/server-api/getStatus";
-import { Socials, Statuses } from "@/utils/models";
+import { SocialType, StatusDocument } from "@/utils/models";
 import Image from "next/image";
 import Link from "next/link";
 
 export const runtime = "edge";
 
 export default async function Home() {
-  const socials: Socials.SocialType = await getSocials();
-  const status: Statuses.StatusDocument = await getStatus();
+  const socials: SocialType = await getSocials();
+  const status: StatusDocument = await getStatus();
 
   return (
     <>

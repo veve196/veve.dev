@@ -2,13 +2,12 @@
 
 import { Progress } from "@/components/ui/progress";
 import { getSpotifyStatus } from "@/server-api/discord";
-import { Discord } from "@/utils/models";
+import { SpotifyStatus } from "@/utils/models";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function SpotifyPlayer() {
-  const [spotifyStatus, setSpotifyStatus] =
-    useState<Discord.SpotifyStatus | null>();
+  const [spotifyStatus, setSpotifyStatus] = useState<SpotifyStatus | null>();
   const [progress, setProgress] = useState(0);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [remainingTime, setRemainingTime] = useState(0);

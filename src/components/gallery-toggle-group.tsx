@@ -1,12 +1,12 @@
 "use client";
 
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { Galleries } from "@/utils/models";
+import { GalleryType } from "@/utils/models";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 interface GalleryToggleGroupProps {
-  galleries: Galleries.GalleryType;
+  galleries: GalleryType;
 }
 
 export default function GalleryToggleGroup({

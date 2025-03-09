@@ -13,16 +13,14 @@ import {
 import { getDiscordUser } from "@/server-api/discord";
 import getMilestones from "@/server-api/getMilestones";
 import "@/styles/avatar.css";
-import { Discord, Milestones } from "@/utils/models";
+import { DiscordUser, MilestoneDocument, MilestoneType } from "@/utils/models";
 import React, { useEffect, useState } from "react";
 
 export default function Avatar() {
   const [showMessage, setShowMessage] = useState(false);
-  const [milestones, setMilestones] = useState<Milestones.MilestoneType | null>(
-    null
-  );
-  const [msDoc, setMsDoc] = useState<Milestones.MilestoneDocument | null>(null);
-  const [dcUser, setDcUser] = useState<Discord.User | null>(null);
+  const [milestones, setMilestones] = useState<MilestoneType | null>(null);
+  const [msDoc, setMsDoc] = useState<MilestoneDocument | null>(null);
+  const [dcUser, setDcUser] = useState<DiscordUser | null>(null);
 
   useEffect(() => {
     getMilestones().then((milestones) => {

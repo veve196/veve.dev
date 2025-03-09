@@ -1,8 +1,8 @@
 "use server";
 
-import { Discord } from "@/utils/models";
+import { DiscordUser, SpotifyStatus } from "@/utils/models";
 
-export async function getDiscordUser(): Promise<Discord.User> {
+export async function getDiscordUser(): Promise<DiscordUser> {
   return await fetch(
     `${process.env.NEXT_PUBLIC_VEVE_API_URL}/Discord/Users/${process.env.NEXT_PUBLIC_DISCORD_MEMBER_ID}`,
     {
@@ -13,7 +13,7 @@ export async function getDiscordUser(): Promise<Discord.User> {
   ).then((res) => res.json());
 }
 
-export async function getSpotifyStatus(): Promise<Discord.SpotifyStatus | null> {
+export async function getSpotifyStatus(): Promise<SpotifyStatus | null> {
   return await fetch(
     `${process.env.NEXT_PUBLIC_VEVE_API_URL}/Discord/Users/${process.env.NEXT_PUBLIC_DISCORD_MEMBER_ID}/Spotify`,
     {

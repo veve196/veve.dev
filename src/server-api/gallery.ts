@@ -1,17 +1,22 @@
 "use server";
 
 import { databases } from "@/app/appwrite-server";
-import { Galleries, Images } from "@/utils/models";
+import {
+  GalleryDocument,
+  GalleryType,
+  ImageDocument,
+  ImageType,
+} from "@/utils/models";
 import { Query } from "node-appwrite";
 
-export async function getGalleriesWithImages(): Promise<Galleries.GalleryType> {
+export async function getGalleriesWithImages(): Promise<GalleryType> {
   return await databases.listDocuments("web", "galleries", [
     Query.orderAsc("sortOrder"),
     Query.or([Query.isNull("isHidden"), Query.equal("isHidden", false)]),
   ]);
 }
 
-export async function getGalleries(): Promise<Galleries.GalleryType> {
+export async function getGalleries(): Promise<GalleryType> {
   return await databases.listDocuments("web", "galleries", [
     Query.select(["$id", "title"]),
     Query.orderAsc("sortOrder"),
@@ -19,8 +24,8 @@ export async function getGalleries(): Promise<Galleries.GalleryType> {
   ]);
 }
 
-export async function getDefaultGallery(): Promise<Galleries.GalleryDocument> {
-  const response: Galleries.GalleryType = await databases.listDocuments(
+export async function getDefaultGallery(): Promise<GalleryDocument> {
+  const response: GalleryType = await databases.listDocuments(
     "web",
     "galleries",
     [
@@ -34,9 +39,7 @@ export async function getDefaultGallery(): Promise<Galleries.GalleryDocument> {
   return response.documents[0];
 }
 
-export async function getGallery(
-  id: string
-): Promise<Galleries.GalleryDocument> {
+export async function getGallery(id: string): Promise<GalleryDocument> {
   return await databases.getDocument("web", "galleries", id);
 }
 
@@ -44,7 +47,7 @@ export async function getGalleryImages(
   id: string,
   page: number,
   imagesPerPage: number
-): Promise<Images.ImageType> {
+): Promise<ImageType> {
   return await databases.listDocuments("web", "images", [
     Query.equal("galleryId", id),
     Query.or([Query.isNull("parentId"), Query.equal("parentId", "")]),
@@ -56,11 +59,11 @@ export async function getGalleryImages(
   ]);
 }
 
-export async function getImage(id: string): Promise<Images.ImageDocument> {
+export async function getImage(id: string): Promise<ImageDocument> {
   return await databases.getDocument("web", "images", id);
 }
 
-export async function getAltImages(id: string): Promise<Images.ImageType> {
+export async function getAltImages(id: string): Promise<ImageType> {
   return await databases.listDocuments("web", "images", [
     Query.equal("parentId", id),
     Query.orderAsc("sortOrder"),
