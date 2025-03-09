@@ -1,5 +1,10 @@
 import { Models } from "node-appwrite";
 
+export interface CounterDocument extends Models.Document {
+  count: number;
+  previousCount?: number;
+}
+
 export interface StatusDocument extends Models.Document {
   status: string;
   from?: Date;

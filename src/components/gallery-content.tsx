@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/pagination";
 import { getGalleryImages } from "@/server-api/gallery";
 import { isMimeTypeAnimatable } from "@/utils/helpers";
-import { Images } from "@/utils/models";
+import { ImageType } from "@/utils/models";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -27,7 +27,7 @@ export default function GalleryContent({
   imagesPerPage,
 }: GalleryContentProps) {
   const [page, setPage] = useState(1);
-  const [images, setImages] = useState<Images.ImageType | null>(null);
+  const [images, setImages] = useState<ImageType | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const imageSize = 200;
 
@@ -37,7 +37,7 @@ export default function GalleryContent({
       setImages(images);
       setIsLoading(false);
     });
-  }, [page]);
+  }, [galleryId, page, imagesPerPage]);
 
   if (!images || isLoading) return <LoadingSpinner className="mx-auto" />;
 

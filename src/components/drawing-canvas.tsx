@@ -114,7 +114,7 @@ const DrawingCanvas = () => {
       context.moveTo(event.offsetX, event.offsetY);
     };
 
-    const handleMouseLeave = (event: MouseEvent) => {
+    const handleMouseLeave = () => {
       if (!isDrawing) return;
       context.closePath();
     };
@@ -181,13 +181,13 @@ const DrawingCanvas = () => {
     setShowDialog(false);
   };
 
-  const handleUndo = () => {
-    setPaths((prevPaths) => {
-      const newPaths = prevPaths.slice(0, -1);
-      redrawCanvas(newPaths);
-      return newPaths;
-    });
-  };
+  // const handleUndo = () => {
+  //   setPaths((prevPaths) => {
+  //     const newPaths = prevPaths.slice(0, -1);
+  //     redrawCanvas(newPaths);
+  //     return newPaths;
+  //   });
+  // };
 
   const redrawCanvas = (paths: { x: number; y: number }[][]) => {
     const canvas = canvasRef.current;

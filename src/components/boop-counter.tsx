@@ -2,6 +2,7 @@
 
 import { client } from "@/app/appwrite";
 import getBoops from "@/server-api/getBoops";
+import { CounterDocument } from "@/utils/models";
 import { RealtimeResponseEvent } from "appwrite";
 import { useEffect, useState } from "react";
 
@@ -13,7 +14,7 @@ export default function BoopCounter() {
 
     client.subscribe(
       "databases.web.collections.counters.documents.veveBoops",
-      (response: RealtimeResponseEvent<any>) => {
+      (response: RealtimeResponseEvent<CounterDocument>) => {
         setBoops(response.payload.count);
       }
     );
