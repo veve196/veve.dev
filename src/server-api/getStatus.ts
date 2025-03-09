@@ -1,15 +1,15 @@
 import { databases } from "@/app/appwrite-server";
-import { Statuses } from "@/utils/models";
+import { StatusDocument, StatusType } from "@/utils/models";
 import { Query } from "node-appwrite";
 
-export async function getStatus(): Promise<Statuses.StatusDocument> {
+export async function getStatus(): Promise<StatusDocument> {
   const date = new Date();
   const tzOffset = date.getTimezoneOffset() * 60000; // offset in milliseconds
   const localISOTime = new Date(date.getTime() - tzOffset)
     .toISOString()
     .slice(0, -1); // remove the 'Z' at the end
 
-  const documents: Statuses.StatusType = await databases.listDocuments(
+  const documents: StatusType = await databases.listDocuments(
     "web",
     "statuses",
     [
