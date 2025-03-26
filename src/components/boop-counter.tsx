@@ -1,7 +1,7 @@
 "use client";
 
 import { client } from "@/app/appwrite";
-import getBoops from "@/server-api/getBoops";
+import getBoops from "@/client-api/getBoops";
 import { CounterDocument } from "@/utils/models";
 import { RealtimeResponseEvent } from "appwrite";
 import { useEffect, useState } from "react";
