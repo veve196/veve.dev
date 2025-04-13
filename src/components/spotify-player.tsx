@@ -5,6 +5,7 @@ import { getSpotifyStatus } from "@/server-api/discord";
 import { SpotifyStatus } from "@/utils/models";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import "@/styles/spotify-player.css";
 
 export default function SpotifyPlayer() {
   const [spotifyStatus, setSpotifyStatus] = useState<SpotifyStatus | null>();
@@ -69,8 +70,14 @@ export default function SpotifyPlayer() {
     return null;
   }
   return (
-    <>
-      <div className="flex bg-background border-2 border-white rounded shadow-sm w-full sm:w-[32rem] mx-auto mt-8">
+    <div className="relative border-2 border-white bg-background/70 rounded shadow-sm w-full sm:w-[32rem] mx-auto mt-8 overflow-hidden">
+      <div
+        className="absolute inset-0 bg-cover bg-center -z-10 blur-sm animated-background"
+        style={{
+          backgroundImage: `url(${spotifyStatus.coverUrl})`,
+        }}
+      ></div>
+      <div className="flex">
         <Image
           src={spotifyStatus.coverUrl}
           alt="album cover"
@@ -79,7 +86,7 @@ export default function SpotifyPlayer() {
           height={148}
           className="self-center"
         />
-        <div className="flex-1 p-4 w-0">
+        <div className="relative flex-1 p-4 w-0">
           <p className="text-xs text-muted-foreground pb-2">listening to:</p>
           <h1 className="font-semibold truncate" title={spotifyStatus.title}>
             {spotifyStatus.title}
@@ -102,6 +109,6 @@ export default function SpotifyPlayer() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

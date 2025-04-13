@@ -1,0 +1,59 @@
+.animated-background {
+  animation: subtle-warp 10s infinite alternate ease-in-out,
+    random-effects 12s infinite ease-in-out;
+}
+
+@keyframes subtle-warp {
+  0% {
+    transform: scale(1) translate(0, 0);
+    filter: blur(8px);
+  }
+  20% {
+    transform: scale(1.02) translate(-8px, 5px);
+    filter: blur(9px);
+  }
+  40% {
+    transform: scale(1.05) translate(10px, -6px);
+    filter: blur(10px);
+  }
+  60% {
+    transform: scale(1.03) translate(-6px, 8px);
+    filter: blur(9px);
+  }
+  80% {
+    transform: scale(1.06) translate(5px, -10px);
+    filter: blur(11px);
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+    filter: blur(8px);
+  }
+}
+
+@keyframes random-effects {
+  0% {
+    opacity: 1;
+    background-position: 50% 50%;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  }
+  25% {
+    opacity: 0.95;
+    background-position: 48% 52%;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    opacity: 0.9;
+    background-position: 52% 48%;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+  }
+  75% {
+    opacity: 0.97;
+    background-position: 49% 51%;
+    box-shadow: 0 0 22px rgba(255, 255, 255, 0.25);
+  }
+  100% {
+    opacity: 1;
+    background-position: 50% 50%;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  }
+}
