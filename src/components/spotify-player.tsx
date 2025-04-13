@@ -12,6 +12,13 @@ export default function SpotifyPlayer() {
   const [progress, setProgress] = useState(0);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [remainingTime, setRemainingTime] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    if (spotifyStatus && spotifyStatus.title) {
+      setIsVisible(true);
+    }
+  }, [spotifyStatus]);
 
   useEffect(() => {
     const fetchSpotifyStatus = async () => {
@@ -70,7 +77,11 @@ export default function SpotifyPlayer() {
     return null;
   }
   return (
-    <div className="relative border-2 border-white bg-background/70 rounded shadow-sm w-full sm:w-[32rem] mx-auto mt-8 overflow-hidden">
+    <div
+      className={`relative border-2 border-white bg-background/70 rounded shadow-sm w-full sm:w-[32rem] mx-auto mt-8 overflow-hidden ${
+        isVisible ? "spotify-player-animate" : ""
+      }`}
+    >
       <div
         className="absolute inset-0 bg-cover bg-center -z-10 blur-sm animated-background"
         style={{
