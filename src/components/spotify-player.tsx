@@ -78,7 +78,7 @@ export default function SpotifyPlayer() {
   }
   return (
     <div
-      className={`relative border-2 border-white bg-background/70 rounded shadow-sm w-full sm:w-[32rem] mx-auto mt-8 overflow-hidden ${
+      className={`relative border-2 border-white rounded shadow-sm w-full sm:w-[32rem] mx-auto mt-8 overflow-hidden ${
         isVisible ? "spotify-player-animate" : ""
       }`}
     >
@@ -97,7 +97,7 @@ export default function SpotifyPlayer() {
           height={148}
           className="self-center"
         />
-        <div className="relative flex-1 p-4 w-0">
+        <div className="relative flex-1 p-4 w-0 bg-background/70">
           <p className="text-xs text-muted-foreground pb-2">listening to:</p>
           <h1 className="font-semibold truncate" title={spotifyStatus.title}>
             {spotifyStatus.title}
