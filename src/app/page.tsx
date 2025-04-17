@@ -42,7 +42,9 @@ export default async function Home() {
           type="button"
           asChild
         >
-          <Link href={"/stickers"}>My Stickers!</Link>
+          <Link href={"https://t.me/addstickers/FurdisAndVeve"}>
+            My Stickers!
+          </Link>
         </Button>
         <Separator className="my-3 !w-72 mx-auto" />
         <div className="flex flex-col">
