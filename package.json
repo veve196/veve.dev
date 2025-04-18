@@ -33,6 +33,8 @@
     "node-appwrite": "^16.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-tilt": "^1.0.2",
+    "react-vanilla-tilt": "^1.0.0",
     "sonner": "^2.0.3",
     "tailwind-merge": "^3.2.0",
     "tailwindcss-animate": "^1.0.7"
