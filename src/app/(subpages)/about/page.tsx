@@ -1,8 +1,9 @@
 import Image from "next/image";
 import { Metadata } from "next/types";
 import "@/styles/about.css";
+import { Button } from "@/components/ui/button";
+import AboutPage from "./page.client";
 
-export const runtime = "edge";
 export const metadata: Metadata = {
   title: "About",
   description: "This is my about page!",
@@ -19,24 +20,5 @@ export const metadata: Metadata = {
 };
 
 export default async function About() {
-  return (
-    <>
-      <div className="flex gap-4">
-        <Image
-          src="/about/wave.webp"
-          alt="wave"
-          title="Hewwo!"
-          width={200}
-          height={200}
-          priority
-        />
-        <div>
-          <p className="text-2xl mb-3">Hello, I&apos;m veve!</p>
-          <p>Hey guys did you know that</p>
-          <p>...</p>
-          <p>Uhm hey guys</p>
-        </div>
-      </div>
-    </>
-  );
+  return <AboutPage />;
 }
