@@ -14,6 +14,7 @@ import { getDiscordUser } from "@/server-api/discord";
 import getMilestones from "@/server-api/getMilestones";
 import "@/styles/avatar.css";
 import { DiscordUser, MilestoneDocument, MilestoneType } from "@/utils/models";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 export default function Avatar() {
@@ -105,7 +106,8 @@ export default function Avatar() {
         title="Boop me!"
       >
         {dcUser && (
-          <div
+          <Link
+            href="/ballpit"
             className={`w-[32px] h-[32px] rounded-full border-2 border-transparent absolute bottom-3 right-3 status-${dcUser.status}`}
             title={`${dcUser.status}`}
           />
