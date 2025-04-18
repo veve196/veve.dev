@@ -1,7 +1,6 @@
 import StickersView from "@/components/stickers-view";
 import { Metadata } from "next/types";
 
-export const runtime = "edge";
 export const metadata: Metadata = {
   title: "Stickers",
   description: "Have a look at my stickers!",

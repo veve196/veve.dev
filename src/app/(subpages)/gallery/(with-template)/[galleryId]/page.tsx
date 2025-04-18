@@ -3,8 +3,6 @@ import { getGallery } from "@/server-api/gallery";
 import "@/styles/gallery.css";
 import { Metadata } from "next/types";
 
-export const runtime = "edge";
-
 export async function generateMetadata(props: {
   params: Promise<{ galleryId: string }>;
 }): Promise<Metadata> {

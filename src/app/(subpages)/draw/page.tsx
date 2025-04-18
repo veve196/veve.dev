@@ -2,7 +2,6 @@ import DrawingCanvas from "@/components/drawing-canvas";
 import GalleryContent from "@/components/gallery-content";
 import { Metadata } from "next/types";
 
-export const runtime = "edge";
 export const metadata: Metadata = {
   title: "Draw something!",
   description: "i dare u",
