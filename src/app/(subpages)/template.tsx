@@ -23,7 +23,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
       const fetchImageTitle = async () => {
         const imageId = pathRoutes[pathRoutes.length - 1];
         const image = await getImage(imageId);
-        pathRoutes[pathRoutes.length - 1] = image.title;
+        pathRoutes[pathRoutes.length - 1] = image?.title ?? "image";
         setRoutes(pathRoutes);
       };
 
