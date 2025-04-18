@@ -9,11 +9,11 @@ interface GalleryTemplateProps {
 export default async function GalleryTemplate({
   children,
 }: GalleryTemplateProps) {
-  const galleries: GalleryType = await getGalleries();
+  const galleries = await getGalleries();
 
   return (
     <>
-      <GalleryToggleGroup galleries={galleries} />
+      {galleries && <GalleryToggleGroup galleries={galleries} />}
       <div className="mt-4">{children}</div>
     </>
   );
