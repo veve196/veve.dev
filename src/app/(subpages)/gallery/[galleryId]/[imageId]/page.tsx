@@ -5,11 +5,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { getAltImages, getImage } from "@/server-api/gallery";
 import "@/styles/details.css";
-import Link from "next/link";
 import { Metadata } from "next/types";
 
 export async function generateMetadata(props: {
