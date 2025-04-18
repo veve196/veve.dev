@@ -50,7 +50,7 @@ export default async function Home() {
         <div className="flex flex-col">
           {socials == null ? (
             <p>
-              Couldn't load socials... :&#91;
+              Couldn&#39;t load socials... :&#91;
               <br />
               Maybe come back later!
             </p>
