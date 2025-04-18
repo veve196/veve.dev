@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Metadata } from "next/types";
 
-export const runtime = "edge";
 export const metadata: Metadata = {
   title: "Refsheet",
   description: "here u go dear artist 👉👈",

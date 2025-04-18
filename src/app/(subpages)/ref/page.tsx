@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next/types";
 
-export const runtime = "edge";
 export const metadata: Metadata = {
   title: "Refsheet",
   description: "here u go dear artist 👉👈",

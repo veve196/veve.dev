@@ -10,8 +10,6 @@ import { getAltImages, getImage } from "@/server-api/gallery";
 import "@/styles/details.css";
 import { Metadata } from "next/types";
 
-export const runtime = "edge";
-
 export async function generateMetadata(props: {
   params: Promise<{ imageId: string }>;
 }): Promise<Metadata> {

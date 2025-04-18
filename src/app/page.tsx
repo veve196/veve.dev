@@ -10,8 +10,6 @@ import { SocialType, StatusDocument } from "@/utils/models";
 import Image from "next/image";
 import Link from "next/link";
 
-export const runtime = "edge";
-
 export default async function Home() {
   const socials: SocialType | null = await getSocials();
   const status: StatusDocument | null = await getStatus();
