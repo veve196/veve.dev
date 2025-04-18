@@ -24,13 +24,15 @@ export default function SpotifyPlayer() {
     const fetchSpotifyStatus = async () => {
       const data = await getSpotifyStatus();
 
-      if (data && data.artist) {
+      setSpotifyStatus(data);
+
+      if (!data) return;
+
+      if (data.artist) {
         data.artist = data.artist.replaceAll(";", ", ");
       }
 
-      setSpotifyStatus(data);
-
-      if (data && data.endDate) {
+      if (data.endDate) {
         const remainingTime = new Date(data.endDate).getTime() - Date.now();
         const timer = setTimeout(() => {
           fetchSpotifyStatus();

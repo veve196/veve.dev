@@ -2,7 +2,7 @@
 
 import { DiscordUser, SpotifyStatus } from "@/utils/models";
 
-export async function getDiscordUser(): Promise<DiscordUser> {
+export async function getDiscordUser(): Promise<DiscordUser | null> {
   return await fetch(
     `${process.env.NEXT_PUBLIC_VEVE_API_URL}/Discord/Users/${process.env.NEXT_PUBLIC_DISCORD_MEMBER_ID}`,
     {
@@ -10,7 +10,10 @@ export async function getDiscordUser(): Promise<DiscordUser> {
         "x-api-key": `${process.env.VEVE_API_KEY}`,
       },
     }
-  ).then((res) => res.json());
+  ).then((response) => {
+    if (!response.ok) return null;
+    return response.json();
+  });
 }
 
 export async function getSpotifyStatus(): Promise<SpotifyStatus | null> {
@@ -21,5 +24,8 @@ export async function getSpotifyStatus(): Promise<SpotifyStatus | null> {
         "x-api-key": `${process.env.VEVE_API_KEY}`,
       },
     }
-  ).then((res) => res.json());
+  ).then((response) => {
+    if (!response.ok) return null;
+    return response.json();
+  });
 }

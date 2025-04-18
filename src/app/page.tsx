@@ -13,8 +13,8 @@ import Link from "next/link";
 export const runtime = "edge";
 
 export default async function Home() {
-  const socials: SocialType = await getSocials();
-  const status: StatusDocument = await getStatus();
+  const socials: SocialType | null = await getSocials();
+  const status: StatusDocument | null = await getStatus();
 
   return (
     <>
@@ -48,24 +48,33 @@ export default async function Home() {
         </Button>
         <Separator className="my-3 !w-72 mx-auto" />
         <div className="flex flex-col">
-          {socials.documents.map((social) => (
-            <Button
-              key={social.$id}
-              variant="link"
-              className="block mx-auto"
-              type="button"
-              asChild
-            >
-              <Link
-                href={social.url}
-                target="_blank"
-                title={social.tooltip ?? social.title}
-                className=""
-              >
-                {social.title}
-              </Link>
-            </Button>
-          ))}
+          {socials == null ? (
+            <p>
+              Couldn't load socials... :&#91;
+              <br />
+              Maybe come back later!
+            </p>
+          ) : (
+            <>
+              {socials.documents.map((social) => (
+                <Button
+                  key={social.$id}
+                  variant="link"
+                  className="block mx-auto"
+                  type="button"
+                  asChild
+                >
+                  <Link
+                    href={social.url}
+                    target="_blank"
+                    title={social.tooltip ?? social.title}
+                  >
+                    {social.title}
+                  </Link>
+                </Button>
+              ))}
+            </>
+          )}
         </div>
         <Separator className="my-3 !w-72 mx-auto" />
         <BoopCounter />
