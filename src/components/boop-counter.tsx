@@ -14,14 +14,18 @@ export default function BoopCounter() {
   useEffect(() => {
     getBoops().then((boops) => setBoops(boops));
 
-    client.subscribe(
+    const unsubscribe = client.subscribe(
       "databases.web.collections.counters.documents.veveBoops",
       (response: RealtimeResponseEvent<CounterDocument>) => {
         setBoops(response.payload.count);
         setPrevBoops(boops || 0);
       }
     );
-  }, []);
+
+    return () => {
+      unsubscribe();
+    };
+  }, [boops]);
   return (
     <>
       <p className="inline">Boops: </p>
