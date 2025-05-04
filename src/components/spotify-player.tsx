@@ -29,12 +29,19 @@ export default function SpotifyPlayer() {
       if (data.artist) {
         data.artist = data.artist.replaceAll(";", ", ");
       }
+
+      console.log(data);
+
       if (data.endDate) {
-        const remainingTime = new Date(data.endDate).getTime() - Date.now();
+        console.log(data.endDate);
+        console.log(new Date());
+        let remainingTime = new Date(data.endDate).getTime() - Date.now();
+
+        if (remainingTime < 1) return;
 
         const timer = setTimeout(() => {
           fetchSpotifyStatus();
-        }, remainingTime + 1000);
+        }, remainingTime + 500);
         return () => clearTimeout(timer);
       }
     };

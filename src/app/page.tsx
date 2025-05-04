@@ -77,7 +77,7 @@ export default async function Home() {
         <Separator className="my-3 !w-72 mx-auto" />
         <BoopCounter />
       </div>
-      {/* <SpotifyPlayer /> */}
+      <SpotifyPlayer />
       <Link href={"/draw"}>
         <Image
           src="/paint.webp"
