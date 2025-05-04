@@ -30,13 +30,8 @@ export default function SpotifyPlayer() {
         data.artist = data.artist.replaceAll(";", ", ");
       }
 
-      console.log(data);
-
       if (data.endDate) {
-        console.log(data.endDate);
-        console.log(new Date());
-        let remainingTime = new Date(data.endDate).getTime() - Date.now();
-
+        const remainingTime = new Date(data.endDate).getTime() - Date.now();
         if (remainingTime < 1) return;
 
         const timer = setTimeout(() => {
