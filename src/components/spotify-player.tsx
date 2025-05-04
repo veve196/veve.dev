@@ -25,19 +25,16 @@ export default function SpotifyPlayer() {
       const data = await getSpotifyStatus();
 
       setSpotifyStatus(data);
-
       if (!data) return;
-
       if (data.artist) {
         data.artist = data.artist.replaceAll(";", ", ");
       }
-
       if (data.endDate) {
         const remainingTime = new Date(data.endDate).getTime() - Date.now();
+
         const timer = setTimeout(() => {
           fetchSpotifyStatus();
         }, remainingTime + 1000);
-
         return () => clearTimeout(timer);
       }
     };
@@ -78,6 +75,7 @@ export default function SpotifyPlayer() {
   if (!spotifyStatus || spotifyStatus.title === undefined) {
     return null;
   }
+
   return (
     <div
       className={`relative border-2 border-white rounded shadow-sm w-full sm:w-[32rem] mx-auto mt-8 overflow-hidden ${
