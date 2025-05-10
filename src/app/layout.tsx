@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import React from "react";
 import "../styles/globals.css";
+import BongoVeve from "@/components/bongo-veve";
 
 const pixelFont = localFont({ src: "../../public/pixelFont.woff2" });
 export const metadata: Metadata = {
@@ -44,6 +45,7 @@ export default function RootLayout({
           <main className="mx-auto max-w-4xl my-8 px-3 lg:px-0">
             {children}
             <SpeedInsights />
+            <BongoVeve className="fixed z-10 bottom-[-8px] right-2" />
           </main>
           <Toaster />
           <Background />
