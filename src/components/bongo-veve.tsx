@@ -50,7 +50,7 @@ export default function BongoVeve({ className }: BongoVeveProps) {
         src={imageSrc}
         alt="veve"
         width={128}
-        height={128}
+        height={74}
         onClick={handleImageClick}
       />
     </div>
