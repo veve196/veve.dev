@@ -4,35 +4,56 @@ import { client } from "@/app/appwrite";
 import getBoops from "@/client-api/getBoops";
 import { CounterDocument } from "@/utils/models";
 import { RealtimeResponseEvent } from "appwrite";
-import { useEffect, useState } from "react";
+import { useEffect, useReducer } from "react";
 import CountUp from "@/components/count-up";
 
+type State = {
+  prevBoops: number;
+  boops: number | null;
+};
+
+type Action =
+  | { type: "SET_BOOPS"; boops: number }
+  | { type: "SET_PREV_BOOPS"; prevBoops: number };
+
+function reducer(state: State, action: Action): State {
+  switch (action.type) {
+    case "SET_BOOPS":
+      return { ...state, prevBoops: state.boops || 0, boops: action.boops };
+    default:
+      return state;
+  }
+}
+
 export default function BoopCounter() {
-  const [prevBoops, setPrevBoops] = useState<number>(0);
-  const [boops, setBoops] = useState<number | null>(null);
+  const [state, dispatch] = useReducer(reducer, { prevBoops: 0, boops: null });
 
   useEffect(() => {
-    getBoops().then((boops) => setBoops(boops));
+    getBoops().then((boops) => dispatch({ type: "SET_BOOPS", boops }));
 
     const unsubscribe = client.subscribe(
       "databases.web.collections.counters.documents.veveBoops",
       (response: RealtimeResponseEvent<CounterDocument>) => {
-        setBoops(response.payload.count);
-        setPrevBoops(boops || 0);
+        dispatch({ type: "SET_BOOPS", boops: response.payload.count });
       }
     );
 
     return () => {
       unsubscribe();
     };
+<<<<<<< HEAD
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Adding boops to dependency array causes websocket errors
+=======
+  }, []);
+
+>>>>>>> b26feebfb9c92061e6e96669867e566a4982eeb5
   return (
     <>
       <p className="inline">Boops: </p>
       <CountUp
-        from={prevBoops}
-        to={boops || 0}
+        from={state.prevBoops}
+        to={state.boops || 0}
         separator=","
         direction="up"
         duration={1}

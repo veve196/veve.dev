@@ -27,7 +27,7 @@ export default async function About() {
           alt="wave"
           title="Hewwo!"
           width={200}
-          height={200}
+          height={250}
           priority
         />
         <div>
