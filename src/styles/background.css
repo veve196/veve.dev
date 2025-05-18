@@ -31,3 +31,32 @@
     transform: translateY(-100vh);
   }
 }
+
+.shooting-star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--color-foreground);
+  border-radius: 50%;
+  box-shadow: 0px 0px 30px 3px var(--color-foreground);
+  filter: brightness(2);
+  pointer-events: none;
+}
+
+@keyframes shooting-star {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scaleX(1);
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+    transform: translate(var(--tx, 800px), var(--ty, -600px)) scaleX(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx, 900px), var(--ty, -700px)) scaleX(1.3);
+  }
+}

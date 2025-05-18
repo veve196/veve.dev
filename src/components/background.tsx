@@ -45,6 +45,64 @@ export default function Background() {
         document.styleSheets[0].cssRules.length
       );
     });
+
+    // Shooting star
+    function randomBetween(a: number, b: number) {
+      return a + Math.random() * (b - a);
+    }
+
+    function createShootingStar() {
+      const star = document.createElement("div");
+      star.className = "shooting-star";
+
+      let startX, startY, tx, ty;
+
+      if (Math.random() < 0.5) {
+        startX = -100;
+        startY = randomBetween(
+          window.innerHeight * 0.1,
+          window.innerHeight * 0.9
+        );
+        const angle = randomBetween(-20, 20);
+        const distance = window.innerWidth + 200;
+        const rad = angle * (Math.PI / 180);
+        tx = Math.cos(rad) * distance;
+        ty = Math.sin(rad) * distance;
+      } else {
+        startX = randomBetween(
+          window.innerWidth * 0.1,
+          window.innerWidth * 0.9
+        );
+        startY = -100;
+
+        const angle = randomBetween(70, 110);
+        const distance = window.innerHeight + 200;
+
+        const rad = angle * (Math.PI / 180);
+        tx = Math.cos(rad) * distance;
+        ty = Math.sin(rad) * distance;
+      }
+
+      star.style.left = `${startX}px`;
+      star.style.top = `${startY}px`;
+      star.style.setProperty("--tx", `${tx}px`);
+      star.style.setProperty("--ty", `${ty}px`);
+      star.style.animation = `shooting-star 1.5s linear forwards`;
+      star.style.animationDelay = `${randomBetween(0, 1)}s`;
+
+      document.getElementById("background")?.appendChild(star);
+
+      star.addEventListener("animationend", () => {
+        star.remove();
+      });
+    }
+
+    const interval = setInterval(
+      createShootingStar,
+      randomBetween(10000, 15000)
+    );
+
+    return () => clearInterval(interval);
   }, []);
 
   return (

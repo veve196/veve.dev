@@ -41,13 +41,8 @@ export default function BoopCounter() {
     return () => {
       unsubscribe();
     };
-<<<<<<< HEAD
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Adding boops to dependency array causes websocket errors
-=======
-  }, []);
-
->>>>>>> b26feebfb9c92061e6e96669867e566a4982eeb5
   return (
     <>
       <p className="inline">Boops: </p>

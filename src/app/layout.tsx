@@ -45,7 +45,7 @@ export default function RootLayout({
           <main className="mx-auto max-w-4xl my-8 px-3 lg:px-0">
             {children}
             <SpeedInsights />
-            <BongoVeve className="fixed z-10 bottom-[-8px] right-2" />
+            <BongoVeve className="fixed z-10 bottom-[-8px] right-4" />
           </main>
           <Toaster />
           <Background />
