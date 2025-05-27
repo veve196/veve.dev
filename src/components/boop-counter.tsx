@@ -39,7 +39,7 @@ export default function BoopCounter() {
     );
 
     return () => {
-      unsubscribe();
+      // unsubscribe(); unsubscribe causes websocket error
     };
   }, []);
   return (
