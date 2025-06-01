@@ -2,7 +2,6 @@ import Image from "next/image";
 import { Metadata } from "next/types";
 import "@/styles/about.css";
 
-export const runtime = "edge";
 export const metadata: Metadata = {
   title: "About",
   description: "This is my about page!",
