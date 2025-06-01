@@ -1,7 +1,6 @@
 import Background from "@/components/background";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import React from "react";
@@ -44,7 +43,6 @@ export default function RootLayout({
         >
           <main className="mx-auto max-w-4xl my-8 px-3 lg:px-0">
             {children}
-            <SpeedInsights />
             <BongoVeve className="fixed z-10 bottom-[-8px] right-4" />
           </main>
           <Toaster />
