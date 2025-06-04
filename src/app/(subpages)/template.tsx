@@ -63,7 +63,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
             <Image
               src="/ve-cube.webp"
               alt="veCube"
-              title="veve"
+              title="get cubed"
               width={32}
               height={32}
               unoptimized
