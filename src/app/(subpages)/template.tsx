@@ -8,9 +8,10 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { getImage } from "@/server-api/gallery";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const [routes, setRoutes] = useState<string[]>([]);
@@ -58,9 +59,20 @@ export default function Template({ children }: { children: React.ReactNode }) {
               </BreadcrumbItem>
             </React.Fragment>
           ))}
+          <BreadcrumbItem className="grow">
+            <Image
+              src="/ve-cube.webp"
+              alt="veCube"
+              title="veve"
+              width={32}
+              height={32}
+              unoptimized
+              className="ms-auto"
+            />
+          </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <Separator className="my-4" />
+      <Separator className="mt-1 mb-4" />
       {children}
     </>
   );

@@ -49,12 +49,12 @@ export default function ImageList({
           image.height = image.height || imageSize;
 
           const isLarge = image.height != imageSize;
-          const scaledHeight = isLarge ? imageSize : image.height;
-          const scaledWidth = isLarge
-            ? (image.width / image.height) * scaledHeight
-            : image.height;
+          const scaledHeight = Math.round(isLarge ? imageSize : image.height);
+          const scaledWidth = Math.round(
+            isLarge ? (image.width / image.height) * scaledHeight : image.height
+          );
 
-          const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/storage/buckets/gallery/files/${image.fileId}/preview?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}&height=200`;
+          const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/storage/buckets/gallery/files/${image.fileId}/preview?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}&width=${scaledWidth}&height=${scaledHeight}&quality=90`;
           const isGif = image.mimeType === "image/gif";
 
           return (
@@ -70,13 +70,14 @@ export default function ImageList({
                 width={scaledWidth}
                 height={scaledHeight}
                 className="rounded"
+                loading="lazy"
                 quality={90}
                 unoptimized={isMimeTypeAnimatable(image.mimeType)}
                 placeholder="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw"
               />
               {isGif && (
                 <Badge
-                  variant="secondary"
+                  variant="default"
                   className="absolute top-0 -translate-y-1/2 right-2"
                 >
                   GIF

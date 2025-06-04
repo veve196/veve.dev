@@ -25,22 +25,22 @@ export default async function Home() {
         <Button variant="link" className="px-2" type="button" asChild>
           <Link href={"/about"}>About</Link>
         </Button>
-        •
+        &#9829;
         <Button variant="link" className="px-2" type="button" asChild>
           <Link href={"/gallery"}>Gallery</Link>
         </Button>
-        •
+        &#9829;
         <Button variant="link" className="px-2" type="button" asChild>
           <Link href={"/ref"}>Refsheet</Link>
         </Button>
-        <span className="hidden sm:inline-block">•</span>
+        <span className="hidden sm:inline-block">&#9829;</span>
         <Button
           variant="link"
           className="px-2 block mx-auto sm:inline-block"
           type="button"
           asChild
         >
-          <Link href={"https://t.me/addstickers/FurdisAndVeve"}>
+          <Link href={"https://t.me/addstickers/FurdisAndVeve"} target="_blank">
             My Stickers!
           </Link>
         </Button>
