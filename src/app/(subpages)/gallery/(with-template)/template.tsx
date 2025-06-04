@@ -1,4 +1,4 @@
-import GalleryToggleGroup from "@/components/gallery-toggle-group";
+import ImageListToggle from "@/components/gallery/image-list-toggle";
 import { getGalleries } from "@/server-api/gallery";
 
 interface GalleryTemplateProps {
@@ -12,7 +12,7 @@ export default async function GalleryTemplate({
 
   return (
     <>
-      {galleries && <GalleryToggleGroup galleries={galleries} />}
+      {galleries && <ImageListToggle galleries={galleries} />}
       <div className="mt-4">{children}</div>
     </>
   );

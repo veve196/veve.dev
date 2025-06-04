@@ -1,5 +1,5 @@
 import DrawingCanvas from "@/components/drawing-canvas";
-import GalleryContent from "@/components/gallery-content";
+import GalleryContent from "@/components/gallery/image-list";
 import { Metadata } from "next/types";
 
 export const metadata: Metadata = {

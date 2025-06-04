@@ -5,13 +5,11 @@ import { GalleryType } from "@/utils/models";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-interface GalleryToggleGroupProps {
+interface ImageListToggleProps {
   galleries: GalleryType;
 }
 
-export default function GalleryToggleGroup({
-  galleries,
-}: GalleryToggleGroupProps) {
+export default function ImageListToggle({ galleries }: ImageListToggleProps) {
   const routes = usePathname().split("/");
   const galleryId = routes[routes.length - 1];
 

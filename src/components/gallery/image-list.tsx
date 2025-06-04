@@ -17,15 +17,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-interface GalleryContentProps {
+interface ImageListProps {
   galleryId: string;
   imagesPerPage: number;
 }
 
-export default function GalleryContent({
+export default function ImageList({
   galleryId,
   imagesPerPage,
-}: GalleryContentProps) {
+}: ImageListProps) {
   const [page, setPage] = useState(1);
   const [images, setImages] = useState<ImageType | null>(null);
   const [isLoading, setIsLoading] = useState(false);

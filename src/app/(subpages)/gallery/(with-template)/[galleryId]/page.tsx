@@ -1,4 +1,4 @@
-import GalleryContent from "@/components/gallery-content";
+import ImageList from "@/components/gallery/image-list";
 import { getGallery } from "@/server-api/gallery";
 import "@/styles/gallery.css";
 import { Metadata } from "next/types";
@@ -39,7 +39,7 @@ export default async function Gallery(props: {
           __html: gallery?.description || "",
         }}
       />
-      <GalleryContent galleryId={galleryId} imagesPerPage={25} />
+      <ImageList galleryId={galleryId} imagesPerPage={25} />
     </>
   );
 }

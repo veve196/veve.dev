@@ -1,4 +1,4 @@
-import GalleryDetailImage from "@/components/gallery-detail-image";
+import ImageDetails from "@/components/gallery/image-details";
 import {
   Accordion,
   AccordionContent,
@@ -61,7 +61,7 @@ export default async function Details(props: {
 
   return (
     <>
-      <GalleryDetailImage image={img} />
+      <ImageDetails image={img} />
 
       {alts && alts.documents.length > 0 && (
         <>
@@ -71,7 +71,7 @@ export default async function Details(props: {
               <AccordionTrigger>Alt versions</AccordionTrigger>
               <AccordionContent>
                 {alts.documents.map((image, index) => (
-                  <GalleryDetailImage key={index} image={image} />
+                  <ImageDetails key={index} image={image} />
                 ))}
               </AccordionContent>
             </AccordionItem>
