@@ -30,10 +30,6 @@ export default function Avatar() {
     getDiscordUser().then((user) => {
       setDcUser(user);
     });
-
-    // Preload image to avoid flickering on hover
-    const img = new Image();
-    img.src = "/avatar-blushies.webp";
   }, []);
 
   const handleClick = async (e: React.MouseEvent<HTMLImageElement>) => {
@@ -96,6 +92,11 @@ export default function Avatar() {
 
   return (
     <>
+      {/* Hidden preloader for avatar-blushies.webp */}
+      <div
+        className="hidden w-0 h-0 overflow-hidden absolute bg-[url('/avatar-blushies.webp')]"
+        aria-hidden="true"
+      />
       <div
         id="avatar"
         className={`w-[200px] h-[200px] rounded-full mx-auto select-none relative cursor-pointer ${
