@@ -21,7 +21,7 @@ export default function StickersView({ stickerPackName }: StickersViewProps) {
         console.error("Failed to fetch sticker URLs:", error);
         setStickerUrls([]);
       });
-  }, []);
+  }, [stickerPackName]);
 
   if (!stickerUrls) {
     return <Loading />;
