@@ -1,6 +1,7 @@
 "use client";
 
 import uploadDrawing from "@/actions/uploadDrawing";
+import Loading from "@/app/(subpages)/loading";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,7 +13,6 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { Slider } from "@/components/ui/slider";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -220,8 +220,7 @@ const DrawingCanvas = () => {
         <div>
           {isSaving && (
             <div className=" w-full h-full absolute flex justify-center items-center gap-2 text-black text-4xl animate-pulse">
-              <LoadingSpinner />
-              Saving...
+              <Loading text="Saving..." />
             </div>
           )}
           <div className="flex justify-between gap-2 mb-2">

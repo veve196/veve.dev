@@ -51,7 +51,7 @@ export default async function Home() {
         </a>
       </div>
       <div className="text-center mt-8">
-        <Link href="/ref/fufu" className="rainbow-text text-4xl">
+        <Link href="/ref/fufu" className="text-rainbow text-4xl">
           Click here for Bfs ref!
         </Link>
       </div>

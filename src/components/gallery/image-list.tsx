@@ -1,8 +1,8 @@
 "use client";
 
+import Loading from "@/app/(subpages)/loading";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import {
   Pagination,
   PaginationContent,
@@ -39,7 +39,7 @@ export default function ImageList({
     });
   }, [galleryId, page, imagesPerPage]);
 
-  if (!images || isLoading) return <LoadingSpinner className="mx-auto" />;
+  if (!images || isLoading) return <Loading />;
 
   return (
     <>

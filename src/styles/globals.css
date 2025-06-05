@@ -130,7 +130,7 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-.rainbow-text {
+.text-rainbow {
   background: linear-gradient(
     to right,
     #6666ff,

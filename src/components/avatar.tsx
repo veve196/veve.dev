@@ -63,7 +63,7 @@ export default function Avatar() {
       "💥",
       "🔥",
       "🔫",
-      "i'm trying to reach you about your car's extended warranty",
+      "🛹",
     ];
 
     text.textContent = emojis[Math.floor(Math.random() * emojis.length)];
