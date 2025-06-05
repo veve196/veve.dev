@@ -219,8 +219,9 @@ const DrawingCanvas = () => {
       <div className="mx-auto relative max-w-[500px]">
         <div>
           {isSaving && (
-            <div className=" w-full h-full absolute flex justify-center items-center gap-2 text-black text-4xl animate-pulse">
-              <Loading text="Saving..." />
+            <div className=" w-full h-full absolute flex flex-col justify-center items-center gap-2 text-black text-4xl animate-pulse">
+              <Loading />
+              <p className="text-gray-500">Saving...</p>
             </div>
           )}
           <div className="flex justify-between gap-2 mb-2">
