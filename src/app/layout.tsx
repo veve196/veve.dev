@@ -1,11 +1,11 @@
 import Background from "@/components/background";
+import BongoVeve from "@/components/bongo-veve";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import React from "react";
-import "../styles/globals.css";
-import BongoVeve from "@/components/bongo-veve";
+import "@/styles/globals.css";
 
 const pixelFont = localFont({ src: "../../public/pixelFont.woff2" });
 export const metadata: Metadata = {
