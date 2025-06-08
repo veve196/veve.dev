@@ -2,10 +2,10 @@
 
 import { client } from "@/app/appwrite";
 import getBoops from "@/client-api/getBoops";
+import CountUp from "@/components/count-up";
 import { CounterDocument } from "@/utils/models";
 import { RealtimeResponseEvent } from "appwrite";
 import { useEffect, useReducer } from "react";
-import CountUp from "@/components/count-up";
 
 type State = {
   prevBoops: number;
@@ -31,20 +31,12 @@ export default function BoopCounter() {
   useEffect(() => {
     getBoops().then((boops) => dispatch({ type: "SET_BOOPS", boops }));
 
-    const unsubscribe = client.subscribe(
+    client.subscribe(
       "databases.web.collections.counters.documents.veveBoops",
       (response: RealtimeResponseEvent<CounterDocument>) => {
         dispatch({ type: "SET_BOOPS", boops: response.payload.count });
       }
     );
-
-    return () => {
-      try {
-        unsubscribe();
-      } catch (e) {
-        console.debug("Unsubscribe error:", e);
-      }
-    };
   }, []);
   return (
     <>
