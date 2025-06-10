@@ -108,7 +108,6 @@ export default function Avatar() {
           className="rounded-full"
         />
         <Image
-          id="avatar"
           src="/avatar.webp"
           alt="Avatar"
           width={200}
