@@ -1,9 +1,9 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import "@/styles/bongo-veve.css";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import "@/styles/bongo-veve.css";
 
 interface BongoVeveProps {
   className?: string;

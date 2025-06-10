@@ -14,8 +14,8 @@ import { getDiscordUser } from "@/server-api/discord";
 import getMilestones from "@/server-api/getMilestones";
 import "@/styles/avatar.css";
 import { DiscordUser, MilestoneDocument, MilestoneType } from "@/utils/models";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
-
 export default function Avatar() {
   const [showMessage, setShowMessage] = useState(false);
   const [milestones, setMilestones] = useState<MilestoneType | null>(null);
@@ -92,19 +92,29 @@ export default function Avatar() {
 
   return (
     <>
-      {/* Hidden preloader for avatar-blushies.webp */}
       <div
-        className="hidden w-0 h-0 overflow-hidden absolute bg-[url('/avatar-blushies.webp')]"
-        aria-hidden="true"
-      />
-      <div
-        id="avatar"
         className={`w-[200px] h-[200px] rounded-full mx-auto select-none relative cursor-pointer ${
           dcUser ? `status-${dcUser.status} border-4` : ""
         }`}
         onClick={handleClick}
         title="Boop me!"
       >
+        {/* Caching didn't fix the flicker on hover so this is the way now */}
+        <Image
+          src="/avatar-blushies.webp"
+          alt="Avatar"
+          width={200}
+          height={200}
+          className="rounded-full"
+        />
+        <Image
+          id="avatar"
+          src="/avatar.webp"
+          alt="Avatar"
+          width={200}
+          height={200}
+          className="rounded-full top-0 left-0 absolute hover:opacity-0 duration-[0.3s]"
+        />
         {dcUser && (
           <div
             className={`w-[32px] h-[32px] rounded-full border-2 border-transparent absolute bottom-3 right-3 status-${dcUser.status}`}

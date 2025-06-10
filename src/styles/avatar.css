@@ -1,13 +1,3 @@
-#avatar {
-  background-image: url("/avatar.webp");
-  background-size: cover;
-  transition-duration: 0.3s;
-}
-
-#avatar:hover {
-  background-image: url("/avatar-blushies.webp");
-}
-
 .fade-away {
   user-select: none;
   pointer-events: none;
