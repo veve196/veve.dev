@@ -16,6 +16,7 @@ import "@/styles/avatar.css";
 import { DiscordUser, MilestoneDocument, MilestoneType } from "@/utils/models";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import Spin from "./spin";
 export default function Avatar() {
   const [showMessage, setShowMessage] = useState(false);
   const [milestones, setMilestones] = useState<MilestoneType | null>(null);
@@ -89,9 +90,10 @@ export default function Avatar() {
       setMsDoc(msTempDoc);
     }
   };
+  
 
   return (
-    <>
+    <Spin>
       <div
         className={`w-[200px] h-[200px] rounded-full mx-auto select-none relative cursor-pointer ${
           dcUser ? `status-${dcUser.status} border-4` : ""
@@ -106,6 +108,7 @@ export default function Avatar() {
           width={200}
           height={200}
           className="rounded-full"
+          draggable={false}
         />
         <Image
           src="/avatar.webp"
@@ -113,6 +116,7 @@ export default function Avatar() {
           width={200}
           height={200}
           className="rounded-full top-0 left-0 absolute hover:opacity-0 duration-[0.3s]"
+          draggable={false}
         />
         {dcUser && (
           <div
@@ -137,6 +141,6 @@ export default function Avatar() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </>
+    </Spin>
   );
 }

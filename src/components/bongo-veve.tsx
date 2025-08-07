@@ -52,6 +52,7 @@ export default function BongoVeve({ className }: BongoVeveProps) {
         width={128}
         height={74}
         onClick={handleImageClick}
+        className="bongo-idle"
       />
     </div>
   );
