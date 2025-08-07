@@ -48,7 +48,8 @@ export interface ImageType {
 
 export interface MilestoneDocument extends Models.Document {
   milestone: number;
-  message: string;
+  title: string;
+  description?: string;
 }
 
 export interface MilestoneType {
