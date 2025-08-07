@@ -22,7 +22,6 @@ export default function Spin({
   const animationRef = useRef<number | null>(null);
   const lastVibrateDeg = useRef<number>(0);
 
-  // --- Stable animateSpin using useRef ---
   const animateSpinRef = useRef<() => void>(() => {});
   animateSpinRef.current = () => {
     let lastTimestamp = performance.now();
@@ -31,7 +30,7 @@ export default function Spin({
     const step = (now: number) => {
       const dt = now - lastTimestamp;
       lastTimestamp = now;
-      let velocity = velocityRef.current * Math.pow(friction, dt / 16);
+      const velocity = velocityRef.current * Math.pow(friction, dt / 16);
       velocityRef.current = velocity;
 
       setRotation((r) => {
@@ -66,7 +65,6 @@ export default function Spin({
     return Math.atan2(clientY - cy, clientX - cx) * (180 / Math.PI);
   };
 
-  // --- useCallback for stable references ---
   const handleSpinMove = useCallback((e: MouseEvent | TouchEvent) => {
     if (!wrapperRef.current) return;
     let clientX, clientY;
@@ -87,7 +85,6 @@ export default function Spin({
       if (delta < -180) delta += 360;
       setRotation((r) => r + delta);
 
-      // Calculate velocity (deg/ms)
       velocityRef.current = delta / (now - lastTimeRef.current);
     }
     lastAngleRef.current = angle;
@@ -97,10 +94,10 @@ export default function Spin({
 
   const handleSpinEnd = useCallback(() => {
     setSpinning(false);
-    document.removeEventListener("mousemove", handleSpinMove as any);
-    document.removeEventListener("touchmove", handleSpinMove as any);
-    document.removeEventListener("mouseup", handleSpinEnd as any);
-    document.removeEventListener("touchend", handleSpinEnd as any);
+    document.removeEventListener("mousemove", handleSpinMove as (e: MouseEvent | TouchEvent) => void);
+    document.removeEventListener("touchmove", handleSpinMove as (e: MouseEvent | TouchEvent) => void);
+    document.removeEventListener("mouseup", handleSpinEnd as () => void);
+    document.removeEventListener("touchend", handleSpinEnd as () => void);
     lastAngleRef.current = null;
     lastTimeRef.current = null;
     animateSpinRef.current();
@@ -123,19 +120,19 @@ export default function Spin({
     lastAngleRef.current = getAngle(clientX, clientY);
     lastTimeRef.current = performance.now();
 
-    document.addEventListener("mousemove", handleSpinMove as any);
-    document.addEventListener("touchmove", handleSpinMove as any, { passive: false });
-    document.addEventListener("mouseup", handleSpinEnd as any);
-    document.addEventListener("touchend", handleSpinEnd as any);
+    document.addEventListener("mousemove", handleSpinMove as (e: MouseEvent | TouchEvent) => void);
+    document.addEventListener("touchmove", handleSpinMove as (e: MouseEvent | TouchEvent) => void, { passive: false });
+    document.addEventListener("mouseup", handleSpinEnd as () => void);
+    document.addEventListener("touchend", handleSpinEnd as () => void);
   }, [handleSpinMove, handleSpinEnd]);
 
   useEffect(() => {
     return () => {
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
-      document.removeEventListener("mousemove", handleSpinMove as any);
-      document.removeEventListener("touchmove", handleSpinMove as any);
-      document.removeEventListener("mouseup", handleSpinEnd as any);
-      document.removeEventListener("touchend", handleSpinEnd as any);
+      document.removeEventListener("mousemove", handleSpinMove as (e: MouseEvent | TouchEvent) => void);
+      document.removeEventListener("touchmove", handleSpinMove as (e: MouseEvent | TouchEvent) => void);
+      document.removeEventListener("mouseup", handleSpinEnd as () => void);
+      document.removeEventListener("touchend", handleSpinEnd as () => void);
     };
   }, [handleSpinMove, handleSpinEnd]);
 
