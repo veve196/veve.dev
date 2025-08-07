@@ -1,6 +1,6 @@
 "use server";
 
-import { storage } from "@/app/appwrite-server";
+import { storage } from "@/utils/appwrite-server";
 import { ID } from "node-appwrite";
 
 export default async function uploadDrawing(drawing: Blob) {

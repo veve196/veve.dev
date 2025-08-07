@@ -1,6 +1,6 @@
 "use server";
 
-import { databases } from "@/app/appwrite-server";
+import { databases } from "@/utils/appwrite-server";
 
 export default async function updateBoop(): Promise<number> {
   const data = await databases.getDocument("web", "counters", "veveBoops");

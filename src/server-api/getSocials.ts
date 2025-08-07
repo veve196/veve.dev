@@ -1,6 +1,6 @@
 "use server";
 
-import { databases } from "@/app/appwrite-server";
+import { databases } from "@/utils/appwrite-server";
 import { SocialType } from "@/utils/models";
 import { Query } from "node-appwrite";
 

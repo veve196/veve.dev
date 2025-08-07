@@ -1,4 +1,4 @@
-import { databases } from "@/app/appwrite-server";
+import { databases } from "@/utils/appwrite-server";
 import { StatusDocument, StatusType } from "@/utils/models";
 import { Query } from "node-appwrite";
 

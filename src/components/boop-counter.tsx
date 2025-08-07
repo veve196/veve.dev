@@ -1,6 +1,6 @@
 "use client";
 
-import { client } from "@/app/appwrite";
+import { client } from "@/utils/appwrite";
 import getBoops from "@/client-api/getBoops";
 import CountUp from "@/components/count-up";
 import { CounterDocument } from "@/utils/models";
