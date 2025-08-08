@@ -5,6 +5,7 @@
   border-radius: 0.4em;
   bottom: 16px;
   padding: 8px;
+  z-index: 10;
 }
 
 .speech-bubble:after {
