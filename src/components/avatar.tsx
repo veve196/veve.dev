@@ -16,6 +16,7 @@ import "@/styles/avatar.css";
 import { DiscordUser, MilestoneDocument, MilestoneType } from "@/utils/models";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import FidgetSpinner from "./fidget-spinner";
 export default function Avatar() {
   const [showMessage, setShowMessage] = useState(false);
   const [milestones, setMilestones] = useState<MilestoneType | null>(null);
@@ -89,41 +90,42 @@ export default function Avatar() {
       setMsDoc(msTempDoc);
     }
   };
-  
 
   return (
     <>
-      <div
-        className={`w-[200px] h-[200px] rounded-full mx-auto select-none relative cursor-pointer ${
-          dcUser ? `status-${dcUser.status} border-4` : ""
-        }`}
-        onClick={handleClick}
-        title="Boop me!"
-      >
-        {/* Caching didn't fix the flicker on hover so this is the way now */}
-        <Image
-          src="/avatar-blushies.webp"
-          alt="Avatar"
-          width={200}
-          height={200}
-          className="rounded-full"
-          draggable={false}
-        />
-        <Image
-          src="/avatar.webp"
-          alt="Avatar"
-          width={200}
-          height={200}
-          className="rounded-full top-0 left-0 absolute hover:opacity-0 duration-[0.3s]"
-          draggable={false}
-        />
-        {dcUser && (
-          <div
-            className={`w-[32px] h-[32px] rounded-full border-2 border-transparent absolute bottom-3 right-3 status-${dcUser.status}`}
-            title={`${dcUser.status}`}
+      <FidgetSpinner>
+        <div
+          className={`w-[200px] h-[200px] rounded-full mx-auto select-none relative cursor-pointer ${
+            dcUser ? `status-${dcUser.status} border-4` : ""
+          }`}
+          onClick={handleClick}
+          title="Boop me!"
+        >
+          {/* Caching didn't fix the flicker on hover so this is the way now */}
+          <Image
+            src="/avatar-blushies.webp"
+            alt="Avatar"
+            width={200}
+            height={200}
+            className="rounded-full"
+            draggable={false}
           />
-        )}
-      </div>
+          <Image
+            src="/avatar.webp"
+            alt="Avatar"
+            width={200}
+            height={200}
+            className="rounded-full top-0 left-0 absolute hover:opacity-0 duration-[0.3s]"
+            draggable={false}
+          />
+          {dcUser && (
+            <div
+              className={`w-[32px] h-[32px] rounded-full border-2 border-transparent absolute bottom-3 right-3 status-${dcUser.status}`}
+              title={`${dcUser.status}`}
+            />
+          )}
+        </div>
+      </FidgetSpinner>
       <AlertDialog open={showMessage} onOpenChange={setShowMessage}>
         <AlertDialogContent>
           <AlertDialogHeader>
