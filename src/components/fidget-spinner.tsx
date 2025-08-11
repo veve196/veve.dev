@@ -21,9 +21,23 @@ export default function FidgetSpinner({
   const [velocity, setVelocity] = useState(0);
   const [lastHapticAngle, setLastHapticAngle] = useState(0);
 
+  // Refs to store current state for event handlers
+  const stateRef = useRef({
+    isDragging: false,
+    rotation: 0,
+    velocity: 0,
+  });
+
   // Animation frame reference
   const animationFrameRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number>(0);
+
+  // Update refs when state changes
+  useEffect(() => {
+    stateRef.current.isDragging = isDragging;
+    stateRef.current.rotation = rotation;
+    stateRef.current.velocity = velocity;
+  }, [isDragging, rotation, velocity]);
 
   // Drag state
   const dragStateRef = useRef({
@@ -109,31 +123,11 @@ export default function FidgetSpinner({
     };
   }, [isDragging, velocity, friction]);
 
-  // Mouse events
-  const handleMouseDown = useCallback(
-    (e: React.MouseEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-      setIsDragging(true);
-
-      const angle = getAngleFromCenter(e.clientX, e.clientY);
-      dragStateRef.current = {
-        startAngle: angle,
-        startRotation: rotation,
-        lastAngle: angle,
-        lastTime: performance.now(),
-        velocityBuffer: [],
-      };
-
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleMouseUp);
-    },
-    [rotation, getAngleFromCenter]
-  );
-
+  // Mouse event handlers - defined in correct order to avoid circular dependencies
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
-      if (!isDragging) return;
+      if (!stateRef.current.isDragging) return;
+      e.preventDefault();
 
       const currentAngle = getAngleFromCenter(e.clientX, e.clientY);
       const currentTime = performance.now();
@@ -144,7 +138,7 @@ export default function FidgetSpinner({
       if (angleDiff > 180) angleDiff -= 360;
       if (angleDiff < -180) angleDiff += 360;
 
-      const newRotation = rotation + angleDiff;
+      const newRotation = stateRef.current.rotation + angleDiff;
       setRotation(newRotation);
 
       // Track velocity for momentum
@@ -167,7 +161,7 @@ export default function FidgetSpinner({
       dragStateRef.current.lastAngle = currentAngle;
       dragStateRef.current.lastTime = currentTime;
     },
-    [isDragging, rotation, getAngleFromCenter]
+    [getAngleFromCenter]
   );
 
   const handleMouseUp = useCallback(() => {
@@ -182,9 +176,30 @@ export default function FidgetSpinner({
       setVelocity(avgVelocity);
     }
 
+    // Remove event listeners
     document.removeEventListener("mousemove", handleMouseMove);
     document.removeEventListener("mouseup", handleMouseUp);
   }, [handleMouseMove]);
+
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      setIsDragging(true);
+
+      const angle = getAngleFromCenter(e.clientX, e.clientY);
+      dragStateRef.current = {
+        startAngle: angle,
+        startRotation: stateRef.current.rotation,
+        lastAngle: angle,
+        lastTime: performance.now(),
+        velocityBuffer: [],
+      };
+
+      document.addEventListener("mousemove", handleMouseMove);
+      document.addEventListener("mouseup", handleMouseUp);
+    },
+    [getAngleFromCenter, handleMouseMove, handleMouseUp]
+  );
 
   // Touch events
   const handleTouchStart = useCallback(
