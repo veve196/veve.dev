@@ -1,5 +1,6 @@
 import Avatar from "@/components/avatar";
 import BoopCounter from "@/components/boop-counter";
+import FakeAd from "@/components/fake-ad";
 import SpotifyPlayer from "@/components/spotify-player";
 import TypingAnimation from "@/components/typing-animation";
 import { Button } from "@/components/ui/button";
@@ -21,7 +22,7 @@ export default async function Home() {
         <p className="text-5xl mt-2 mb-4">
           <TypingAnimation texts={["welcome to my page! :3", "veve"]} />
         </p>
-        {status && <p>{status.status}</p>}
+        {status && <div dangerouslySetInnerHTML={{ __html: status.status }} />}
         <Button variant="link" className="px-2" type="button" asChild>
           <Link href={"/about"}>About</Link>
         </Button>

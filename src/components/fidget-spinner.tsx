@@ -7,6 +7,7 @@ interface FidgetSpinnerProps {
   hapticInterval?: number; // Degrees between haptic feedback
   friction?: number; // Friction coefficient (0-1)
   className?: string;
+  hapticEnabled?: boolean; // Enable/disable haptic feedback
 }
 
 export default function FidgetSpinner({
@@ -14,6 +15,7 @@ export default function FidgetSpinner({
   hapticInterval = 15,
   friction = 0.98,
   className = "",
+  hapticEnabled = true, // Default to enabled
 }: FidgetSpinnerProps) {
   const spinnerRef = useRef<HTMLDivElement>(null);
   const [rotation, setRotation] = useState(0);
@@ -50,6 +52,8 @@ export default function FidgetSpinner({
 
   // Haptic feedback function
   const triggerHaptic = useCallback(() => {
+    if (!hapticEnabled) return; // Early return if haptic is disabled
+
     try {
       // Try multiple haptic feedback methods
       if ("vibrate" in navigator && navigator.vibrate) {
@@ -64,7 +68,7 @@ export default function FidgetSpinner({
     } catch (error) {
       console.log("Haptic feedback not supported:", error);
     }
-  }, []);
+  }, [hapticEnabled]);
 
   // Calculate angle from center to mouse/touch position
   const getAngleFromCenter = useCallback((clientX: number, clientY: number) => {
@@ -82,6 +86,8 @@ export default function FidgetSpinner({
 
   // Handle haptic feedback based on rotation
   useEffect(() => {
+    if (!hapticEnabled) return; // Skip haptic calculations if disabled
+
     const normalizedRotation = ((rotation % 360) + 360) % 360;
     const currentHapticStep = Math.floor(normalizedRotation / hapticInterval);
     const lastHapticStep = Math.floor(
@@ -92,7 +98,7 @@ export default function FidgetSpinner({
       triggerHaptic();
       setLastHapticAngle(rotation); // Use raw rotation instead of normalized
     }
-  }, [rotation, hapticInterval, lastHapticAngle, triggerHaptic]);
+  }, [rotation, hapticInterval, lastHapticAngle, triggerHaptic, hapticEnabled]);
 
   // Animation loop for momentum
   useEffect(() => {

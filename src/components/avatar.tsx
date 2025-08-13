@@ -93,7 +93,7 @@ export default function Avatar() {
 
   return (
     <>
-      <FidgetSpinner>
+      <FidgetSpinner hapticEnabled={false}>
         <div
           className={`w-[200px] h-[200px] rounded-full mx-auto select-none relative cursor-pointer ${
             dcUser ? `status-${dcUser.status} border-4` : ""
