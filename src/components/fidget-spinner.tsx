@@ -62,12 +62,7 @@ export default function FidgetSpinner({
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (navigator as any).hapticFeedback.impact({ intensity: "light" });
       }
-
-      // Add console log for debugging (remove in production)
-      console.log("Haptic feedback triggered");
-    } catch (error) {
-      console.log("Haptic feedback not supported:", error);
-    }
+    } catch {}
   }, [hapticEnabled]);
 
   // Calculate angle from center to mouse/touch position

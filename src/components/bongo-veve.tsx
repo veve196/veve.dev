@@ -16,18 +16,16 @@ export default function BongoVeve({ className }: BongoVeveProps) {
   const speechBubbleTexts = ["Hello!", "Meow!", "Yip!"];
 
   useEffect(() => {
-    const handleWindowMouseDown = (e: MouseEvent) => {
-      console.log("bongo-veve down");
+    const handleWindowMouseDown = () => {
       setImageSrc("/bongo-veve/bongo-veve-02.webp");
-    }
+    };
 
-    const handleWindowMouseUp = (e: MouseEvent) => {
-      console.log("bongo veve up");
+    const handleWindowMouseUp = () => {
       setImageSrc("/bongo-veve/bongo-veve-01.webp");
-    }
+    };
 
-    window.addEventListener("mousedown", handleWindowMouseDown)
-    window.addEventListener("mouseup", handleWindowMouseUp)
+    window.addEventListener("mousedown", handleWindowMouseDown);
+    window.addEventListener("mouseup", handleWindowMouseUp);
 
     return () => {
       window.removeEventListener("mousedown", handleWindowMouseDown);

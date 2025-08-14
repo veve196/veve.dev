@@ -1,6 +1,5 @@
 import Avatar from "@/components/avatar";
 import BoopCounter from "@/components/boop-counter";
-import FakeAd from "@/components/fake-ad";
 import SpotifyPlayer from "@/components/spotify-player";
 import TypingAnimation from "@/components/typing-animation";
 import { Button } from "@/components/ui/button";
