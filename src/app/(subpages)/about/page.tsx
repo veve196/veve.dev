@@ -70,7 +70,7 @@ export default async function About() {
         />
       </div>
       <div className="text-center my-6">
-        <h1 className="text-4xl md:text-6xl text-rainbow mb-4">
+        <h1 className="text-4xl md:text-6xl text-rainbow mt-12 mb-4">
           no but actually...
         </h1>
         <p>
