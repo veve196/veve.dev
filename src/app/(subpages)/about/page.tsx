@@ -30,7 +30,7 @@ export default async function About() {
             width={200}
             height={250}
             priority
-            className="block"
+            className="block min-w-[100px]"
           />
           <svg
             className="sweat-drop absolute left-[21%] top-6 w-6 h-8 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 "
@@ -66,10 +66,13 @@ export default async function About() {
           width={250}
           height={250}
           unoptimized={true}
+          className="hidden md:block"
         />
       </div>
       <div className="text-center my-6">
-        <h1 className="text-6xl text-rainbow mb-4">no but actually...</h1>
+        <h1 className="text-4xl md:text-6xl text-rainbow mb-4">
+          no but actually...
+        </h1>
         <p>
           ...idk what to put here, so here&apos;s just some random stuff i like
           :3
