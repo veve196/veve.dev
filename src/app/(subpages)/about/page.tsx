@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 export default async function About() {
   return (
     <>
-      <div className="flex gap-4">
+      <div className="px-4 flex gap-8">
         <div className="relative group nervous">
           <Image
             src="/about/wave.webp"
@@ -32,7 +32,6 @@ export default async function About() {
             priority
             className="block"
           />
-          {/* Sweat drop SVG */}
           <svg
             className="sweat-drop absolute left-[21%] top-6 w-6 h-8 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 "
             viewBox="0 0 64 64"
@@ -54,12 +53,20 @@ export default async function About() {
             />
           </svg>
         </div>
-        <div>
+        <div className="grow">
           <p className="text-2xl mb-3">Hello, I&apos;m veve!</p>
           <p>Hey guys did you know that</p>
           <p>...</p>
           <p>Uhm hey guys</p>
         </div>
+        <Image
+          src="/about/veve-spin.webp"
+          alt="veve spin"
+          title="veve"
+          width={250}
+          height={250}
+          unoptimized={true}
+        />
       </div>
       <div className="text-center my-6">
         <h1 className="text-6xl text-rainbow mb-4">no but actually...</h1>
