@@ -17,12 +17,10 @@ export default function BongoVeve({ className }: BongoVeveProps) {
 
   useEffect(() => {
     const handleWindowMouseDown = (e: MouseEvent) => {
-      console.log("bongo-veve down");
       setImageSrc("/bongo-veve/bongo-veve-02.webp");
     }
 
     const handleWindowMouseUp = (e: MouseEvent) => {
-      console.log("bongo veve up");
       setImageSrc("/bongo-veve/bongo-veve-01.webp");
     }
 

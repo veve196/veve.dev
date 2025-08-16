@@ -50,8 +50,17 @@ export default function FidgetSpinner({
     velocityBuffer: [] as { angle: number; time: number }[],
   });
 
+  // Audio for click sound
+  const clickAudioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    // Initialize audio only on client
+    clickAudioRef.current = new window.Audio("/click.mp3");
+    clickAudioRef.current.volume = 0.5;
+  }, []);
+
   // Haptic feedback function
-  const triggerHaptic = useCallback(() => {
+  const triggerHapticAndClick = useCallback(() => {
     if (!hapticEnabled) return; // Early return if haptic is disabled
 
     try {
@@ -62,11 +71,16 @@ export default function FidgetSpinner({
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (navigator as any).hapticFeedback.impact({ intensity: "light" });
       }
-
+      // Play click sound
+      if (clickAudioRef.current) {
+        // Restart sound if already playing
+        clickAudioRef.current.currentTime = 0;
+        clickAudioRef.current.play();
+      }
       // Add console log for debugging (remove in production)
-      console.log("Haptic feedback triggered");
+      // console.log("Haptic feedback and click sound triggered");
     } catch (error) {
-      console.log("Haptic feedback not supported:", error);
+      // console.log("Haptic feedback/click not supported:", error);
     }
   }, [hapticEnabled]);
 
@@ -95,10 +109,10 @@ export default function FidgetSpinner({
     );
 
     if (currentHapticStep !== lastHapticStep) {
-      triggerHaptic();
+      triggerHapticAndClick();
       setLastHapticAngle(rotation); // Use raw rotation instead of normalized
     }
-  }, [rotation, hapticInterval, lastHapticAngle, triggerHaptic, hapticEnabled]);
+  }, [rotation, hapticInterval, lastHapticAngle, triggerHapticAndClick, hapticEnabled]);
 
   // Animation loop for momentum
   useEffect(() => {
