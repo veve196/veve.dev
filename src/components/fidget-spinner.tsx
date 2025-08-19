@@ -1,47 +1,45 @@
 "use client";
 
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface FidgetSpinnerProps {
   children: React.ReactNode;
-  hapticInterval?: number; // Degrees between haptic feedback
   friction?: number; // Friction coefficient (0-1)
   className?: string;
-  hapticEnabled?: boolean; // Enable/disable haptic feedback
+  audioEnabled?: boolean;
+  audioInterval?: number;
+  maxTicksPerSecond?: number;
 }
 
 export default function FidgetSpinner({
   children,
-  hapticInterval = 15,
   friction = 0.98,
   className = "",
-  hapticEnabled = true, // Default to enabled
+  audioEnabled = true,
+  audioInterval = 45,
+  maxTicksPerSecond = 15,
 }: FidgetSpinnerProps) {
   const spinnerRef = useRef<HTMLDivElement>(null);
   const [rotation, setRotation] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [velocity, setVelocity] = useState(0);
-  const [lastHapticAngle, setLastHapticAngle] = useState(0);
+  const [lastAudioAngle, setLastAudioAngle] = useState(0);
 
-  // Refs to store current state for event handlers
   const stateRef = useRef({
     isDragging: false,
     rotation: 0,
     velocity: 0,
   });
 
-  // Animation frame reference
   const animationFrameRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number>(0);
 
-  // Update refs when state changes
   useEffect(() => {
     stateRef.current.isDragging = isDragging;
     stateRef.current.rotation = rotation;
     stateRef.current.velocity = velocity;
   }, [isDragging, rotation, velocity]);
 
-  // Drag state
   const dragStateRef = useRef({
     startAngle: 0,
     startRotation: 0,
@@ -49,42 +47,47 @@ export default function FidgetSpinner({
     lastTime: 0,
     velocityBuffer: [] as { angle: number; time: number }[],
   });
-
-  // Audio for click sound
-  const clickAudioRef = useRef<HTMLAudioElement | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
+  const clickBufferRef = useRef<AudioBuffer | null>(null);
+  const lastClickSoundTimeRef = useRef<number>(0);
 
   useEffect(() => {
-    // Initialize audio only on client
-    clickAudioRef.current = new window.Audio("/click.mp3");
-    clickAudioRef.current.volume = 0.5;
-  }, []);
+    if (!audioEnabled) return;
+    const AudioContextClass =
+      window.AudioContext || (window as any).webkitAudioContext;
+    const ctx = new AudioContextClass();
+    audioContextRef.current = ctx;
 
-  // Haptic feedback function
-  const triggerHapticAndClick = useCallback(() => {
-    if (!hapticEnabled) return; // Early return if haptic is disabled
+    fetch("tick.mp3")
+      .then((res) => res.arrayBuffer())
+      .then((arrayBuffer) => ctx.decodeAudioData(arrayBuffer))
+      .then((audioBuffer) => {
+        clickBufferRef.current = audioBuffer;
+      });
+    return () => {
+      ctx.close();
+    };
+  }, [audioEnabled]);
 
-    try {
-      // Try multiple haptic feedback methods
-      if ("vibrate" in navigator && navigator.vibrate) {
-        navigator.vibrate(15); // Slightly longer vibration for better feel
-      } else if ("hapticFeedback" in navigator) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (navigator as any).hapticFeedback.impact({ intensity: "light" });
+  const triggerAudioTick = useCallback(() => {
+    if (audioEnabled && audioContextRef.current && clickBufferRef.current) {
+      const now = performance.now();
+      const minInterval = 1000 / maxTicksPerSecond;
+      if (now - lastClickSoundTimeRef.current >= minInterval) {
+        lastClickSoundTimeRef.current = now;
+        try {
+          const ctx = audioContextRef.current;
+          const source = ctx.createBufferSource();
+          source.buffer = clickBufferRef.current;
+          source.connect(ctx.destination);
+          source.start(0);
+        } catch (error) {
+          console.log("Audio not supported:", error);
+        }
       }
-      // Play click sound
-      if (clickAudioRef.current) {
-        // Restart sound if already playing
-        clickAudioRef.current.currentTime = 0;
-        clickAudioRef.current.play();
-      }
-      // Add console log for debugging (remove in production)
-      // console.log("Haptic feedback and click sound triggered");
-    } catch (error) {
-      // console.log("Haptic feedback/click not supported:", error);
     }
-  }, [hapticEnabled]);
+  }, [audioEnabled, maxTicksPerSecond]);
 
-  // Calculate angle from center to mouse/touch position
   const getAngleFromCenter = useCallback((clientX: number, clientY: number) => {
     if (!spinnerRef.current) return 0;
 
@@ -98,23 +101,19 @@ export default function FidgetSpinner({
     return Math.atan2(deltaY, deltaX) * (180 / Math.PI);
   }, []);
 
-  // Handle haptic feedback based on rotation
   useEffect(() => {
-    if (!hapticEnabled) return; // Skip haptic calculations if disabled
-
     const normalizedRotation = ((rotation % 360) + 360) % 360;
-    const currentHapticStep = Math.floor(normalizedRotation / hapticInterval);
-    const lastHapticStep = Math.floor(
-      (((lastHapticAngle % 360) + 360) % 360) / hapticInterval
+    const currentAudioStep = Math.floor(normalizedRotation / audioInterval);
+    const lastAudioStep = Math.floor(
+      (((lastAudioAngle % 360) + 360) % 360) / audioInterval
     );
 
-    if (currentHapticStep !== lastHapticStep) {
-      triggerHapticAndClick();
-      setLastHapticAngle(rotation); // Use raw rotation instead of normalized
+    if (currentAudioStep !== lastAudioStep) {
+      triggerAudioTick();
+      setLastAudioAngle(rotation);
     }
-  }, [rotation, hapticInterval, lastHapticAngle, triggerHapticAndClick, hapticEnabled]);
+  }, [rotation, audioInterval, lastAudioAngle, triggerAudioTick]);
 
-  // Animation loop for momentum
   useEffect(() => {
     const animate = (currentTime: number) => {
       if (!isDragging && Math.abs(velocity) > 0.1) {
@@ -143,7 +142,6 @@ export default function FidgetSpinner({
     };
   }, [isDragging, velocity, friction]);
 
-  // Mouse event handlers - defined in correct order to avoid circular dependencies
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
       if (!stateRef.current.isDragging) return;
@@ -154,14 +152,12 @@ export default function FidgetSpinner({
 
       let angleDiff = currentAngle - dragStateRef.current.lastAngle;
 
-      // Handle angle wraparound
       if (angleDiff > 180) angleDiff -= 360;
       if (angleDiff < -180) angleDiff += 360;
 
       const newRotation = stateRef.current.rotation + angleDiff;
       setRotation(newRotation);
 
-      // Track velocity for momentum
       const timeDiff = currentTime - dragStateRef.current.lastTime;
       if (timeDiff > 0) {
         const angularVelocity = (angleDiff / timeDiff) * 16; // Normalize to ~60fps
@@ -171,7 +167,6 @@ export default function FidgetSpinner({
           time: currentTime,
         });
 
-        // Keep only recent velocity samples (last 100ms)
         dragStateRef.current.velocityBuffer =
           dragStateRef.current.velocityBuffer.filter(
             (sample) => currentTime - sample.time < 100
@@ -187,7 +182,6 @@ export default function FidgetSpinner({
   const handleMouseUp = useCallback(() => {
     setIsDragging(false);
 
-    // Calculate average velocity from recent samples
     const recentSamples = dragStateRef.current.velocityBuffer;
     if (recentSamples.length > 0) {
       const avgVelocity =
@@ -196,7 +190,6 @@ export default function FidgetSpinner({
       setVelocity(avgVelocity);
     }
 
-    // Remove event listeners
     document.removeEventListener("mousemove", handleMouseMove);
     document.removeEventListener("mouseup", handleMouseUp);
   }, [handleMouseMove]);
@@ -221,7 +214,6 @@ export default function FidgetSpinner({
     [getAngleFromCenter, handleMouseMove, handleMouseUp]
   );
 
-  // Touch events
   const handleTouchStart = useCallback(
     (e: React.TouchEvent) => {
       e.preventDefault();
@@ -253,14 +245,12 @@ export default function FidgetSpinner({
 
       let angleDiff = currentAngle - dragStateRef.current.lastAngle;
 
-      // Handle angle wraparound
       if (angleDiff > 180) angleDiff -= 360;
       if (angleDiff < -180) angleDiff += 360;
 
       const newRotation = rotation + angleDiff;
       setRotation(newRotation);
 
-      // Track velocity for momentum
       const timeDiff = currentTime - dragStateRef.current.lastTime;
       if (timeDiff > 0) {
         const angularVelocity = (angleDiff / timeDiff) * 16; // Normalize to ~60fps
@@ -270,7 +260,6 @@ export default function FidgetSpinner({
           time: currentTime,
         });
 
-        // Keep only recent velocity samples (last 100ms)
         dragStateRef.current.velocityBuffer =
           dragStateRef.current.velocityBuffer.filter(
             (sample) => currentTime - sample.time < 100
@@ -286,7 +275,6 @@ export default function FidgetSpinner({
   const handleTouchEnd = useCallback(() => {
     setIsDragging(false);
 
-    // Calculate average velocity from recent samples
     const recentSamples = dragStateRef.current.velocityBuffer;
     if (recentSamples.length > 0) {
       const avgVelocity =
@@ -296,7 +284,6 @@ export default function FidgetSpinner({
     }
   }, []);
 
-  // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (animationFrameRef.current) {
@@ -314,10 +301,10 @@ export default function FidgetSpinner({
       style={{
         transform: `rotate(${rotation}deg)`,
         transition: isDragging ? "none" : "transform 0.1s ease-out",
-        touchAction: "none", // Prevent default touch behaviors
-        userSelect: "none", // Prevent text selection
-        WebkitUserSelect: "none", // Safari
-        WebkitTouchCallout: "none", // iOS Safari
+        touchAction: "none",
+        userSelect: "none",
+        WebkitUserSelect: "none",
+        WebkitTouchCallout: "none",
       }}
       onMouseDown={handleMouseDown}
       onTouchStart={handleTouchStart}

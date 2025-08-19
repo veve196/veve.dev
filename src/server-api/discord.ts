@@ -25,7 +25,6 @@ export async function getSpotifyStatus(): Promise<SpotifyStatus | null> {
       },
     }
   ).then((response) => {
-    console.log(response);
     if (!response.ok) return null;
     return response.json();
   });

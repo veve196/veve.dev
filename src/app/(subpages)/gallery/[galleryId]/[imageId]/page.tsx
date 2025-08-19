@@ -46,9 +46,6 @@ export default async function Details(props: {
 }) {
   const params = await props.params;
   const { imageId } = params;
-  console.log(
-    `${process.env.NEXT_PUBLIC_API_URL}/v1/storage/buckets/gallery/files/${imageId}/view?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}`
-  );
   const img = await getImage(imageId);
   const alts = await getAltImages(imageId);
 
