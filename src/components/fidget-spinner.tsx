@@ -54,6 +54,7 @@ export default function FidgetSpinner({
   useEffect(() => {
     if (!audioEnabled) return;
     const AudioContextClass =
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       window.AudioContext || (window as any).webkitAudioContext;
     const ctx = new AudioContextClass();
     audioContextRef.current = ctx;
