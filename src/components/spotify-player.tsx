@@ -94,7 +94,7 @@ export default function SpotifyPlayer() {
         <Image
           src={spotifyStatus.coverUrl}
           alt="album cover"
-          title={`${spotifyStatus.title} by ${spotifyStatus.artist}`}
+          title={`${spotifyStatus.album}`}
           width={148}
           height={148}
           className="self-center"

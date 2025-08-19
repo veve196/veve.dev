@@ -85,8 +85,13 @@ export default function FidgetSpinner({
           console.log("Audio not supported:", error);
         }
       }
+<<<<<<< HEAD
     }
   }, [audioEnabled, maxTicksPerSecond]);
+=======
+    } catch {}
+  }, [hapticEnabled]);
+>>>>>>> e0ffd082de60863df2f1395d7c6c5565ec787a4e
 
   const getAngleFromCenter = useCallback((clientX: number, clientY: number) => {
     if (!spinnerRef.current) return 0;

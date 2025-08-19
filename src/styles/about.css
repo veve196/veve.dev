@@ -1,3 +1,31 @@
+@keyframes gentle-shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-0.8px) rotate(-0.4deg);
+  }
+  50% {
+    transform: translateX(0.8px) rotate(0.4deg);
+  }
+  75% {
+    transform: translateX(-0.6px) rotate(-0.3deg);
+  }
+  100% {
+    transform: translateX(0.6px) rotate(0.3deg);
+  }
+}
+
+/* Sweat drop animation */
+.sweat-drop {
+  transition: opacity 0.2s, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
+  z-index: 2;
+}
+.group:hover .sweat-drop {
+  opacity: 1;
+  transform: translateY(32px);
+}
 /* img {
   transition-duration: 0.3s;
 }
@@ -5,3 +33,11 @@
 img:hover {
   transform: scale(1.1) rotate(-5deg);
 } */
+
+.nervous {
+  animation-duration: 0.3s;
+}
+
+.nervous:hover {
+  animation: gentle-shake 0.3s infinite;
+}
