@@ -26,15 +26,15 @@
     "@radix-ui/react-toggle": "^1.1.10",
     "@radix-ui/react-toggle-group": "^1.1.11",
     "@radix-ui/react-tooltip": "^1.2.8",
-    "appwrite": "^18.2.0",
+    "appwrite": "^19.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.12",
     "gsap": "^3.13.0",
-    "lucide-react": "^0.539.0",
-    "next": "15.4.6",
+    "lucide-react": "^0.542.0",
+    "next": "15.5.2",
     "next-themes": "^0.4.6",
-    "node-appwrite": "^17.2.0",
+    "node-appwrite": "^18.0.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-tilt": "^1.0.2",
@@ -46,13 +46,13 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.12",
     "@types/node": "^24.3.0",
-    "@types/react": "^19.1.11",
-    "@types/react-dom": "^19.1.7",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
     "eslint": "^9.34.0",
-    "eslint-config-next": "15.4.6",
+    "eslint-config-next": "15.5.2",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.12",
     "typescript": "^5.9.2",
-    "wrangler": "^4.32.0"
+    "wrangler": "^4.33.1"
   }
 }
