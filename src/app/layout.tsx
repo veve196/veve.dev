@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import React from "react";
 import "@/styles/globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const pixelFont = localFont({ src: "../../public/pixelFont.woff2" });
 export const metadata: Metadata = {
@@ -47,6 +48,7 @@ export default function RootLayout({
           </main>
           <Toaster />
           <Background />
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>
