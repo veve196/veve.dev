@@ -62,7 +62,7 @@ export default async function About() {
         <Image
           src="/about/veve-spin.webp"
           alt="veve spin"
-          title="veve"
+          title="hello i'm a placeholder :3"
           width={250}
           height={250}
           unoptimized={true}
