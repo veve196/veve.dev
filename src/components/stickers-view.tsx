@@ -16,9 +16,27 @@ export default function StickersView({ stickerPackName }: StickersViewProps) {
 
   useEffect(() => {
     getStickerUrls(stickerPackName)
-      .then((urls) => setStickerUrls(urls))
+      .then((urls) => {
+        if (!Array.isArray(urls)) {
+          console.error("Unexpected sticker response:", urls);
+          setStickerUrls([]);
+          return;
+        }
+        setStickerUrls(urls);
+      })
       .catch((error) => {
-        console.error("Failed to fetch sticker URLs:", error);
+        try {
+          if (error instanceof Error) {
+            console.error("Failed to fetch sticker URLs:", error.message);
+          } else {
+            console.error(
+              "Failed to fetch sticker URLs:",
+              JSON.stringify(error)
+            );
+          }
+        } catch (e) {
+          console.error("Failed to fetch sticker URLs: (unknown error)", e);
+        }
         setStickerUrls([]);
       });
   }, [stickerPackName]);

@@ -83,7 +83,15 @@ export default function FidgetSpinner({
           source.connect(ctx.destination);
           source.start(0);
         } catch (error) {
-          console.log("Audio not supported:", error);
+          try {
+            if (error instanceof Error) {
+              console.log("Audio not supported:", error.message);
+            } else {
+              console.log("Audio not supported:", JSON.stringify(error));
+            }
+          } catch (e) {
+            console.log("Audio not supported: (unknown error)", e);
+          }
         }
       }
     }
