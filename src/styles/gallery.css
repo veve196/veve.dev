@@ -10,3 +10,37 @@
   text-decoration: underline !important;
   font-weight: 800;
 }
+
+/* Rotating banner shown above all content */
+.rotating-banner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  pointer-events: auto;
+}
+.rotating-banner__text {
+  display: inline-block;
+  background: #c62828;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-weight: 800;
+  transform-origin: center center;
+  animation: spin 8s linear infinite;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

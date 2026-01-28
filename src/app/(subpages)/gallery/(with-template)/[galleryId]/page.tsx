@@ -1,4 +1,5 @@
 import ImageList from "@/components/gallery/image-list";
+import RotatingBanner from "@/components/rotating-banner";
 import { getGallery } from "@/server-api/gallery";
 import "@/styles/gallery.css";
 import { Metadata } from "next/types";
@@ -33,6 +34,7 @@ export default async function Gallery(props: {
 
   return (
     <>
+      <RotatingBanner />
       <div
         className="text-center mb-4 gallery-description"
         dangerouslySetInnerHTML={{
